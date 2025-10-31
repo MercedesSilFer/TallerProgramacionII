@@ -93,7 +93,13 @@ namespace Capa_Logica
                 usuario.ErroresValidacion.Add("Error al modificar el usuario: " + ex.Message);
                 return null;
             }
-        }      
+
+        }
+        public string ObtenerUsuarioPreventistaPorZona(int idZona)
+        {
+            return usuario.ObtenerUsuarioPreventistaPorZona(idZona);
+        }
+
 
     }
 }

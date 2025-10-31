@@ -8,12 +8,23 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_Entidades;
+using Capa_Logica;
+using Capa_Utilidades;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ArimaERP.EmpleadoClientes
 {
     public partial class FormAltaPreventista : Form
     {
-        private bool limpiarPresionado = false;
+        ClassClienteLogica clienteLogica = new ClassClienteLogica();
+        ClassRolLogica logicaRol = new ClassRolLogica();
+        ClassUsuarioLogica usuarioLog = new ClassUsuarioLogica();
+        ClassEmpleadoLogica empleadoLogica = new ClassEmpleadoLogica();
+        private string contrasenaOriginal;
+
         public FormAltaPreventista()
         {
             InitializeComponent();
@@ -25,50 +36,31 @@ namespace ArimaERP.EmpleadoClientes
             this.Close();
         }
 
-        private void btnCrear_Click(object sender, EventArgs e)
-        {   
-            //Validar que los campos no esten vacios
-            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text) || string.IsNullOrWhiteSpace(textBoxContrasena.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxApellido.Text) || string.IsNullOrWhiteSpace(textBoxTelefono.Text) || string.IsNullOrWhiteSpace(textBoxMail.Text) || string.IsNullOrWhiteSpace(textBoxDNI.Text) || string.IsNullOrWhiteSpace(textBoxDireccion.Text))
-            {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // Validar que se haya seleccionado una zona
-            if (comboBoxZona.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor, seleccione una zona.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            //Confirmar la creación del preventista
-            var result = MessageBox.Show("¿Está seguro que desea crear el preventista?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                //Mostrar mensaje de éxito
-                MessageBox.Show("Preventista creado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //Cerrar el formulario
-                //limpiar todos los campos con el btnLimpiar
-                btnLimpiar.PerformClick();
-                //Activar btnCrear
-                btnCrear.Enabled = true;
-            }
-            
-        }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            limpiarPresionado = true;
-            //Limpiar todos los campos
-            txtBoxUsuario.Text = "";
-            textBoxContrasena.Text = "";
-            textBoxNombre.Text = "";
-            textBoxApellido.Text = "";
-            textBoxTelefono.Text = "";
-            textBoxMail.Text = "";
-            textBoxDNI.Text = "";
-            textBoxDireccion.Text = "";
-            errorProvider1.Clear();
+            //limpiar todos los campos y reiniciar comboBox
             comboBoxZona.SelectedIndex = -1;
-            limpiarPresionado = false;
+            txtBoxUsuario.Clear();
+            textBoxContrasena.Clear();
+            textBoxNombre.Clear();
+            textBoxApellido.Clear();
+            textBoxMail.Clear();
+            textBoxDireccion.Clear();
+            textBoxDNI.Clear();
+            textBoxTelefono.Clear();
+            checkBoxEstado.Checked = false;
+            textBoxBusqueda.Clear();
+            //habilitar btnCrear
+            btnCrear.Enabled = true;
+            //deshabilitar btnModificarUsuario
+            btnModificarUsuario.Enabled = false;
+            //habilitar textBoxUsuario
+            txtBoxUsuario.Enabled = true;
+            //limpiar errores
+            errorProvider1.Clear();
+            btnBaja.Enabled = false;
+            btnModificar.Enabled = false;
+
         }
 
         private void textBoxContrasena_KeyPress(object sender, KeyPressEventArgs e)
@@ -272,35 +264,7 @@ namespace ArimaERP.EmpleadoClientes
 
         }
 
-        private void textBoxContrasena_Validating(object sender, CancelEventArgs e)
-        {
-            // Validar que la contraseña tenga al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial
-            string password = textBoxContrasena.Text;
-            if (password.Length < 8 || !password.Any(char.IsUpper) || !password.Any(char.IsLower) || !password.Any(char.IsDigit) || !password.Any(ch => !char.IsLetterOrDigit(ch)))
-            {
-                errorProvider1.SetError(textBoxContrasena, "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
-            }
-            else
-            {
-                errorProvider1.SetError(textBoxContrasena, "");
-            }
-            //si esta vacío permitir avanzar
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                errorProvider1.SetError(textBoxContrasena, "");
-            }
-            //si se presionó limpiar no validar
-            if (limpiarPresionado)
-            {
-                errorProvider1.SetError(textBoxContrasena, "");
-            }
-            //si se presionó cerrar (this.IsDisposed) no validar
-            if (this.IsDisposed)
-            {
-                errorProvider1.SetError(textBoxContrasena, "");
-            }
-
-        }
+      
 
         private void txtBoxUsuario_Validating(object sender, CancelEventArgs e)
         {
@@ -315,8 +279,6 @@ namespace ArimaERP.EmpleadoClientes
             }
         }
 
-
-
         private void textBoxDNI_Validating(object sender, CancelEventArgs e)
         {
             // No permitir menos de 7 caracteres
@@ -329,46 +291,78 @@ namespace ArimaERP.EmpleadoClientes
                 errorProvider1.SetError(textBoxDNI, "");
             }
         }
-
-        private void btnBuscarPreventista_Click(object sender, EventArgs e)
-        {
-            //Desactivar btnCrear
-            btnCrear.Enabled = false;
-            btnVolver.Enabled = false;
-            btnModificar.Enabled = true;
-            btnBaja.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
+              
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //Validar que los campos no esten vacios
-            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text) || string.IsNullOrWhiteSpace(textBoxContrasena.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxApellido.Text) || string.IsNullOrWhiteSpace(textBoxTelefono.Text) || string.IsNullOrWhiteSpace(textBoxMail.Text) || string.IsNullOrWhiteSpace(textBoxDNI.Text) || string.IsNullOrWhiteSpace(textBoxDireccion.Text))
+            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text))
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, seleccione un usuario para actualizar.", "Usuario no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // Validar que se haya seleccionado una zona
-            if (comboBoxZona.SelectedIndex == -1)
+            //verificar que los campos nombre, apellido, email, direccion, dni y telefono no esten vacíos
+            if (string.IsNullOrWhiteSpace(textBoxNombre.Text) ||
+                string.IsNullOrWhiteSpace(textBoxApellido.Text) ||
+                string.IsNullOrWhiteSpace(textBoxMail.Text) ||
+                string.IsNullOrWhiteSpace(textBoxDireccion.Text) ||
+                string.IsNullOrWhiteSpace(textBoxDNI.Text) ||
+                string.IsNullOrWhiteSpace(textBoxTelefono.Text))
             {
-                MessageBox.Show("Por favor, seleccione una zona.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, complete todos los campos obligatorios para actualizar un empleado ", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            //Confirmar la modificación del preventista
-            var result = MessageBox.Show("¿Está seguro que desea modificar el preventista?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                //Mostrar mensaje de éxito
-                MessageBox.Show("Preventista modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //limpiar todos los campos con el btnLimpiar
-                btnLimpiar.PerformClick();
-                //Activar btnCrear
-                btnCrear.Enabled = true;
-                btnVolver.Enabled = true;
-                btnModificar.Enabled = true;
-                btnBaja.Enabled = false;
-                btnCancelar.Enabled = false;
 
+            var empleadoExistente = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(txtBoxUsuario.Text);
+            if (empleadoExistente == null)
+            {
+                MessageBox.Show("El empleado no existe. Por favor, verifique el nombre de usuario.", "Empleado no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // verificar que no hay otro empleado con el mismo dni, email o telefono
+            if (empleadoExistente.dni.ToString() != textBoxDNI.Text && empleadoLogica.ExisteEmpleado(Convert.ToInt32(textBoxDNI.Text)))
+            {
+                MessageBox.Show("Ya existe otro empleado con ese DNI. Por favor, verifique el DNI.", "DNI duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (empleadoExistente.email != textBoxMail.Text && empleadoLogica.ExisteEmpleadoPorEmail(textBoxMail.Text))
+            {
+                MessageBox.Show("Ya existe otro empleado con ese email. Por favor, verifique el email.", "Email duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (empleadoExistente.telefono.ToString() != textBoxTelefono.Text && empleadoLogica.ExisteEmpleadoPorTelefono(Convert.ToInt64(textBoxTelefono.Text)))
+            {
+                MessageBox.Show("Ya existe otro empleado con ese teléfono. Por favor, verifique el teléfono.", "Teléfono duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (empleadoLogica.ActualizarEmpleado(
+                txtBoxUsuario.Text,
+                textBoxNombre.Text,
+                textBoxApellido.Text,
+                textBoxMail.Text,
+                textBoxDireccion.Text,
+                textBoxDNI.Text,
+                textBoxTelefono.Text))
+            {
+                MessageBox.Show("Empleado actualizado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //actualizar empleado desde la base de datos
+                //si el usuario tiene un empleado asociado, cargar los datos en los campos correspondientes
+                var empleadoAsociado = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(txtBoxUsuario.Text);
+                if (empleadoAsociado != null)
+                {
+                    textBoxNombre.Text = empleadoAsociado.nombre;
+                    textBoxApellido.Text = empleadoAsociado.apellido;
+                    textBoxMail.Text = empleadoAsociado.email;
+                    textBoxDireccion.Text = empleadoAsociado.direccion;
+                    textBoxDNI.Text = empleadoAsociado.dni.ToString();
+                    textBoxTelefono.Text = empleadoAsociado.telefono.ToString();
+                }
+                else
+                {
+                    string errores = string.Join("\n", empleadoLogica.ErroresValidacion);
+                    MessageBox.Show("No se pudo actualizar el empleado:\n" + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -386,19 +380,36 @@ namespace ArimaERP.EmpleadoClientes
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-            //Confirmar la baja del preventista
-            var result = MessageBox.Show("¿Está seguro que desea dar de baja el preventista?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes) {
-                //Mostrar mensaje de éxito
-                MessageBox.Show("Preventista dado de baja con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //limpiar todos los campos con el btnLimpiar
-                btnLimpiar.PerformClick();
-                //Activar btnCrear
+            //solicitar confirmación
+            var result = MessageBox.Show("¿Está seguro que desea dar de baja este empleado?", "Confirmar baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                //verificar que el usuario existe
+                USUARIOS usuarioExistente = usuarioLog.ObtenerUsuarioPorNombre(txtBoxUsuario.Text);
+                if (usuarioExistente == null)
+                {
+                    MessageBox.Show("El usuario del empleado no existe.");
+                    return;
+                }
+                //dar de baja empleado
+                if (!empleadoLogica.EliminarEmpleado(txtBoxUsuario.Text))
+                {
+                    string errores = string.Join("\n", empleadoLogica.ErroresValidacion);
+                    MessageBox.Show("No se pudo dar de baja el empleado:\n" + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Empleado dado de baja con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                //habilitar btnNuevo
                 btnCrear.Enabled = true;
-                btnVolver.Enabled = true;
+                //deshabilitar btnModificar y btnBaja
                 btnModificar.Enabled = false;
                 btnBaja.Enabled = false;
                 btnCancelar.Enabled = false;
+                //limpiar campos
+                btnLimpiar.PerformClick();
             }
         }
 
@@ -414,5 +425,351 @@ namespace ArimaERP.EmpleadoClientes
                 errorProvider1.SetError(textBoxDNI, "");
             }
         }
+
+        private void btnBuscarUsuario_Click(object sender, EventArgs e)
+        {
+            btnVolver.Enabled = false;
+            btnModificarUsuario.Enabled = true;
+            //activar btnModificar y btnBaja
+            btnModificar.Enabled = true;
+            btnBaja.Enabled = true;
+            btnCancelar.Enabled = true;
+            //desactivar btnNuevo
+            btnCrear.Enabled = false;
+
+            //buscar por nombre de usuario y cargar en texBoxUsuario y texBoxContrasena
+            // Obtener el nombre ingresado
+            string nombreBuscado = textBoxBusqueda.Text.Trim();
+            if (string.IsNullOrEmpty(nombreBuscado))
+            {
+                MessageBox.Show("Por favor, ingrese un nombre de usuario para buscar.");
+                return;
+            }
+            // Buscar el usuario en la capa lógica
+            USUARIOS usuarioEncontrado = usuarioLog.ObtenerUsuarioPorNombre(nombreBuscado);
+
+
+            if (usuarioEncontrado != null)
+            {
+                //Validar que sea de id_rol = 5, "Preventista"
+                if (usuarioEncontrado.id_rol != 5)
+                {
+                    MessageBox.Show("El Usuario no es un preventista", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                // Cargar los datos en los TextBox
+                txtBoxUsuario.Text = usuarioEncontrado.nombre;
+                textBoxContrasena.Text = usuarioEncontrado.contraseña; // Mostrar la contraseña en texto plano
+                //focus en textBoxContrasena
+                textBoxContrasena.Focus();
+                //cargar estado del usuario en el checkBoxEstado
+                checkBoxEstado.Checked = usuarioEncontrado.estado;
+                // Deshabilitar la edición del textBoxUsuario
+                txtBoxUsuario.Enabled = false;
+                contrasenaOriginal = usuarioEncontrado.contraseña; // Guardás el hash original
+                //si el usuario tiene un empleado asociado, cargar los datos en los campos correspondientes
+                var empleadoAsociado = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(usuarioEncontrado.nombre);
+                if (empleadoAsociado != null)
+                {
+                    textBoxNombre.Text = empleadoAsociado.nombre;
+                    textBoxApellido.Text = empleadoAsociado.apellido;
+                    textBoxMail.Text = empleadoAsociado.email;
+                    textBoxDireccion.Text = empleadoAsociado.direccion;
+                    textBoxDNI.Text = empleadoAsociado.dni.ToString();
+                    textBoxTelefono.Text = empleadoAsociado.telefono.ToString();
+                    btnCrearEmpleado.Enabled = false;
+                    btnModificar.Enabled = true;
+                    btnBaja.Enabled = true;
+                }
+                else
+                {
+                    // Si no hay empleado asociado, limpiar los campos relacionados
+                    textBoxNombre.Clear();
+                    textBoxApellido.Clear();
+                    textBoxMail.Clear();
+                    textBoxDireccion.Clear();
+                    textBoxDNI.Clear();
+                    textBoxTelefono.Clear();
+                    btnCrearEmpleado.Enabled = true;
+                    btnBaja.Enabled = false;
+                    btnModificar.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Usuario no encontrado.");
+                txtBoxUsuario.Clear();
+                textBoxContrasena.Clear();
+            }
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            btnModificarUsuario.Enabled = true;
+            //habilitar btnNuevo
+            btnCrear.Enabled = true;
+            //deshabilitar btnModificar y btnBaja
+            btnModificar.Enabled = true;
+            btnBaja.Enabled = false;
+            btnCancelar.Enabled = false;
+            txtBoxUsuario.Enabled = true;
+            btnCrearEmpleado.Enabled = true;
+            //limpiar campos
+            btnLimpiar.PerformClick();
+        }
+
+
+
+        private void btnModificarUsuario_Click(object sender, EventArgs e)
+        {
+            string nuevaContrasena = textBoxContrasena.Text;
+            string contrasenaFinal;
+            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text))
+            {
+                MessageBox.Show("Por favor, ingrese el nombre de usuario para modificar.");
+                return;
+            }
+            USUARIOS usuarioExistente = usuarioLog.ObtenerUsuarioPorNombre(txtBoxUsuario.Text);
+            if (string.IsNullOrWhiteSpace(textBoxContrasena.Text))
+            {
+                MessageBox.Show("Por favor, complete el campo contraseña para modificar el usuario ", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxContrasena.Text = usuarioExistente.contraseña;
+                textBoxContrasena.Focus();
+                return;
+            }
+            //verificar que el usuario existe            
+            if (usuarioExistente == null)
+            {
+                MessageBox.Show("El usuario no existe.");
+                return;
+            }
+            // Verificar si la contraseña ingresada es distinta (asumiendo que el campo muestra texto plano)
+            if (!PasswordHasher.VerifyPassword(nuevaContrasena, usuarioExistente.contraseña))
+            {
+                contrasenaFinal = nuevaContrasena; // Se encripta en capa lógica
+            }
+            else
+            {
+                contrasenaFinal = usuarioExistente.contraseña; // Ya está encriptada
+            }
+
+            // Validar que no haya errores en los campos
+            if (errorProvider1.GetError(txtBoxUsuario) != "" ||
+                errorProvider1.GetError(textBoxContrasena) != "" ||
+                errorProvider1.GetError(textBoxNombre) != "" ||
+                errorProvider1.GetError(textBoxApellido) != "" ||
+                errorProvider1.GetError(textBoxMail) != "" ||
+                errorProvider1.GetError(textBoxDireccion) != "" ||
+                errorProvider1.GetError(textBoxDNI) != "" ||
+                errorProvider1.GetError(textBoxTelefono) != ""
+            )
+            {
+                MessageBox.Show("Por favor, corrija los errores en los campos antes de modificar el usuario.", "Errores en el formulario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //obtener los valores del formulario
+            string nombre = txtBoxUsuario.Text;
+            string id_rol = "5";
+            bool estado = checkBoxEstado.Checked;
+            DialogResult confirmacion = MessageBox.Show(
+            "¿Está seguro de que desea modificar los datos del usuario?",
+            "Confirmar modificación",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+            );
+
+            if (confirmacion != DialogResult.Yes)
+            {
+                MessageBox.Show("Modificación cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            // Llamar a capa lógica
+            USUARIOS usuarioModificado = usuarioLog.ModificarUsuario(nombre, contrasenaFinal, id_rol, estado);
+
+            if (usuarioModificado != null)
+            {
+                MessageBox.Show("Usuario modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnLimpiar.PerformClick();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo modificar el usuario. Verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void FormAltaPreventista_Load(object sender, EventArgs e)
+        {
+
+            //Cargar comboBoxZona desde base de datos
+            var zonas = clienteLogica.ObtenerZonas();
+            comboBoxZona.DataSource = zonas;
+            comboBoxZona.DisplayMember = "nombre";
+            comboBoxZona.ValueMember = "id_zona";
+            comboBoxZona.SelectedIndex = -1; // No seleccionar nada al inicio
+
+        }
+
+        private void comboBoxZona_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxZona.SelectedIndex == -1)
+                return;
+            //filtrar clientes por zona seleccionada
+            if (comboBoxZona.SelectedValue is int zonaSeleccionada && zonaSeleccionada > 0)
+            {
+                comboBoxZona.SelectedIndex = -1;
+                int idZona = zonaSeleccionada;
+                // Obtener nombre de usuario preventista
+                string nombrePreventista = usuarioLog.ObtenerUsuarioPreventistaPorZona(idZona);
+                if (string.IsNullOrEmpty(nombrePreventista))
+                {
+                    MessageBox.Show("No se encontró preventista asociado a esta zona.");
+                    return;
+                }
+
+                // Buscar el usuario en la capa lógica
+                USUARIOS usuarioEncontrado = usuarioLog.ObtenerUsuarioPorNombre(nombrePreventista);
+                if (usuarioEncontrado == null || usuarioEncontrado.id_rol != 5)
+                {
+                    MessageBox.Show("El usuario asociado no es un preventista válido.");
+                    return;
+                }
+
+                // Cargar datos del usuario preventista
+                txtBoxUsuario.Text = usuarioEncontrado.nombre;
+                textBoxContrasena.Text = usuarioEncontrado.contraseña;
+                checkBoxEstado.Checked = usuarioEncontrado.estado;
+                txtBoxUsuario.Enabled = false;
+                contrasenaOriginal = usuarioEncontrado.contraseña;
+                textBoxContrasena.Focus();
+                comboBoxZona.SelectedIndex = -1; //resetear comboBox después de filtrar
+
+                // Cargar datos del empleado si existe
+                var empleadoAsociado = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(usuarioEncontrado.nombre);
+                if (empleadoAsociado != null)
+                {
+                    textBoxNombre.Text = empleadoAsociado.nombre;
+                    textBoxApellido.Text = empleadoAsociado.apellido;
+                    textBoxMail.Text = empleadoAsociado.email;
+                    textBoxDireccion.Text = empleadoAsociado.direccion;
+                    textBoxDNI.Text = empleadoAsociado.dni.ToString();
+                    textBoxTelefono.Text = empleadoAsociado.telefono.ToString();
+                    btnCrearEmpleado.Enabled = false;
+                    btnModificar.Enabled = true;
+                    btnBaja.Enabled = true;
+                }
+                else
+                {
+                    textBoxNombre.Clear();
+                    textBoxApellido.Clear();
+                    textBoxMail.Clear();
+                    textBoxDireccion.Clear();
+                    textBoxDNI.Clear();
+                    textBoxTelefono.Clear();
+                    btnCrearEmpleado.Enabled = true;
+                    btnBaja.Enabled = false;
+                    btnModificar.Enabled = false;
+                }
+            }
+        }
+
+        private void btnCrearEmpleado_Click(object sender, EventArgs e)
+        {
+
+            //solicitar la busqueda del usuario en el caso de que no se haya buscado
+            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text))
+            {
+                MessageBox.Show("Por favor, busque y seleccione un usuario antes de crear un empleado.", "Usuario no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                //buscar el usuario en la base de datos
+                USUARIOS usuarioEncontrado = usuarioLog.ObtenerUsuarioPorNombre(txtBoxUsuario.Text);
+                if (usuarioEncontrado == null)
+                {
+                    MessageBox.Show("El usuario no existe. Por favor, verifique el nombre de usuario.", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            //verificar que los campos nombre, apellido, email, direccion, dni y telefono no esten vacíos
+            if (string.IsNullOrWhiteSpace(textBoxNombre.Text) ||
+                string.IsNullOrWhiteSpace(textBoxApellido.Text) ||
+                string.IsNullOrWhiteSpace(textBoxMail.Text) ||
+                string.IsNullOrWhiteSpace(textBoxDireccion.Text) ||
+                string.IsNullOrWhiteSpace(textBoxDNI.Text) ||
+                string.IsNullOrWhiteSpace(textBoxTelefono.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios para crear un empleado ", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //
+
+            if (empleadoLogica.AgregarEmpleado(txtBoxUsuario.Text, textBoxNombre.Text, textBoxApellido.Text, textBoxMail.Text, textBoxDireccion.Text, textBoxDNI.Text, textBoxTelefono.Text))
+            {
+                // Si todos los campos son válidos mostrar mensaje de éxito
+                MessageBox.Show("Empleado guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Mostrar errores de validación
+                string errores = string.Join("\n", empleadoLogica.ErroresValidacion);
+                MessageBox.Show("No se pudo crear el empleado debido a los siguientes errores:\n" + errores, "Error al crear empleado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            // Validar que todos los campos obligatorios estén completos para crear usuario
+            if (string.IsNullOrWhiteSpace(txtBoxUsuario.Text) ||
+                string.IsNullOrWhiteSpace(textBoxContrasena.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios para crear nuevo usuario ", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+           
+            // Validar que no haya errores en los campos
+            if (errorProvider1.GetError(txtBoxUsuario) != "" ||
+                errorProvider1.GetError(textBoxContrasena) != "" ||
+                errorProvider1.GetError(textBoxNombre) != "" ||
+                errorProvider1.GetError(textBoxApellido) != "" ||
+                errorProvider1.GetError(textBoxMail) != "" ||
+                errorProvider1.GetError(textBoxDireccion) != "" ||
+                errorProvider1.GetError(textBoxDNI) != "" ||
+                errorProvider1.GetError(textBoxTelefono) != ""
+            )
+            {
+                MessageBox.Show("Por favor, corrija los errores en los campos antes de crear el usuario.", "Errores en el formulario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            //comprobar que no existe otro usuario con el mismo nombre
+            var usuariosExistentes = usuarioLog.ObtenerUsuarios();
+            if (usuariosExistentes.Any(u => u.nombre.Equals(txtBoxUsuario.Text, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe un usuario con ese nombre. Por favor, elija otro nombre de usuario.", "Nombre de usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Crear nuevo usuario
+            bool exito = usuarioLog.SalvarUsuario(
+            txtBoxUsuario.Text,
+            textBoxContrasena.Text,
+            "5"
+        );
+            if (exito)
+            {
+                MessageBox.Show("Usuario creado con éxito.", "Creación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //limpiar campos
+                btnLimpiar.PerformClick();
+            }
+            else
+            {
+                // Mostrar errores de validación
+                string errores = string.Join("\n", usuarioLog.ErroresValidacion);
+                MessageBox.Show("No se pudo crear el usuario debido a los siguientes errores:\n" + errores, "Error al crear usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
+    
+

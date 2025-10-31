@@ -36,6 +36,7 @@
             this.textBoxBusqueda = new System.Windows.Forms.TextBox();
             this.TLPCampos = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBaja = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCrearEmpleado = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@
             this.gbxAcciones = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnBaja = new System.Windows.Forms.Button();
             this.TLPMain.SuspendLayout();
             this.pnlBuscar.SuspendLayout();
             this.TLPCampos.SuspendLayout();
@@ -193,6 +193,22 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rellene los campos del Empleado";
+            // 
+            // btnBaja
+            // 
+            this.btnBaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(160)))));
+            this.btnBaja.Enabled = false;
+            this.btnBaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBaja.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBaja.ForeColor = System.Drawing.Color.White;
+            this.btnBaja.Location = new System.Drawing.Point(365, 324);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(263, 44);
+            this.btnBaja.TabIndex = 7;
+            this.btnBaja.Text = "Dar de Baja";
+            this.btnBaja.UseVisualStyleBackColor = false;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnLimpiar
             // 
@@ -734,22 +750,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // btnBaja
-            // 
-            this.btnBaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(160)))));
-            this.btnBaja.Enabled = false;
-            this.btnBaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBaja.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBaja.ForeColor = System.Drawing.Color.White;
-            this.btnBaja.Location = new System.Drawing.Point(365, 324);
-            this.btnBaja.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(263, 44);
-            this.btnBaja.TabIndex = 7;
-            this.btnBaja.Text = "Dar de Baja";
-            this.btnBaja.UseVisualStyleBackColor = false;
-            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // FormRegistrarUsuario
             // 

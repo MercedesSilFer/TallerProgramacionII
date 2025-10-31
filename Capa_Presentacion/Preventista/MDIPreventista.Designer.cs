@@ -96,9 +96,8 @@
             this.lblRol.Location = new System.Drawing.Point(941, 49);
             this.lblRol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(52, 32);
+            this.lblRol.Size = new System.Drawing.Size(0, 32);
             this.lblRol.TabIndex = 7;
-            this.lblRol.Text = "Rol:";
             this.lblRol.Click += new System.EventHandler(this.lblRol_Click);
             // 
             // lblNombre

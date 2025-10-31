@@ -17,7 +17,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 namespace ArimaERP.Administrador
 {
     public partial class FormRegistrarUsuario : Form
-    {
+    {        
         ClassRolLogica logicaRol = new ClassRolLogica();
         ClassUsuarioLogica usuarioLog = new ClassUsuarioLogica();
         ClassEmpleadoLogica empleadoLogica = new ClassEmpleadoLogica();

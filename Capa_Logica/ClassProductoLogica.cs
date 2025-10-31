@@ -53,5 +53,64 @@ namespace Capa_Logica
             }
             return stock;
         }
+        //obtener lista de producto_presentacion
+        public List<producto_presentacion> ObtenerListaProductoPresentacion()
+        {
+            var lista = classProducto.ListarProductoPresentacion();
+            if (lista == null)
+            {
+                ErroresValidacion = classProducto.ErroresValidacion;
+            }
+            return lista;
+        }
+        //obtener lista de productos
+        public List<PRODUCTO> ObtenerListaProductos()
+        {
+            var lista = classProducto.ListarProductos();
+            if (lista == null)
+            {
+                ErroresValidacion = classProducto.ErroresValidacion;
+            }
+            return lista;
+        }
+        //obtener lista de presentaciones
+        public List<PRESENTACION> ObtenerListaPresentaciones()
+        {
+            var lista = classProducto.ListarPresentaciones();
+            if (lista == null)
+            {
+                ErroresValidacion = classProducto.ErroresValidacion;
+            }
+            return lista;
+        }
+        public List<producto_presentacion> ListarProductoPresentacionActivosConStock()
+        {
+            var lista = classProducto.ListarProductoPresentacionActivosConStock();
+            if (lista == null)
+            {
+                ErroresValidacion = classProducto.ErroresValidacion;
+            }
+            return lista;
+        }
+        //obtener producto_presentacion por id_producto id_presentacion
+        public producto_presentacion ObtenerProductoPresentacionPorProductoYPresentacion(int id_producto, int id_presentacion)
+        {
+            var productoPresentacion = classProducto.ObtenerProductoPresentacionPorId_productoId_ID_presentacion(id_producto, id_presentacion);
+            if (productoPresentacion == null)
+            {
+                ErroresValidacion = classProducto.ErroresValidacion;
+            }
+            return productoPresentacion;
+        }
+        //Obtener producto por familia
+        public List<PRODUCTO> ObtenerProductosPorFamilia(int familia)
+        {
+            return classProducto.ObtenerProductosPorFamilia(familia);
+        }
+        public List<PRODUCTO> ObtenerProductoPorMarca(int marca)
+        {
+            return classProducto.ObtenerProductoPorMarca(marca);
+        }
     }
 }
+

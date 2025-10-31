@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c2d4d71e64014632948cc7b4a201543f" Name="Diagram1">
+      <Diagram DiagramId="c2d4d71e64014632948cc7b4a201543f" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="ArimaERPModel1.ACCION" Width="1.5" PointX="1.5" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ArimaERPModel1.AUDITORIA" Width="1.5" PointX="3.75" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="ArimaERPModel1.CLIENTE" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />

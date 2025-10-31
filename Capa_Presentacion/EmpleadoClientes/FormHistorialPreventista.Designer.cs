@@ -56,12 +56,18 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewHistorial = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnBuscarPreventista = new System.Windows.Forms.Button();
             this.txtBuscarPreventista = new System.Windows.Forms.TextBox();
+            this.btnBuscarPreventista = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblDni = new System.Windows.Forms.Label();
+            this.lblNombreApellido = new System.Windows.Forms.Label();
+            this.lblMail = new System.Windows.Forms.Label();
+            this.lblnombre_usuario = new System.Windows.Forms.Label();
             this.menuStripHistorialPreventista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistorial)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripHistorialPreventista
@@ -78,9 +84,9 @@
             this.toolStripMenuItem1,
             this.productosToolStripMenuItem,
             this.pagosToolStripMenuItem});
-            this.menuStripHistorialPreventista.Location = new System.Drawing.Point(794, 12);
+            this.menuStripHistorialPreventista.Location = new System.Drawing.Point(642, 12);
             this.menuStripHistorialPreventista.Name = "menuStripHistorialPreventista";
-            this.menuStripHistorialPreventista.Size = new System.Drawing.Size(428, 28);
+            this.menuStripHistorialPreventista.Size = new System.Drawing.Size(580, 28);
             this.menuStripHistorialPreventista.TabIndex = 0;
             this.menuStripHistorialPreventista.Text = "menuStrip1";
             // 
@@ -98,7 +104,7 @@
             // noConfiablesToolStripMenuItem
             // 
             this.noConfiablesToolStripMenuItem.Name = "noConfiablesToolStripMenuItem";
-            this.noConfiablesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.noConfiablesToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.noConfiablesToolStripMenuItem.Text = "No confiables";
             this.noConfiablesToolStripMenuItem.Click += new System.EventHandler(this.noConfiablesToolStripMenuItem_Click);
             // 
@@ -107,6 +113,7 @@
             this.confiablesToolStripMenuItem.Name = "confiablesToolStripMenuItem";
             this.confiablesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.confiablesToolStripMenuItem.Text = "Confiables";
+            this.confiablesToolStripMenuItem.Click += new System.EventHandler(this.confiablesToolStripMenuItem_Click);
             // 
             // tamañoToolStripMenuItem
             // 
@@ -121,20 +128,23 @@
             // pequeñosToolStripMenuItem
             // 
             this.pequeñosToolStripMenuItem.Name = "pequeñosToolStripMenuItem";
-            this.pequeñosToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.pequeñosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.pequeñosToolStripMenuItem.Text = "Pequeños";
+            this.pequeñosToolStripMenuItem.Click += new System.EventHandler(this.pequeñosToolStripMenuItem_Click);
             // 
             // medianosToolStripMenuItem
             // 
             this.medianosToolStripMenuItem.Name = "medianosToolStripMenuItem";
-            this.medianosToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.medianosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.medianosToolStripMenuItem.Text = "Medianos ";
+            this.medianosToolStripMenuItem.Click += new System.EventHandler(this.medianosToolStripMenuItem_Click);
             // 
             // grandesToolStripMenuItem
             // 
             this.grandesToolStripMenuItem.Name = "grandesToolStripMenuItem";
-            this.grandesToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.grandesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.grandesToolStripMenuItem.Text = "Grandes";
+            this.grandesToolStripMenuItem.Click += new System.EventHandler(this.grandesToolStripMenuItem_Click);
             // 
             // pedidosToolStripMenuItem
             // 
@@ -154,6 +164,7 @@
             this.pendientesToolStripMenuItem.Name = "pendientesToolStripMenuItem";
             this.pendientesToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
             this.pendientesToolStripMenuItem.Text = "Pendientes";
+            this.pendientesToolStripMenuItem.Click += new System.EventHandler(this.pendientesToolStripMenuItem_Click);
             // 
             // entregadosToolStripMenuItem
             // 
@@ -162,11 +173,12 @@
             this.entregadosToolStripMenuItem.Name = "entregadosToolStripMenuItem";
             this.entregadosToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
             this.entregadosToolStripMenuItem.Text = "Entregados";
+            this.entregadosToolStripMenuItem.Click += new System.EventHandler(this.entregadosToolStripMenuItem_Click);
             // 
             // últimoMesToolStripMenuItem
             // 
             this.últimoMesToolStripMenuItem.Name = "últimoMesToolStripMenuItem";
-            this.últimoMesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.últimoMesToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.últimoMesToolStripMenuItem.Text = "Último Mes";
             // 
             // conSaldosPendientesToolStripMenuItem
@@ -186,6 +198,7 @@
             this.canceladosToolStripMenuItem.Name = "canceladosToolStripMenuItem";
             this.canceladosToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
             this.canceladosToolStripMenuItem.Text = "Cancelados";
+            this.canceladosToolStripMenuItem.Click += new System.EventHandler(this.canceladosToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem
             // 
@@ -203,25 +216,25 @@
             this.efectivoToolStripMenuItem,
             this.cuentaCorrienteToolStripMenuItem});
             this.mensualToolStripMenuItem.Name = "mensualToolStripMenuItem";
-            this.mensualToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.mensualToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.mensualToolStripMenuItem.Text = "Mensual";
             // 
             // efectivoToolStripMenuItem
             // 
             this.efectivoToolStripMenuItem.Name = "efectivoToolStripMenuItem";
-            this.efectivoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.efectivoToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.efectivoToolStripMenuItem.Text = "Efectivo";
             // 
             // cuentaCorrienteToolStripMenuItem
             // 
             this.cuentaCorrienteToolStripMenuItem.Name = "cuentaCorrienteToolStripMenuItem";
-            this.cuentaCorrienteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cuentaCorrienteToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.cuentaCorrienteToolStripMenuItem.Text = "Cuenta Corriente";
             // 
             // semanalToolStripMenuItem
             // 
             this.semanalToolStripMenuItem.Name = "semanalToolStripMenuItem";
-            this.semanalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.semanalToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.semanalToolStripMenuItem.Text = "Semanal";
             // 
             // toolStripMenuItem1
@@ -241,7 +254,7 @@
             // masVendidosToolStripMenuItem
             // 
             this.masVendidosToolStripMenuItem.Name = "masVendidosToolStripMenuItem";
-            this.masVendidosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.masVendidosToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.masVendidosToolStripMenuItem.Text = "Mas vendidos";
             // 
             // pagosToolStripMenuItem
@@ -257,14 +270,14 @@
             // registrarPagoToolStripMenuItem
             // 
             this.registrarPagoToolStripMenuItem.Name = "registrarPagoToolStripMenuItem";
-            this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.registrarPagoToolStripMenuItem.Text = "Último mes";
             this.registrarPagoToolStripMenuItem.Click += new System.EventHandler(this.registrarPagoToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // dataGridViewHistorial
@@ -273,7 +286,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewHistorial.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHistorial.Location = new System.Drawing.Point(30, 53);
+            this.dataGridViewHistorial.Location = new System.Drawing.Point(30, 111);
             this.dataGridViewHistorial.Name = "dataGridViewHistorial";
             this.dataGridViewHistorial.RowHeadersWidth = 51;
             this.dataGridViewHistorial.RowTemplate.Height = 24;
@@ -291,6 +304,15 @@
             this.panel1.Size = new System.Drawing.Size(1381, 47);
             this.panel1.TabIndex = 2;
             // 
+            // txtBuscarPreventista
+            // 
+            this.txtBuscarPreventista.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarPreventista.Location = new System.Drawing.Point(327, 9);
+            this.txtBuscarPreventista.Name = "txtBuscarPreventista";
+            this.txtBuscarPreventista.Size = new System.Drawing.Size(274, 31);
+            this.txtBuscarPreventista.TabIndex = 1;
+            this.txtBuscarPreventista.TextChanged += new System.EventHandler(this.txtBuscarPreventista_TextChanged);
+            // 
             // btnBuscarPreventista
             // 
             this.btnBuscarPreventista.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -302,20 +324,11 @@
             this.btnBuscarPreventista.UseVisualStyleBackColor = true;
             this.btnBuscarPreventista.Click += new System.EventHandler(this.btnBuscarPreventista_Click);
             // 
-            // txtBuscarPreventista
-            // 
-            this.txtBuscarPreventista.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarPreventista.Location = new System.Drawing.Point(327, 9);
-            this.txtBuscarPreventista.Name = "txtBuscarPreventista";
-            this.txtBuscarPreventista.Size = new System.Drawing.Size(274, 31);
-            this.txtBuscarPreventista.TabIndex = 1;
-            this.txtBuscarPreventista.TextChanged += new System.EventHandler(this.txtBuscarPreventista_TextChanged);
-            // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(1026, 461);
+            this.btnSalir.Location = new System.Drawing.Point(1032, 499);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(221, 42);
             this.btnSalir.TabIndex = 3;
@@ -323,22 +336,88 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.lblnombre_usuario, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblMail, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblNombreApellido, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblDni, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(30, 53);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1323, 52);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // lblDni
+            // 
+            this.lblDni.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDni.AutoSize = true;
+            this.lblDni.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDni.Location = new System.Drawing.Point(465, 13);
+            this.lblDni.Name = "lblDni";
+            this.lblDni.Size = new System.Drawing.Size(59, 25);
+            this.lblDni.TabIndex = 0;
+            this.lblDni.Text = "label1";
+            // 
+            // lblNombreApellido
+            // 
+            this.lblNombreApellido.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblNombreApellido.AutoSize = true;
+            this.lblNombreApellido.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreApellido.Location = new System.Drawing.Point(135, 13);
+            this.lblNombreApellido.Name = "lblNombreApellido";
+            this.lblNombreApellido.Size = new System.Drawing.Size(59, 25);
+            this.lblNombreApellido.TabIndex = 1;
+            this.lblNombreApellido.Text = "label2";
+            // 
+            // lblMail
+            // 
+            this.lblMail.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblMail.AutoSize = true;
+            this.lblMail.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMail.Location = new System.Drawing.Point(795, 13);
+            this.lblMail.Name = "lblMail";
+            this.lblMail.Size = new System.Drawing.Size(59, 25);
+            this.lblMail.TabIndex = 2;
+            this.lblMail.Text = "label3";
+            // 
+            // lblnombre_usuario
+            // 
+            this.lblnombre_usuario.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblnombre_usuario.AutoSize = true;
+            this.lblnombre_usuario.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblnombre_usuario.Location = new System.Drawing.Point(1127, 13);
+            this.lblnombre_usuario.Name = "lblnombre_usuario";
+            this.lblnombre_usuario.Size = new System.Drawing.Size(59, 25);
+            this.lblnombre_usuario.TabIndex = 3;
+            this.lblnombre_usuario.Text = "label3";
+            // 
             // FormHistorialPreventista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1381, 547);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridViewHistorial);
             this.MainMenuStrip = this.menuStripHistorialPreventista;
             this.Name = "FormHistorialPreventista";
             this.Text = "Historial Preventista";
+            this.Load += new System.EventHandler(this.FormHistorialPreventista_Load);
             this.menuStripHistorialPreventista.ResumeLayout(false);
             this.menuStripHistorialPreventista.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistorial)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -376,5 +455,10 @@
         private System.Windows.Forms.TextBox txtBuscarPreventista;
         private System.Windows.Forms.Button btnBuscarPreventista;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblMail;
+        private System.Windows.Forms.Label lblNombreApellido;
+        private System.Windows.Forms.Label lblDni;
+        private System.Windows.Forms.Label lblnombre_usuario;
     }
 }

@@ -47,21 +47,14 @@ namespace ArimaERP.EmpleadoClientes
                     provincia = fila.Cells["provincia"].Value?.ToString(),
                     cod_postal = Convert.ToInt32(fila.Cells["cod_postal"].Value),
                     id_zona = Convert.ToInt32(fila.Cells["id_zona"].Value),
-                    id_tamano = Convert.ToInt32(fila.Cells["id_tamano"].Value),
-                    
-
-
+                    id_tamano = Convert.ToInt32(fila.Cells["id_tamano"].Value),                  
 
                 };
-
                 FormEditarCliente formEditarCliente = new FormEditarCliente(clienteSeleccionado);
                 // Suscribirse al evento               
                 formEditarCliente.ShowDialog();
                 // Después de cerrar el formulario de edición, recargar los datos
-                FormModificacionCliente_Load(this, EventArgs.Empty);
-                    
-
-
+                FormModificacionCliente_Load(this, EventArgs.Empty);                 
             }
         }
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -79,7 +72,6 @@ namespace ArimaERP.EmpleadoClientes
         {
             if (e.KeyCode == Keys.Enter && dataGridListarClientes.CurrentRow != null)
             {
-
                 AbrirFormularioEdicion();
                 e.SuppressKeyPress = true;
             }
@@ -111,9 +103,7 @@ namespace ArimaERP.EmpleadoClientes
             dataGridListarClientes.Columns.Add("id_tamano", "ID Tamaño");
             dataGridListarClientes.Columns["id_tamano"].Visible = false;
             dataGridListarClientes.Columns.Add("id_zona", "ID Zona");
-            dataGridListarClientes.Columns["id_zona"].Visible = false;
-            
-
+            dataGridListarClientes.Columns["id_zona"].Visible = false;            
             dataGridListarClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridListarClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridListarClientes.MultiSelect = false;
@@ -123,22 +113,18 @@ namespace ArimaERP.EmpleadoClientes
             List<CLIENTE> listaClientes = clienteLogica.ObtenerClientes();
             var zonas = clienteLogica.ObtenerZonas();
             var tamanos = clienteLogica.ObtenerTamanos();
-
             foreach (var cliente in listaClientes)
             {
                 string estadoTexto = cliente.estado ? "Activo" : "Inactivo";
                 string confiableTexto = cliente.confiable ? "Si" : "No";
                 // Buscar nombre de zona
                 string nombreZona = zonas.FirstOrDefault(z => z.id_zona == cliente.id_zona)?.nombre ?? "Zona desconocida";
-
                 // Buscar nombre de tamaño
                 string nombreTamano = tamanos.FirstOrDefault(t => t.id_tamano == cliente.id_tamano)?.descripcion ?? "Tamaño desconocido";
                 dataGridListarClientes.Rows.Add(cliente.id_cliente, cliente.dni, cliente.nombre, cliente.apellido, cliente.telefono, cliente.email, cliente.razon_social, cliente.cuil_cuit, cliente.fecha_alta, estadoTexto, confiableTexto, cliente.condicion_frenteIVA, cliente.calle, cliente.numero, cliente.ciudad, cliente.provincia, cliente.cod_postal, nombreTamano, nombreZona, cliente.id_tamano, cliente.id_zona);
             }
             //CARGAR COMBOBOX ZONA
-
             zonas.Insert(0, new ZONA { id_zona = 0, nombre = "Seleccione zona" });
-
             comboBoxBuscarClienteZona.DataSource = zonas;
             comboBoxBuscarClienteZona.DisplayMember = "nombre";
             comboBoxBuscarClienteZona.ValueMember = "id_zona";
@@ -319,10 +305,8 @@ namespace ArimaERP.EmpleadoClientes
                 {
                     string estadoTexto = cliente.estado ? "Activo" : "Inactivo";
                     string confiableTexto = cliente.confiable ? "Si" : "No";
-
                     string nombreZona = zonas.FirstOrDefault(z => z.id_zona == cliente.id_zona)?.nombre ?? "Zona desconocida";
                     string nombreTamano = tamanos.FirstOrDefault(t => t.id_tamano == cliente.id_tamano)?.descripcion ?? "Tamaño desconocido";
-
                     dataGridListarClientes.Rows.Add(
                         cliente.id_cliente,
                         cliente.dni,
@@ -345,7 +329,6 @@ namespace ArimaERP.EmpleadoClientes
                         nombreZona,
                          cliente.id_tamano, cliente.id_zona
                     );
-
                 }
             }
         }
@@ -411,9 +394,7 @@ namespace ArimaERP.EmpleadoClientes
                      cliente.id_tamano, cliente.id_zona
                 );
             }
-
         }
-
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -428,6 +409,6 @@ namespace ArimaERP.EmpleadoClientes
                 MessageBox.Show("Por favor, ingrese solo letras y espacios para el nombre o apellido.", "Entrada inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Handled = true; // evita que el carácter no válido se ingrese en el TextBox
             }      
-        }               
+        }      
     }
 }

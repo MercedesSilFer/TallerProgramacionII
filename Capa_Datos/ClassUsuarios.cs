@@ -104,6 +104,24 @@ namespace Capa_Datos
                 return null;
             }
         }
-        
+        //Obtener nombre preventista (usuario id_rol = 5) por id_zona
+        public string ObtenerUsuarioPreventistaPorZona(int idZona)
+        {
+            try
+            {
+                using (var contexto = new ArimaERPEntities())
+                {
+                    var zona = contexto.ZONA.FirstOrDefault(z => z.id_zona == idZona);
+                    return zona?.preventista; // preventsta es FK a USUARIOS.nombre
+                }
+            }
+            catch (Exception ex)
+            {
+                ErroresValidacion.Clear();
+                ErroresValidacion.Add("Error al obtener el preventista: " + ex.Message);
+                return null;
+            }
+        }
+
     }
 }

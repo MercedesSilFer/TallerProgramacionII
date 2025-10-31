@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Capa_Entidades;
+using Capa_Logica;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,7 @@ namespace ArimaERP.Preventista
 {
     public partial class MDIPreventista : Form
     {
+        ClassEmpleadoLogica classEmpleadoLogica = new ClassEmpleadoLogica();
         public MDIPreventista()
         {
             InitializeComponent();
@@ -23,7 +26,21 @@ namespace ArimaERP.Preventista
         {
             //cargar fecha en lblFecha
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            lblRol.Text = "ROL: Preventista";
+            lblRol.Text = "Preventista";
+            //Obtener usuario actual
+            string usuarioActual = ObtenerUsuarioActual();
+            //obtener nombre de empleado de tabla Empleado partir de nombre_usuario que corresponde al usuario actual
+            Empleado empleado = new ClassEmpleadoLogica().ObtenerEmpleadoPorNombreUsuario(usuarioActual);
+            if (empleado != null)
+            {
+                lblNombre.Text = $"{empleado.nombre} {empleado.apellido}";
+            }
+        }
+        
+         private string ObtenerUsuarioActual()
+        {
+            // Aquí debes implementar la lógica para obtener el nombre del usuario actual
+            return UsuarioSesion.Nombre; // Ejemplo: retorna el nombre del usuario desde una clase estática de sesión
         }
 
         public void AbrirFormEnPanel(Form formHijo)

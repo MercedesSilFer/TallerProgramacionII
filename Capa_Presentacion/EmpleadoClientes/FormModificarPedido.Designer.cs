@@ -31,72 +31,54 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxNumeroPedido = new System.Windows.Forms.TextBox();
+            this.btnTodosLosPedidos = new System.Windows.Forms.Button();
+            this.textBoxNumeroFactura = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.txtBuscarCliente = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblNumeroFactura = new System.Windows.Forms.Label();
             this.labelClientes = new System.Windows.Forms.Label();
             this.comboBoxClienteZona = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnFechaEntrega = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblZona = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.txtDNI = new System.Windows.Forms.TextBox();
             this.MontoMaximo = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtMontoMaximo = new System.Windows.Forms.TextBox();
             this.labelPreventista = new System.Windows.Forms.Label();
             this.comboBoxBuscarPorEstado = new System.Windows.Forms.ComboBox();
-            this.Creacion = new System.Windows.Forms.Button();
+            this.btnCreacion = new System.Windows.Forms.Button();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewModificarPedidos = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Preventista = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnModificarPedido = new System.Windows.Forms.Button();
+            this.comboBoxEstados = new System.Windows.Forms.ComboBox();
+            this.lblEstadoPedido = new System.Windows.Forms.Label();
+            this.btnCancelarModificacion = new System.Windows.Forms.Button();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaEntrega = new System.Windows.Forms.Label();
             this.lblDetalles = new System.Windows.Forms.Label();
             this.dataGridViewDetallePedido = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio_Unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_Bulto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_Unitario_Bulto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnCancelarModificacion = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblMarca = new System.Windows.Forms.Label();
+            this.comboBoxFamilia = new System.Windows.Forms.ComboBox();
+            this.comboBoxMarca = new System.Windows.Forms.ComboBox();
+            this.textBoxCodigo = new System.Windows.Forms.TextBox();
+            this.lblFamilia = new System.Windows.Forms.Label();
+            this.btnVerTodos = new System.Windows.Forms.Button();
+            this.dataGridViewProductos = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewModificarPedidos)).BeginInit();
             this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetallePedido)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -104,191 +86,103 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.36964F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.6559F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnTodosLosPedidos, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1331, 62);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1331, 44);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(562, 15);
+            this.label1.Location = new System.Drawing.Point(538, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(205, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = " Modificar Pedidos";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxNumeroPedido
+            // btnTodosLosPedidos
             // 
-            this.textBoxNumeroPedido.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxNumeroPedido.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNumeroPedido.Location = new System.Drawing.Point(1091, 4);
-            this.textBoxNumeroPedido.Name = "textBoxNumeroPedido";
-            this.textBoxNumeroPedido.Size = new System.Drawing.Size(185, 30);
-            this.textBoxNumeroPedido.TabIndex = 3;
-            this.textBoxNumeroPedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNumeroPedido_KeyPress);
+            this.btnTodosLosPedidos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnTodosLosPedidos.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTodosLosPedidos.Location = new System.Drawing.Point(1117, 6);
+            this.btnTodosLosPedidos.Name = "btnTodosLosPedidos";
+            this.btnTodosLosPedidos.Size = new System.Drawing.Size(191, 32);
+            this.btnTodosLosPedidos.TabIndex = 17;
+            this.btnTodosLosPedidos.Text = "Todos los Pedidos";
+            this.btnTodosLosPedidos.UseVisualStyleBackColor = true;
+            this.btnTodosLosPedidos.Click += new System.EventHandler(this.btnTodosLosPedidos_Click);
+            // 
+            // textBoxNumeroFactura
+            // 
+            this.textBoxNumeroFactura.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxNumeroFactura.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNumeroFactura.Location = new System.Drawing.Point(1165, 4);
+            this.textBoxNumeroFactura.Name = "textBoxNumeroFactura";
+            this.textBoxNumeroFactura.Size = new System.Drawing.Size(163, 30);
+            this.textBoxNumeroFactura.TabIndex = 3;
+            this.textBoxNumeroFactura.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNumeroFactura_KeyDown);
+            this.textBoxNumeroFactura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNumeroPedido_KeyPress);
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tableLayoutPanel2.ColumnCount = 8;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.55556F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.50505F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 19F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 7, 0);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.txtBuscarCliente, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxNumeroPedido, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblNumeroFactura, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxNumeroFactura, 7, 0);
             this.tableLayoutPanel2.Controls.Add(this.labelClientes, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBoxClienteZona, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxClienteZona, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnFechaEntrega, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker1, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblZona, 4, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 62);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 44);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1331, 39);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.tableLayoutPanel3.ColumnCount = 8;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.15152F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.57576F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.27273F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 264F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label3, 5, 0);
-            this.tableLayoutPanel3.Controls.Add(this.textBox2, 6, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.comboBox1, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker2, 3, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(1314, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(14, 33);
-            this.tableLayoutPanel3.TabIndex = 44;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(-285, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1, 30);
-            this.textBox1.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(-451, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 39);
-            this.label3.TabIndex = 40;
-            this.label3.Text = "Ingrese Número de Pedido";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(-230, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 30);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1, 39);
-            this.label4.TabIndex = 41;
-            this.label4.Text = "Ingrese Cliente";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(-664, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(164, 31);
-            this.comboBox1.TabIndex = 10;
-            this.comboBox1.Text = "Seleccione Zona";
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(-593, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(1, 33);
-            this.button2.TabIndex = 42;
-            this.button2.Text = "Fecha Entrega";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(-816, 3);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(146, 30);
-            this.dateTimePicker2.TabIndex = 43;
-            // 
             // txtBuscarCliente
             // 
             this.txtBuscarCliente.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarCliente.Location = new System.Drawing.Point(135, 3);
+            this.txtBuscarCliente.Location = new System.Drawing.Point(169, 3);
             this.txtBuscarCliente.Name = "txtBuscarCliente";
-            this.txtBuscarCliente.Size = new System.Drawing.Size(169, 30);
+            this.txtBuscarCliente.Size = new System.Drawing.Size(160, 30);
             this.txtBuscarCliente.TabIndex = 7;
+            this.txtBuscarCliente.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBuscarCliente_KeyDown);
             // 
-            // label2
+            // lblNumeroFactura
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblNumeroFactura.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(870, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 39);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Ingrese Número de Pedido";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNumeroFactura.AutoSize = true;
+            this.lblNumeroFactura.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumeroFactura.Location = new System.Drawing.Point(1002, 0);
+            this.lblNumeroFactura.Name = "lblNumeroFactura";
+            this.lblNumeroFactura.Size = new System.Drawing.Size(157, 39);
+            this.lblNumeroFactura.TabIndex = 40;
+            this.lblNumeroFactura.Text = "Número de Factura";
+            this.lblNumeroFactura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelClientes
             // 
@@ -296,42 +190,55 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelClientes.AutoSize = true;
             this.labelClientes.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelClientes.Location = new System.Drawing.Point(5, 0);
+            this.labelClientes.Location = new System.Drawing.Point(14, 0);
             this.labelClientes.Name = "labelClientes";
-            this.labelClientes.Size = new System.Drawing.Size(124, 39);
+            this.labelClientes.Size = new System.Drawing.Size(149, 39);
             this.labelClientes.TabIndex = 41;
-            this.labelClientes.Text = "Ingrese Cliente";
+            this.labelClientes.Text = "Ingrese DNI/Email Cliente";
             this.labelClientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBoxClienteZona
             // 
             this.comboBoxClienteZona.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxClienteZona.FormattingEnabled = true;
-            this.comboBoxClienteZona.Location = new System.Drawing.Point(640, 3);
+            this.comboBoxClienteZona.Location = new System.Drawing.Point(833, 3);
             this.comboBoxClienteZona.Name = "comboBoxClienteZona";
-            this.comboBoxClienteZona.Size = new System.Drawing.Size(197, 31);
+            this.comboBoxClienteZona.Size = new System.Drawing.Size(160, 31);
             this.comboBoxClienteZona.TabIndex = 10;
             this.comboBoxClienteZona.Text = "Seleccione Zona";
+            this.comboBoxClienteZona.SelectedIndexChanged += new System.EventHandler(this.comboBoxClienteZona_SelectedIndexChanged);
             // 
-            // button1
+            // btnFechaEntrega
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(310, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 33);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Fecha Entrega";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnFechaEntrega.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFechaEntrega.Location = new System.Drawing.Point(335, 3);
+            this.btnFechaEntrega.Name = "btnFechaEntrega";
+            this.btnFechaEntrega.Size = new System.Drawing.Size(160, 33);
+            this.btnFechaEntrega.TabIndex = 42;
+            this.btnFechaEntrega.Text = "Fecha Entrega";
+            this.btnFechaEntrega.UseVisualStyleBackColor = true;
+            this.btnFechaEntrega.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(445, 3);
+            this.dateTimePicker1.Location = new System.Drawing.Point(501, 3);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(189, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(160, 30);
             this.dateTimePicker1.TabIndex = 43;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // lblZona
+            // 
+            this.lblZona.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblZona.AutoSize = true;
+            this.lblZona.Location = new System.Drawing.Point(728, 11);
+            this.lblZona.Name = "lblZona";
+            this.lblZona.Size = new System.Drawing.Size(38, 16);
+            this.lblZona.TabIndex = 45;
+            this.lblZona.Text = "Zona";
             // 
             // errorProvider1
             // 
@@ -341,141 +248,50 @@
             // 
             this.tableLayoutPanel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tableLayoutPanel4.ColumnCount = 8;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.66805F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.22222F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.22222F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 222F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 7, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox5, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.MontoMaximo, 5, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox6, 6, 0);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Controls.Add(this.lblEstado, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtDNI, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.MontoMaximo, 6, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtMontoMaximo, 7, 0);
             this.tableLayoutPanel4.Controls.Add(this.labelPreventista, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.comboBoxBuscarPorEstado, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Creacion, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxBuscarPorEstado, 5, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnCreacion, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.dateTimePicker4, 3, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 101);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 83);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1331, 39);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
-            // tableLayoutPanel5
+            // lblEstado
             // 
-            this.tableLayoutPanel5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.tableLayoutPanel5.ColumnCount = 8;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.15152F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.57576F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.27273F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 264F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Controls.Add(this.textBox3, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label5, 5, 0);
-            this.tableLayoutPanel5.Controls.Add(this.textBox4, 6, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.comboBox2, 4, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button3, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.dateTimePicker3, 3, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(1311, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(17, 33);
-            this.tableLayoutPanel5.TabIndex = 44;
+            this.lblEstado.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(722, 11);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(50, 16);
+            this.lblEstado.TabIndex = 46;
+            this.lblEstado.Text = "Estado";
             // 
-            // textBox3
+            // txtDNI
             // 
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(-284, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(1, 30);
-            this.textBox3.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(-449, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(215, 39);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "Ingrese Número de Pedido";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(-228, 4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(185, 30);
-            this.textBox4.TabIndex = 3;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(1, 39);
-            this.label6.TabIndex = 41;
-            this.label6.Text = "Ingrese Cliente";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(-662, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(164, 31);
-            this.comboBox2.TabIndex = 10;
-            this.comboBox2.Text = "Seleccione Zona";
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(-591, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(1, 33);
-            this.button3.TabIndex = 42;
-            this.button3.Text = "Fecha Entrega";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker3.Location = new System.Drawing.Point(-814, 3);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(146, 30);
-            this.dateTimePicker3.TabIndex = 43;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(133, 3);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(171, 30);
-            this.textBox5.TabIndex = 7;
+            this.txtDNI.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDNI.Location = new System.Drawing.Point(169, 3);
+            this.txtDNI.Name = "txtDNI";
+            this.txtDNI.Size = new System.Drawing.Size(160, 30);
+            this.txtDNI.TabIndex = 7;
+            this.txtDNI.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDNI_KeyDown);
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // MontoMaximo
             // 
@@ -483,22 +299,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MontoMaximo.AutoSize = true;
             this.MontoMaximo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MontoMaximo.Location = new System.Drawing.Point(895, 0);
+            this.MontoMaximo.Location = new System.Drawing.Point(1032, 0);
             this.MontoMaximo.Name = "MontoMaximo";
-            this.MontoMaximo.Size = new System.Drawing.Size(188, 39);
+            this.MontoMaximo.Size = new System.Drawing.Size(127, 39);
             this.MontoMaximo.TabIndex = 40;
-            this.MontoMaximo.Text = "Ingrese Monto Máximo";
+            this.MontoMaximo.Text = "Monto Máximo";
             this.MontoMaximo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox6
+            // txtMontoMaximo
             // 
-            this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(1089, 4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(185, 30);
-            this.textBox6.TabIndex = 3;
-            this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox6_KeyPress);
+            this.txtMontoMaximo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtMontoMaximo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMontoMaximo.Location = new System.Drawing.Point(1165, 4);
+            this.txtMontoMaximo.Name = "txtMontoMaximo";
+            this.txtMontoMaximo.Size = new System.Drawing.Size(163, 30);
+            this.txtMontoMaximo.TabIndex = 3;
+            this.txtMontoMaximo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMontoMaximo_KeyDown);
+            this.txtMontoMaximo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox6_KeyPress);
             // 
             // labelPreventista
             // 
@@ -506,11 +323,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPreventista.AutoSize = true;
             this.labelPreventista.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPreventista.Location = new System.Drawing.Point(33, 0);
+            this.labelPreventista.Location = new System.Drawing.Point(62, 0);
             this.labelPreventista.Name = "labelPreventista";
-            this.labelPreventista.Size = new System.Drawing.Size(94, 39);
+            this.labelPreventista.Size = new System.Drawing.Size(101, 39);
             this.labelPreventista.TabIndex = 41;
-            this.labelPreventista.Text = "Ingrese Preventista";
+            this.labelPreventista.Text = "Ingrese DNI Preventista";
             this.labelPreventista.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBoxBuscarPorEstado
@@ -523,160 +340,163 @@
             "Entregado",
             "Cancelado",
             "Retrasado"});
-            this.comboBoxBuscarPorEstado.Location = new System.Drawing.Point(638, 3);
+            this.comboBoxBuscarPorEstado.Location = new System.Drawing.Point(833, 3);
             this.comboBoxBuscarPorEstado.Name = "comboBoxBuscarPorEstado";
-            this.comboBoxBuscarPorEstado.Size = new System.Drawing.Size(197, 31);
+            this.comboBoxBuscarPorEstado.Size = new System.Drawing.Size(160, 31);
             this.comboBoxBuscarPorEstado.TabIndex = 10;
             this.comboBoxBuscarPorEstado.Text = "Seleccione Estado";
+            this.comboBoxBuscarPorEstado.SelectedIndexChanged += new System.EventHandler(this.comboBoxBuscarPorEstado_SelectedIndexChanged);
             // 
-            // Creacion
+            // btnCreacion
             // 
-            this.Creacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Creacion.Location = new System.Drawing.Point(310, 3);
-            this.Creacion.Name = "Creacion";
-            this.Creacion.Size = new System.Drawing.Size(127, 33);
-            this.Creacion.TabIndex = 42;
-            this.Creacion.Text = "Fecha Creación";
-            this.Creacion.UseVisualStyleBackColor = true;
+            this.btnCreacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCreacion.Location = new System.Drawing.Point(335, 3);
+            this.btnCreacion.Name = "btnCreacion";
+            this.btnCreacion.Size = new System.Drawing.Size(160, 33);
+            this.btnCreacion.TabIndex = 42;
+            this.btnCreacion.Text = "Fecha Creación";
+            this.btnCreacion.UseVisualStyleBackColor = true;
+            this.btnCreacion.Click += new System.EventHandler(this.btnCreacion_Click);
             // 
             // dateTimePicker4
             // 
             this.dateTimePicker4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimePicker4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker4.Location = new System.Drawing.Point(443, 3);
+            this.dateTimePicker4.Location = new System.Drawing.Point(501, 3);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(189, 30);
+            this.dateTimePicker4.Size = new System.Drawing.Size(160, 30);
             this.dateTimePicker4.TabIndex = 43;
+            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker4_ValueChanged);
             // 
             // dataGridViewModificarPedidos
             // 
+            this.dataGridViewModificarPedidos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewModificarPedidos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewModificarPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewModificarPedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Preventista,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column10});
-            this.dataGridViewModificarPedidos.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridViewModificarPedidos.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dataGridViewModificarPedidos.Location = new System.Drawing.Point(0, 140);
+            this.dataGridViewModificarPedidos.Location = new System.Drawing.Point(0, 128);
             this.dataGridViewModificarPedidos.Name = "dataGridViewModificarPedidos";
             this.dataGridViewModificarPedidos.RowHeadersVisible = false;
             this.dataGridViewModificarPedidos.RowHeadersWidth = 51;
             this.dataGridViewModificarPedidos.RowTemplate.Height = 24;
-            this.dataGridViewModificarPedidos.Size = new System.Drawing.Size(1331, 204);
+            this.dataGridViewModificarPedidos.Size = new System.Drawing.Size(1328, 141);
             this.dataGridViewModificarPedidos.TabIndex = 4;
             this.dataGridViewModificarPedidos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewModificarPedidos_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Pedido N°";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Cliente";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Fecha Entrega";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Fecha Creación";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 125;
-            // 
-            // Preventista
-            // 
-            this.Preventista.HeaderText = "Preventista";
-            this.Preventista.MinimumWidth = 6;
-            this.Preventista.Name = "Preventista";
-            this.Preventista.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Estado";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column5.Width = 125;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Monto Total";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 125;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Detalle";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.Text = "Ver";
-            this.Column7.ToolTipText = "Ver detalle pedido";
-            this.Column7.Width = 125;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Acción";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column8.Text = "Guardar";
-            this.Column8.ToolTipText = "Guardar cambios";
-            this.Column8.Width = 125;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Saldo";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column10.Width = 125;
+            this.dataGridViewModificarPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewModificarPedidos_CellFormatting);
             // 
             // tableLayoutPanel6
             // 
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel6.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel6.Controls.Add(this.lblDetalles, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel6.ColumnCount = 7;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.5061F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.5061F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.89788F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.20777F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.88215F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
+            this.tableLayoutPanel6.Controls.Add(this.btnModificarPedido, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.comboBoxEstados, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.lblEstadoPedido, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.btnCancelarModificacion, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.dateTimePicker2, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.lblFechaEntrega, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.lblDetalles, 5, 0);
             this.tableLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 344);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 480);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1331, 62);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1331, 45);
             this.tableLayoutPanel6.TabIndex = 5;
+            // 
+            // btnModificarPedido
+            // 
+            this.btnModificarPedido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificarPedido.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarPedido.Location = new System.Drawing.Point(9, 3);
+            this.btnModificarPedido.Name = "btnModificarPedido";
+            this.btnModificarPedido.Size = new System.Drawing.Size(180, 39);
+            this.btnModificarPedido.TabIndex = 14;
+            this.btnModificarPedido.Text = "Actualizar Pedido";
+            this.btnModificarPedido.UseVisualStyleBackColor = true;
+            this.btnModificarPedido.Click += new System.EventHandler(this.btnModificarPedido_Click);
+            // 
+            // comboBoxEstados
+            // 
+            this.comboBoxEstados.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxEstados.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxEstados.FormattingEnabled = true;
+            this.comboBoxEstados.Items.AddRange(new object[] {
+            "Pendiente",
+            "En Preparación",
+            "Entregado",
+            "Cancelado",
+            "Retrasado"});
+            this.comboBoxEstados.Location = new System.Drawing.Point(699, 7);
+            this.comboBoxEstados.Name = "comboBoxEstados";
+            this.comboBoxEstados.Size = new System.Drawing.Size(183, 31);
+            this.comboBoxEstados.TabIndex = 13;
+            this.comboBoxEstados.Text = "Seleccione Estado";
+            // 
+            // lblEstadoPedido
+            // 
+            this.lblEstadoPedido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEstadoPedido.AutoSize = true;
+            this.lblEstadoPedido.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstadoPedido.Location = new System.Drawing.Point(575, 0);
+            this.lblEstadoPedido.Name = "lblEstadoPedido";
+            this.lblEstadoPedido.Size = new System.Drawing.Size(118, 45);
+            this.lblEstadoPedido.TabIndex = 12;
+            this.lblEstadoPedido.Text = "Estado Pedido";
+            this.lblEstadoPedido.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnCancelarModificacion
+            // 
+            this.btnCancelarModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelarModificacion.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelarModificacion.Location = new System.Drawing.Point(1131, 3);
+            this.btnCancelarModificacion.Name = "btnCancelarModificacion";
+            this.btnCancelarModificacion.Size = new System.Drawing.Size(151, 39);
+            this.btnCancelarModificacion.TabIndex = 8;
+            this.btnCancelarModificacion.Text = "Cancelar";
+            this.btnCancelarModificacion.UseVisualStyleBackColor = true;
+            this.btnCancelarModificacion.Click += new System.EventHandler(this.btnCancelarModificacion_Click);
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(368, 3);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(167, 31);
+            this.dateTimePicker2.TabIndex = 11;
+            // 
+            // lblFechaEntrega
+            // 
+            this.lblFechaEntrega.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFechaEntrega.AutoSize = true;
+            this.lblFechaEntrega.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaEntrega.Location = new System.Drawing.Point(244, 0);
+            this.lblFechaEntrega.Name = "lblFechaEntrega";
+            this.lblFechaEntrega.Size = new System.Drawing.Size(118, 45);
+            this.lblFechaEntrega.TabIndex = 2;
+            this.lblFechaEntrega.Text = "Fecha Entrega";
+            this.lblFechaEntrega.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDetalles
             // 
             this.lblDetalles.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetalles.AutoSize = true;
-            this.lblDetalles.Location = new System.Drawing.Point(567, 15);
+            this.lblDetalles.Location = new System.Drawing.Point(909, 7);
             this.lblDetalles.Name = "lblDetalles";
             this.lblDetalles.Size = new System.Drawing.Size(195, 31);
             this.lblDetalles.TabIndex = 0;
@@ -686,119 +506,155 @@
             // dataGridViewDetallePedido
             // 
             this.dataGridViewDetallePedido.AllowUserToDeleteRows = false;
+            this.dataGridViewDetallePedido.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDetallePedido.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDetallePedido.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Producto,
-            this.Cantidad_Unidad,
-            this.Precio_Unitario,
-            this.Cantidad_Bulto,
-            this.precio_Unitario_Bulto,
-            this.Descuento,
-            this.subtotal,
-            this.Column11,
-            this.Column12});
-            this.dataGridViewDetallePedido.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dataGridViewDetallePedido.Location = new System.Drawing.Point(0, 406);
+            this.dataGridViewDetallePedido.Location = new System.Drawing.Point(0, 533);
             this.dataGridViewDetallePedido.Name = "dataGridViewDetallePedido";
+            this.dataGridViewDetallePedido.RowHeadersVisible = false;
             this.dataGridViewDetallePedido.RowHeadersWidth = 51;
             this.dataGridViewDetallePedido.RowTemplate.Height = 24;
-            this.dataGridViewDetallePedido.Size = new System.Drawing.Size(1331, 126);
+            this.dataGridViewDetallePedido.Size = new System.Drawing.Size(1331, 81);
             this.dataGridViewDetallePedido.TabIndex = 7;
             this.dataGridViewDetallePedido.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDetallePedido_CellContentClick);
+            this.dataGridViewDetallePedido.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDetallePedido_CellValueChanged);
+            this.dataGridViewDetallePedido.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridViewDetallePedido_CurrentCellDirtyStateChanged);
+            this.dataGridViewDetallePedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewDetallePedido_KeyPress);
             // 
-            // Producto
+            // tableLayoutPanel3
             // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.MinimumWidth = 6;
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            this.Producto.Width = 125;
-            // 
-            // Cantidad_Unidad
-            // 
-            this.Cantidad_Unidad.HeaderText = "Cantidad Unidades";
-            this.Cantidad_Unidad.MinimumWidth = 6;
-            this.Cantidad_Unidad.Name = "Cantidad_Unidad";
-            this.Cantidad_Unidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Cantidad_Unidad.Width = 125;
-            // 
-            // Precio_Unitario
-            // 
-            this.Precio_Unitario.HeaderText = "Precio Unitario";
-            this.Precio_Unitario.MinimumWidth = 6;
-            this.Precio_Unitario.Name = "Precio_Unitario";
-            this.Precio_Unitario.ReadOnly = true;
-            this.Precio_Unitario.Width = 125;
-            // 
-            // Cantidad_Bulto
-            // 
-            this.Cantidad_Bulto.HeaderText = "Cantidad Bulto";
-            this.Cantidad_Bulto.MinimumWidth = 6;
-            this.Cantidad_Bulto.Name = "Cantidad_Bulto";
-            this.Cantidad_Bulto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Cantidad_Bulto.Width = 125;
-            // 
-            // precio_Unitario_Bulto
-            // 
-            this.precio_Unitario_Bulto.HeaderText = "Precio Unitario Bulto";
-            this.precio_Unitario_Bulto.MinimumWidth = 6;
-            this.precio_Unitario_Bulto.Name = "precio_Unitario_Bulto";
-            this.precio_Unitario_Bulto.ReadOnly = true;
-            this.precio_Unitario_Bulto.Width = 125;
-            // 
-            // Descuento
-            // 
-            this.Descuento.HeaderText = "Descuento";
-            this.Descuento.MinimumWidth = 6;
-            this.Descuento.Name = "Descuento";
-            this.Descuento.ReadOnly = true;
-            this.Descuento.Width = 125;
-            // 
-            // subtotal
-            // 
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.MinimumWidth = 6;
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
-            this.subtotal.Width = 125;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Acción";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Text = "Guardar Cambios";
-            this.Column11.ToolTipText = "Guardar cambios";
-            this.Column11.Width = 160;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Eliminar Fila";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 125;
-            // 
-            // btnCancelarModificacion
-            // 
-            this.btnCancelarModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelarModificacion.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarModificacion.Location = new System.Drawing.Point(490, 549);
-            this.btnCancelarModificacion.Name = "btnCancelarModificacion";
-            this.btnCancelarModificacion.Size = new System.Drawing.Size(170, 54);
-            this.btnCancelarModificacion.TabIndex = 8;
-            this.btnCancelarModificacion.Text = "Cancelar";
-            this.btnCancelarModificacion.UseVisualStyleBackColor = true;
-            this.btnCancelarModificacion.Click += new System.EventHandler(this.btnCancelarModificacion_Click);
+            this.tableLayoutPanel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tableLayoutPanel3.ColumnCount = 7;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.17656F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.50038F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.235913F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.81142F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.489858F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.55222F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.00826F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblMarca, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxFamilia, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxMarca, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxCodigo, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblFamilia, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnVerTodos, 6, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 275);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1331, 50);
+            this.tableLayoutPanel3.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(156, 16);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Ingrese Código Producto";
+            // 
+            // lblMarca
+            // 
+            this.lblMarca.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblMarca.AutoSize = true;
+            this.lblMarca.Location = new System.Drawing.Point(789, 17);
+            this.lblMarca.Name = "lblMarca";
+            this.lblMarca.Size = new System.Drawing.Size(45, 16);
+            this.lblMarca.TabIndex = 13;
+            this.lblMarca.Text = "Marca";
+            // 
+            // comboBoxFamilia
+            // 
+            this.comboBoxFamilia.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxFamilia.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFamilia.FormattingEnabled = true;
+            this.comboBoxFamilia.Location = new System.Drawing.Point(485, 9);
+            this.comboBoxFamilia.Name = "comboBoxFamilia";
+            this.comboBoxFamilia.Size = new System.Drawing.Size(263, 31);
+            this.comboBoxFamilia.TabIndex = 8;
+            this.comboBoxFamilia.Text = "Familia";
+            this.comboBoxFamilia.SelectedIndexChanged += new System.EventHandler(this.comboBoxFamilia_SelectedIndexChanged);
+            // 
+            // comboBoxMarca
+            // 
+            this.comboBoxMarca.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxMarca.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxMarca.FormattingEnabled = true;
+            this.comboBoxMarca.Location = new System.Drawing.Point(871, 9);
+            this.comboBoxMarca.Name = "comboBoxMarca";
+            this.comboBoxMarca.Size = new System.Drawing.Size(201, 31);
+            this.comboBoxMarca.TabIndex = 10;
+            this.comboBoxMarca.Text = "Marca";
+            this.comboBoxMarca.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarca_SelectedIndexChanged);
+            // 
+            // textBoxCodigo
+            // 
+            this.textBoxCodigo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBoxCodigo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCodigo.Location = new System.Drawing.Point(220, 10);
+            this.textBoxCodigo.Name = "textBoxCodigo";
+            this.textBoxCodigo.Size = new System.Drawing.Size(156, 30);
+            this.textBoxCodigo.TabIndex = 7;
+            this.textBoxCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCodigo_KeyDown);
+            this.textBoxCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCodigo_KeyPress);
+            // 
+            // lblFamilia
+            // 
+            this.lblFamilia.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblFamilia.AutoSize = true;
+            this.lblFamilia.Location = new System.Drawing.Point(411, 17);
+            this.lblFamilia.Name = "lblFamilia";
+            this.lblFamilia.Size = new System.Drawing.Size(51, 16);
+            this.lblFamilia.TabIndex = 12;
+            this.lblFamilia.Text = "Familia";
+            // 
+            // btnVerTodos
+            // 
+            this.btnVerTodos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnVerTodos.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerTodos.Location = new System.Drawing.Point(1107, 9);
+            this.btnVerTodos.Name = "btnVerTodos";
+            this.btnVerTodos.Size = new System.Drawing.Size(191, 32);
+            this.btnVerTodos.TabIndex = 16;
+            this.btnVerTodos.Text = "Todos los Productos";
+            this.btnVerTodos.UseVisualStyleBackColor = true;
+            this.btnVerTodos.Click += new System.EventHandler(this.btnVerTodos_Click);
+            // 
+            // dataGridViewProductos
+            // 
+            this.dataGridViewProductos.AllowUserToAddRows = false;
+            this.dataGridViewProductos.AllowUserToDeleteRows = false;
+            this.dataGridViewProductos.AllowUserToResizeRows = false;
+            this.dataGridViewProductos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewProductos.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProductos.Location = new System.Drawing.Point(0, 332);
+            this.dataGridViewProductos.Name = "dataGridViewProductos";
+            this.dataGridViewProductos.ReadOnly = true;
+            this.dataGridViewProductos.RowHeadersVisible = false;
+            this.dataGridViewProductos.RowHeadersWidth = 51;
+            this.dataGridViewProductos.RowTemplate.Height = 24;
+            this.dataGridViewProductos.Size = new System.Drawing.Size(1331, 142);
+            this.dataGridViewProductos.TabIndex = 10;
+            this.dataGridViewProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductos_CellContentClick);
             // 
             // FormModificarPedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1331, 615);
-            this.Controls.Add(this.btnCancelarModificacion);
+            this.Controls.Add(this.dataGridViewProductos);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.dataGridViewDetallePedido);
             this.Controls.Add(this.tableLayoutPanel6);
             this.Controls.Add(this.dataGridViewModificarPedidos);
@@ -807,21 +663,21 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormModificarPedido";
             this.Text = "Modificar  Pedidos";
+            this.Load += new System.EventHandler(this.FormModificarPedido_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewModificarPedidos)).EndInit();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetallePedido)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -833,59 +689,41 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox txtBuscarCliente;
         private System.Windows.Forms.ComboBox comboBoxClienteZona;
-        private System.Windows.Forms.TextBox textBoxNumeroPedido;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxNumeroFactura;
+        private System.Windows.Forms.Label lblNumeroFactura;
         private System.Windows.Forms.Label labelClientes;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnFechaEntrega;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.Label MontoMaximo;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtMontoMaximo;
         private System.Windows.Forms.Label labelPreventista;
         private System.Windows.Forms.ComboBox comboBoxBuscarPorEstado;
-        private System.Windows.Forms.Button Creacion;
+        private System.Windows.Forms.Button btnCreacion;
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.DataGridView dataGridViewModificarPedidos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label lblDetalles;
         private System.Windows.Forms.DataGridView dataGridViewDetallePedido;
         private System.Windows.Forms.Button btnCancelarModificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Preventista;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewButtonColumn Column7;
-        private System.Windows.Forms.DataGridViewButtonColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Unidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Unitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Bulto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio_Unitario_Bulto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descuento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
-        private System.Windows.Forms.DataGridViewButtonColumn Column11;
-        private System.Windows.Forms.DataGridViewButtonColumn Column12;
+        private System.Windows.Forms.Label lblZona;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMarca;
+        private System.Windows.Forms.ComboBox comboBoxFamilia;
+        private System.Windows.Forms.ComboBox comboBoxMarca;
+        private System.Windows.Forms.TextBox textBoxCodigo;
+        private System.Windows.Forms.Label lblFamilia;
+        private System.Windows.Forms.Button btnVerTodos;
+        private System.Windows.Forms.Label lblFechaEntrega;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.ComboBox comboBoxEstados;
+        private System.Windows.Forms.Label lblEstadoPedido;
+        private System.Windows.Forms.DataGridView dataGridViewProductos;
+        private System.Windows.Forms.Button btnModificarPedido;
+        private System.Windows.Forms.Button btnTodosLosPedidos;
     }
 }

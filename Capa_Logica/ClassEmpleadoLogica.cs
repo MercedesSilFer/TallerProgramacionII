@@ -16,7 +16,8 @@ namespace Capa_Logica
         //agregar empleado
         public Boolean AgregarEmpleado(string nombre_usuario, string nombre, string apellido, string email, string direccion, string dni, string telefono)
         {
-            try { 
+            try
+            {
                 //validar si el empleado ya existe por dni o nombre de usuario
                 if (empleado.ExisteEmpleado(Convert.ToInt32(dni)))
                 {
@@ -53,17 +54,17 @@ namespace Capa_Logica
             try
             {
                 Empleado nuevoEmpleado = new Empleado
-            {
-                nombre_usuario = nombre_usuario,
-                nombre = nombre,
-                apellido = apellido,
-                email = email,
-                direccion = direccion,
-                dni = Convert.ToInt32(dni),
-                telefono = Convert.ToInt64(telefono),
-                
-            };
-            return empleado.AgregarEmpleado(nuevoEmpleado);
+                {
+                    nombre_usuario = nombre_usuario,
+                    nombre = nombre,
+                    apellido = apellido,
+                    email = email,
+                    direccion = direccion,
+                    dni = Convert.ToInt32(dni),
+                    telefono = Convert.ToInt64(telefono),
+
+                };
+                return empleado.AgregarEmpleado(nuevoEmpleado);
             }
             catch (Exception ex)
             {
@@ -87,7 +88,7 @@ namespace Capa_Logica
             }
         }
         public bool ActualizarEmpleado(string nombreUsuario, string nombre, string apellido, string email, string direccion, string dni, string telefono)
-        {         
+        {
             // Llamar a capa de datos
             return empleado.ModificarEmpleado(nombreUsuario, nombre, apellido, email, direccion, dni, telefono);
         }
@@ -151,5 +152,58 @@ namespace Capa_Logica
                 return new List<Empleado>();
             }
         }
+        //Obtener Empleado por DNI
+        public Empleado ObtenerEmpleadoPorDNI(int dni)
+        {
+            try
+            {
+                return empleado.ObtenerEmpleadoPorDni(dni);
+            }
+            catch (Exception ex)
+            {
+                empleado.ErroresValidacion.Clear();
+                empleado.ErroresValidacion.Add("Error al obtener el empleado por DNI: " + ex.Message);
+                return null;
+            }
+        }
+        public Empleado BuscarPreventistaPorTexto(string texto)
+        {
+            try
+            {
+                return empleado.BuscarPreventistaPorTexto(texto);
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                empleado.ErroresValidacion.Clear();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationErrors.ValidationErrors)
+                    {
+                        string mensaje = $"Entidad: {validationErrors.Entry.Entity.GetType().Name}, Campo: {error.PropertyName}, Error: {error.ErrorMessage}";
+                        empleado.ErroresValidacion.Add(mensaje);
+                    }
+                }
+                return null;
+            }
+            catch (InvalidOperationException ex)
+            {
+                empleado.ErroresValidacion.Clear();
+                empleado.ErroresValidacion.Add("Error de operación: " + ex.Message);
+                return null;
+            }
+            catch (NullReferenceException ex)
+            {
+                empleado.ErroresValidacion.Clear();
+                empleado.ErroresValidacion.Add("Referencia nula: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                empleado.ErroresValidacion.Clear();
+                empleado.ErroresValidacion.Add("Error inesperado: " + ex.Message);
+                return null;
+            }
+        }
+
     }
 }

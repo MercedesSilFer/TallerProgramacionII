@@ -53,7 +53,6 @@
             this.btnHistorialPreventistas = new System.Windows.Forms.Button();
             this.btnAltaPrevent = new System.Windows.Forms.Button();
             this.pnlPedidos = new System.Windows.Forms.Panel();
-            this.btnCancPedido = new System.Windows.Forms.Button();
             this.btnModificarPedido = new System.Windows.Forms.Button();
             this.btnCrearPedido = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -358,7 +357,6 @@
             // pnlPedidos
             // 
             this.pnlPedidos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(160)))));
-            this.pnlPedidos.Controls.Add(this.btnCancPedido);
             this.pnlPedidos.Controls.Add(this.btnModificarPedido);
             this.pnlPedidos.Controls.Add(this.btnCrearPedido);
             this.pnlPedidos.Dock = System.Windows.Forms.DockStyle.Left;
@@ -368,19 +366,6 @@
             this.pnlPedidos.Size = new System.Drawing.Size(224, 683);
             this.pnlPedidos.TabIndex = 2;
             this.pnlPedidos.Visible = false;
-            // 
-            // btnCancPedido
-            // 
-            this.btnCancPedido.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCancPedido.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancPedido.Location = new System.Drawing.Point(0, 146);
-            this.btnCancPedido.Margin = new System.Windows.Forms.Padding(4, 4, 40, 37);
-            this.btnCancPedido.Name = "btnCancPedido";
-            this.btnCancPedido.Size = new System.Drawing.Size(224, 73);
-            this.btnCancPedido.TabIndex = 2;
-            this.btnCancPedido.Text = "Cancelar";
-            this.btnCancPedido.UseVisualStyleBackColor = true;
-            this.btnCancPedido.Click += new System.EventHandler(this.btnCancPedido_Click);
             // 
             // btnModificarPedido
             // 
@@ -462,7 +447,6 @@
         private System.Windows.Forms.Button btnAltaPrevent;
         private System.Windows.Forms.Panel pnlVistaMenuSecundario;
         private System.Windows.Forms.Button btnHistorialPreventistas;
-        private System.Windows.Forms.Button btnCancPedido;
         private System.Windows.Forms.Button btnVolverPanel;
         private System.Windows.Forms.ToolTip toolTip1;
     }

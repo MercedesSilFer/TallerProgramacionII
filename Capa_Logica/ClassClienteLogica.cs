@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Capa_Datos;
+using Capa_Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Capa_Datos;
-using Capa_Entidades;
 
 
 
@@ -187,7 +188,27 @@ namespace Capa_Logica
             {
             return ClassCliente.BuscarClientePorDNI(dni);
         }
-
+        //Obtener CUENTA_CORRIENTE por id_cliente
+        public CUENTA_CORRIENTE ObtenerCuentaCorrientePorIdCliente(int id_cliente)
+        {
+            return client.ObtenerCuentaCorrientePorIdCliente(id_cliente);
+        }
+        public bool SumarSaldoPorPedidoEntregado(int idCliente, decimal monto)
+        {
+            return client.ActualizarSaldoCuentaCorriente(idCliente, monto);
+        }
+        public bool AjustarSaldo(int idCliente, decimal diferencia)
+        {
+            return client.ActualizarSaldoCuentaCorriente(idCliente, diferencia);
+        }
+        public List<CLIENTE> ClientesNoConfiablesPorZona(int id_zona)
+        {
+            return client.ClientesNoConfiablesPorZona(id_zona);
+        }
+        public List<CLIENTE> ClientesConfiablesPorZona(int id_zona)
+        {
+            return client.ClientesConfiablesPorZona(id_zona);
+        }
     }
 }
 

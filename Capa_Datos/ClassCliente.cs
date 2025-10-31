@@ -207,6 +207,92 @@ namespace Capa_Datos
                 return context.CLIENTE.Where(c => c.confiable == false).ToList();
             }
         }
-        
+        //Obtener CUENTA_CORRIENTE por id_cliente
+        public CUENTA_CORRIENTE ObtenerCuentaCorrientePorIdCliente(int idCliente)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.CUENTA_CORRIENTE.FirstOrDefault(c => c.id_cliente == idCliente);
+            }
+        }
+        public bool ActualizarSaldoCuentaCorriente(int idCliente, decimal monto)
+        {
+            try
+            {
+                using (var contexto = new ArimaERPEntities())
+                {
+                    var cuenta = contexto.CUENTA_CORRIENTE.FirstOrDefault(c => c.id_cliente == idCliente);
+                    if (cuenta != null)
+                    {
+                        cuenta.saldo_actual += monto;
+                        cuenta.fecha_ultimo_movimiento = DateTime.Today;
+                        contexto.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        // Si no existe, crear nueva cuenta
+                        var nuevaCuenta = new CUENTA_CORRIENTE
+                        {
+                            id_cliente = idCliente,
+                            saldo_actual = monto,
+                            fecha_ultimo_movimiento = DateTime.Today
+                        };
+                        contexto.CUENTA_CORRIENTE.Add(nuevaCuenta);
+                        contexto.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                ErroresValidacion.Clear();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationErrors.ValidationErrors)
+                    {
+                        string mensaje = $"Entidad: {validationErrors.Entry.Entity.GetType().Name}, Campo: {error.PropertyName}, Error: {error.ErrorMessage}";
+                        ErroresValidacion.Add(mensaje);
+                    }
+                }
+
+                if (ex.InnerException != null)
+                    ErroresValidacion.Add("Detalle interno: " + ex.InnerException.Message);
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                ErroresValidacion.Clear();
+                ErroresValidacion.Add("Error general al guardar saldo en cuenta corriente o crear cuenta corriente: " + ex.Message);
+
+                if (ex.InnerException != null)
+                    ErroresValidacion.Add("Inner: " + ex.InnerException.Message);
+
+                if (ex.InnerException?.InnerException != null)
+                    ErroresValidacion.Add("Inner deeper: " + ex.InnerException.InnerException.Message);
+
+                return false;
+            }
+        }
+        public List<CLIENTE> ClientesNoConfiablesPorZona(int id_zona)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.CLIENTE
+                    .Where(c => c.id_zona == id_zona && c.confiable == false)
+                    .ToList();
+            }
+        }
+        //Obtener clientes confiables
+        public List<CLIENTE> ClientesConfiablesPorZona(int id_zona)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.CLIENTE
+                    .Where(c => c.id_zona == id_zona && c.confiable == true)
+                    .ToList();
+            }
+        }
     }
 }

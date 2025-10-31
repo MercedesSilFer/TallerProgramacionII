@@ -59,7 +59,7 @@ namespace Capa_Datos
         }
         //existe empleado por email
         public bool ExisteEmpleadoPorEmail(string email)
-            {
+        {
             using (var context = new ArimaERPEntities())
             {
                 return context.Empleado.Any(e => e.email == email);
@@ -117,7 +117,7 @@ namespace Capa_Datos
         }
         //obtener empleados por rol de usuario
         public List<Empleado> ObtenerEmpleadosPorRol(int id_rol)
-            {
+        {
             using (var context = new ArimaERPEntities())
             {
                 return context.Empleado
@@ -126,5 +126,71 @@ namespace Capa_Datos
                     .ToList();
             }
         }
+        //Obtener Empleado por dni
+        public Empleado ObtenerEmpleadoPorDni(int dni)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.Empleado.FirstOrDefault(e => e.dni == dni);
+            }
+        }
+        public Empleado BuscarPreventistaPorTexto(string texto)
+        {
+            try
+            {
+                using (var context = new ArimaERPEntities())
+                {
+                    texto = texto.ToLower();
+
+                    var resultado = context.Empleado
+                        .Include(e => e.USUARIOS)
+                        .Where(e => e.USUARIOS.id_rol == 5 &&
+                            (
+                                e.nombre.ToLower().Contains(texto) ||
+                                e.apellido.ToLower().Contains(texto) ||
+                                e.email.ToLower().Contains(texto) ||
+                                (e.direccion != null && e.direccion.ToLower().Contains(texto)) ||
+                                e.nombre_usuario.ToLower().Contains(texto) ||
+                                e.dni.ToString().Contains(texto) ||
+                                e.telefono.ToString().Contains(texto)
+                            ))
+                        .FirstOrDefault();
+
+                    return resultado;
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                ErroresValidacion.Clear();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationErrors.ValidationErrors)
+                    {
+                        string mensaje = $"Entidad: {validationErrors.Entry.Entity.GetType().Name}, Campo: {error.PropertyName}, Error: {error.ErrorMessage}";
+                        ErroresValidacion.Add(mensaje);
+                    }
+                }
+                return null;
+            }
+            catch (InvalidOperationException ex)
+            {
+                ErroresValidacion.Clear();
+                ErroresValidacion.Add("Error de operación: " + ex.Message);
+                return null;
+            }
+            catch (NullReferenceException ex)
+            {
+                ErroresValidacion.Clear();
+                ErroresValidacion.Add("Referencia nula: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                ErroresValidacion.Clear();
+                ErroresValidacion.Add("Error inesperado: " + ex.Message);
+                return null;
+            }
+        }
+
     }
 }

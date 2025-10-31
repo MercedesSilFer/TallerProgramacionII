@@ -55,6 +55,7 @@
     <Compile Include="ClassEmpleadoLogica.cs" />
     <Compile Include="ClassFamiliaLogica.cs" />
     <Compile Include="ClassMarcaLogica.cs" />
+    <Compile Include="ClassPagoLogica.cs" />
     <Compile Include="ClassPedidoLogica.cs" />
     <Compile Include="ClassProductoLogica.cs" />
     <Compile Include="ClassProveedorLogica.cs" />

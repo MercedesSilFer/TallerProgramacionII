@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Logica;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using Font = iTextSharp.text.Font;
 
 
 namespace ArimaERP.EmpleadoClientes
@@ -21,11 +25,14 @@ namespace ArimaERP.EmpleadoClientes
         ClassFamiliaLogica familiaLogica = new ClassFamiliaLogica();
         ClassMarcaLogica marcaLogica = new ClassMarcaLogica();
         ClassProveedorLogica proveedorLogica = new ClassProveedorLogica();
+        ClassProductoLogica productoLogica = new ClassProductoLogica();
+        ClassEmpleadoLogica empleadoLogica = new ClassEmpleadoLogica();
+       
+
         public FormCrearPedido()
         {
             InitializeComponent();
         }
-
         private void FormCrearPedido_Load(object sender, EventArgs e)
         {
             lblFechaHora.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -58,44 +65,25 @@ namespace ArimaERP.EmpleadoClientes
             dgvResultados.MultiSelect = false;
             dgvResultados.ReadOnly = true;
             dgvResultados.AllowUserToAddRows = false;
+            CargarTodosLosClientesActivos();
             //cargar zonas en comboBoxClienteZona
-            var zonas = clienteLogica.ObtenerZonas();
+            var zonas = clienteLogica.ObtenerZonas();            
             comboBoxClienteZona.DataSource = zonas;
             comboBoxClienteZona.DisplayMember = "nombre";
             comboBoxClienteZona.ValueMember = "id_zona";
             comboBoxClienteZona.SelectedIndex = -1; // No seleccionar nada al inicio
+            //cargar comboBoxMarca de base de datos
+            var marcas = marcaLogica.ObtenerTodasLasMarcas();
+            comboBoxMarca.DataSource = marcas; 
             //cargar comboBoxFamilia de base de datos
             var familias = familiaLogica.ObtenerTodasLasFamilias();
             comboBoxFamilia.DataSource = familias;
             comboBoxFamilia.DisplayMember = "descripcion";
             comboBoxFamilia.ValueMember = "id_familia";
-
             comboBoxFamilia.SelectedIndex = -1; // No seleccionar nada al inicio
-            //cargar comboBoxMarca de base de datos
-            var marcas = marcaLogica.ObtenerTodasLasMarcas();
-            comboBoxMarca.DataSource = marcas;
             comboBoxMarca.DisplayMember = "nombre";
             comboBoxMarca.ValueMember = "id_marca";
-            comboBoxMarca.SelectedIndex = -1; // No seleccionar nada al inicio
-            //cargar comboBoxProveedor de base de datos
-            var proveedores = proveedorLogica.ObtenerTodosLosProveedores();
-            if (proveedores.Any())
-            {
-                comboBoxProveedor.DataSource = proveedores;
-                comboBoxProveedor.DisplayMember = "razon_social";
-                comboBoxProveedor.ValueMember = "id_proveedor";
-                comboBoxProveedor.SelectedIndex = -1; // No seleccionar nada al inicio
-            }
-            else
-            {
-                MessageBox.Show("No se encontraron proveedores.");
-                if (proveedorLogica.ErroresValidacion.Any())
-                {
-                    MessageBox.Show(string.Join("\n", proveedorLogica.ErroresValidacion));
-                }
-
-
-            }
+            comboBoxMarca.SelectedIndex = -1; // No seleccionar nada al inicio            
             //cargar dataGridViewProductos con columnas
             dataGridViewProductos.Columns.Add("nombre", "Nombre");
             dataGridViewProductos.Columns.Add("presentacion", "Presentación");
@@ -107,13 +95,21 @@ namespace ArimaERP.EmpleadoClientes
             dataGridViewProductos.Columns["ID_presentacion"].Visible = false;
             dataGridViewProductos.Columns.Add("id_producto", "ID_producto");
             dataGridViewProductos.Columns["id_producto"].Visible = false;
+            //agregar un boton que sirva para seleccionar el producto y cargar al dataGridViewDetallePedido
+            DataGridViewButtonColumn btnAgregarProducto = new DataGridViewButtonColumn();
+            btnAgregarProducto.HeaderText = "Acción";
+            btnAgregarProducto.Text = "Agregar al Detalle";
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.UseColumnTextForButtonValue = true;
+            dataGridViewProductos.Columns.Add(btnAgregarProducto);
             dataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewDetallePedido.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProductos.MultiSelect = false;
             dataGridViewProductos.ReadOnly = true;
             dataGridViewProductos.AllowUserToAddRows = false;
+            //cargar dataGridViewProductos con todos los productos de la base de datos
+            CargarTodosLosProductosActivosConStock();
             //cargar dataGridViewDetallePedido con columnas
-            dataGridViewDetallePedido.Columns.Add("id_pedido", "ID_pedido");
             dataGridViewDetallePedido.Columns.Add("ID_detalle_pedido", "ID_Detalle");
             dataGridViewDetallePedido.Columns.Add("id_producto", "ID_producto");
             dataGridViewDetallePedido.Columns.Add("ID_presentacion", "ID_presentacion");
@@ -123,14 +119,13 @@ namespace ArimaERP.EmpleadoClientes
             dataGridViewDetallePedido.Columns.Add("cantidad_bultos", "Cantidad Bultos");
             dataGridViewDetallePedido.Columns.Add("precio_unitario", "Precio Unitario");
             dataGridViewDetallePedido.Columns.Add("subtotal", "Subtotal");
-            dataGridViewDetallePedido.Columns.Add("descuento", "Descuento");
+            dataGridViewDetallePedido.Columns.Add("descuento", "Descuento(%)");
             dataGridViewDetallePedido.Columns.Add("total", "Total");
             //permitir editar solo cantidad_unidad, cantidad_bultos y descuento
             dataGridViewDetallePedido.Columns["cantidad_unidad"].ReadOnly = false;
             dataGridViewDetallePedido.Columns["cantidad_bultos"].ReadOnly = false;
             dataGridViewDetallePedido.Columns["descuento"].ReadOnly = false;
-            //no permitir la edición de las demás columnas
-            dataGridViewDetallePedido.Columns["id_pedido"].ReadOnly = true;
+            //no permitir la edición de las demás columnas            
             dataGridViewDetallePedido.Columns["ID_detalle_pedido"].ReadOnly = true;
             dataGridViewDetallePedido.Columns["id_producto"].ReadOnly = true;
             dataGridViewDetallePedido.Columns["ID_presentacion"].ReadOnly = true;
@@ -139,7 +134,6 @@ namespace ArimaERP.EmpleadoClientes
             dataGridViewDetallePedido.Columns["precio_unitario"].ReadOnly = true;
             dataGridViewDetallePedido.Columns["subtotal"].ReadOnly = true;
             dataGridViewDetallePedido.Columns["total"].ReadOnly = true;
-
             //agregar boton de eliminar detalle
             DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
             btnEliminar.HeaderText = "Acción";
@@ -151,18 +145,82 @@ namespace ArimaERP.EmpleadoClientes
             dataGridViewDetallePedido.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewDetallePedido.ReadOnly = false;
             dataGridViewDetallePedido.MultiSelect = false;
-            dataGridViewDetallePedido.Columns["id_pedido"].Visible = false;
             dataGridViewDetallePedido.Columns["id_producto"].Visible = false;
             dataGridViewDetallePedido.Columns["ID_presentacion"].Visible = false;
             dataGridViewDetallePedido.Columns["total"].Visible = false;
-
         }
-
+        private void CargarTodosLosClientesActivos()
+        {
+            dgvResultados.Rows.Clear();
+            //obtener clientes activos y cargarlos en dgvResultados
+            var clientes = clienteLogica.ObtenerClientesActivos();
+            //cargar zonas en comboBoxClienteZona
+            var zonas = clienteLogica.ObtenerZonas();
+            //cargar dgvResultados
+            foreach (var cliente in clientes)
+            {
+                string estadoTexto = cliente.estado ? "Activo" : "Inactivo";
+                string confiableTexto = cliente.confiable ? "Si" : "No";
+                string nombreZona = zonas.FirstOrDefault(z => z.id_zona == cliente.id_zona)?.nombre ?? "Zona desconocida";
+                string nombreTamano = clienteLogica.ObtenerTamanos().FirstOrDefault(t => t.id_tamano == cliente.id_tamano)?.descripcion ?? "Tamaño desconocido";
+                dgvResultados.Rows.Add(
+                    cliente.id_cliente,
+                    cliente.dni,
+                    cliente.nombre,
+                    cliente.apellido,
+                    cliente.telefono,
+                    cliente.email,
+                    cliente.razon_social,
+                    cliente.cuil_cuit,
+                    cliente.fecha_alta,
+                    estadoTexto,
+                    confiableTexto,
+                    cliente.condicion_frenteIVA,
+                    cliente.calle,
+                    cliente.numero,
+                    cliente.ciudad,
+                    cliente.provincia,
+                    cliente.cod_postal,
+                    nombreTamano,
+                    nombreZona,
+                     cliente.id_tamano, cliente.id_zona
+                );
+            }
+        }
+        private void CargarTodosLosProductosActivosConStock()
+        {
+            //limpiar dataGridViewProductos
+            dataGridViewProductos.Rows.Clear();
+            //cargar dataGridViewProductos con todos los productos de la base de datos
+            var productosPresentacion = new ClassProductoLogica().ListarProductoPresentacionActivosConStock();
+            var productos = new ClassProductoLogica().ObtenerListaProductos();
+            var presentaciones = new ClassProductoLogica().ObtenerListaPresentaciones();
+            var marcasLista = new ClassMarcaLogica().ObtenerTodasLasMarcas();
+            foreach (var pp in productosPresentacion)
+            {
+                var producto = productos.FirstOrDefault(p => p.id_producto == pp.id_producto);
+                var presentacion = presentaciones.FirstOrDefault(pr => pr.ID_presentacion == pp.ID_presentacion);
+                var marca = marcasLista.FirstOrDefault(m => m.id_marca == producto.id_marca);
+                var stockProducto = new ClassProductoLogica().ObtenerStockPorProductoYPresentacion(pp.id_producto, pp.ID_presentacion);
+                if (producto != null && presentacion != null)
+                {
+                    dataGridViewProductos.Rows.Add(
+                        producto.nombre,
+                        presentacion.descripcion,
+                        pp.cod_producto,
+                        pp.precioLista,
+                        stockProducto.stock_actual,
+                        marca != null ? marca.nombre : "Marca desconocida",
+                        pp.ID_presentacion,
+                        pp.id_producto
+                        );
+                }
+            }
+        }
         private void timerFechaHora_Tick(object sender, EventArgs e)
         {
             lblFechaHora.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
-
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {   //clear textBoxDNI
             textBoxDNI.Clear();
@@ -174,13 +232,10 @@ namespace ArimaERP.EmpleadoClientes
                 MessageBox.Show("Ingrese un término de búsqueda.");
                 return;
             }
-            // Realizar búsqueda en la base de datos
             //busqueda general en todas las columnas de la tabla cliente
             var zonas = clienteLogica.ObtenerZonas();
             var tamanos = clienteLogica.ObtenerTamanos();
-
             List<CLIENTE> listaClientes = clienteLogica.ObtenerClientes();
-
             var clientesFiltrados = listaClientes.Where(cliente =>
                 (cliente.nombre != null && cliente.nombre.ToLower().Contains(filtro)) ||
                 (cliente.apellido != null && cliente.apellido.ToLower().Contains(filtro)) ||
@@ -231,83 +286,188 @@ namespace ArimaERP.EmpleadoClientes
                      cliente.id_tamano, cliente.id_zona
                 );
             }
-
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-
             // Instanciar el formulario
             FormCliente formCliente = new FormCliente();
             //Ubicar en el centro de pnlVistaMenuSecundario como showDialog
             formCliente.StartPosition = FormStartPosition.CenterParent;
             formCliente.ShowDialog();
         }
-
         private void btnCancelarPedido_Click(object sender, EventArgs e)
         {
-            //cerrar formulario
-            this.Close();
-        }
+            
+            //limpiar datos del pedido
+            lblNombre.Text = "Cliente: ";
+            lblZona.Text = "Zona: ";
+            lblTelefono.Text = "Teléfono: ";
+            lblDireccion.Text = "Dirección: ";
+            lblVendedor.Text = "Vendedor: ";
+            lblNumeroPedido.Text = "Pedido N°: ";
+            dataGridViewDetallePedido.Rows.Clear();
+            txtBuscarCliente.Clear();
+            textBoxDNI.Clear();
+            lblTotalPedido.Text = "Total: ";
+            textBoxCodigo.Clear();         
+            
+            //recargar dgvResultados con clientes activos
+                       
 
-        private void button2_Click(object sender, EventArgs e)
+        }
+        private void btnConfirmarPedido_Click(object sender, EventArgs e)
         {
-            //Validar campos en dataGridViewDetallePedido
-            if (dataGridViewDetallePedido.Rows.Count == 0)
+            if (!ValidarDatosPedido()) return;
+
+            if (dgvResultados.CurrentCell == null)
             {
-                MessageBox.Show("El pedido debe tener al menos un producto.");
+                MessageBox.Show("Debe seleccionar un cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            foreach (DataGridViewRow fila in dataGridViewDetallePedido.Rows)
+
+            int filaIndex = dgvResultados.CurrentCell.RowIndex;
+            int idCliente = Convert.ToInt32(dgvResultados.Rows[filaIndex].Cells["id_cliente"].Value);
+            DateTime fechaActual = DateTime.Now;
+            decimal total = CalcularTotalPedido();
+            string vendedor = ObtenerUsuarioActual();
+
+            // Validar detalles antes de crear el pedido
+            var detallesTemporales = CrearDetallesDesdeGrid(-1); // Usamos -1 como ID temporal
+            if (detallesTemporales == null)
             {
-                if (fila.Cells["ID_detalle_pedido"].Value == null||fila.Cells["cantidad_unidad"].Value == null || fila.Cells["cantidad_bultos"].Value == null || fila.Cells["descuento"].Value == null)
-                {
-                    MessageBox.Show("Todos los campos de cantidad y descuento deben estar completos.");
-                    return;
-                }
-                int cantidadUnidades;
-                int cantidadBultos;
-                decimal descuento;
-                if (!int.TryParse(fila.Cells["cantidad_unidad"].Value.ToString(), out cantidadUnidades) || cantidadUnidades < 0)
-                {
-                    MessageBox.Show("La cantidad de unidades debe ser un número entero positivo.");
-                    return;
-                }
-                if (!int.TryParse(fila.Cells["cantidad_bultos"].Value.ToString(), out cantidadBultos) || cantidadBultos < 0)
-                {
-                    MessageBox.Show("La cantidad de bultos debe ser un número entero positivo.");
-                    return;
-                }
-                if (!decimal.TryParse(fila.Cells["descuento"].Value.ToString(), out descuento) || descuento < 0)
-                {
-                    MessageBox.Show("El descuento debe ser un número decimal positivo.");
-                    return;
-                }
-                //guardar detalle pedido
-                if(pedidoLogica.GuardarDetallePedido(
-                    cantidadUnidades.ToString(),
-                    descuento.ToString(),
-                    fila.Cells["ID_detalle_pedido"].Value.ToString(),
-                    fila.Cells["id_pedido"].Value.ToString(),
-                    fila.Cells["id_producto"].Value.ToString(),
-                    fila.Cells["ID_presentacion"].Value.ToString(),
-                    cantidadBultos.ToString(),
-                    fila.Cells["precio_unitario"].Value.ToString()
-                    ))
-                {
-                    MessageBox.Show("Detalle del pedido guardado correctamente.");
-                }
-                else
-                {
-                    MessageBox.Show("Error al guardar el detalle del pedido.");
-                    if (pedidoLogica.ErroresValidacion.Any())
-                    {
-                        MessageBox.Show(string.Join("\n", pedidoLogica.ErroresValidacion));
-                    }
-                    return;
-                }
+                MessageBox.Show("No se puede crear el pedido. Hay productos con stock insuficiente o faltante.", "Error de stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Crear pedido
+            int idPedidoGenerado = pedidoLogica.CrearPedido(fechaActual, dateTimePicker1.Value, idCliente, 1, total, vendedor);
+            if (idPedidoGenerado == -1)
+            {
+                string errores = string.Join("\n", pedidoLogica.ErroresValidacion);
+                MessageBox.Show("Error al crear el pedido:\n" + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Asignar ID generado a los detalles
+            foreach (var detalle in detallesTemporales)
+            {
+                detalle.id_pedido = idPedidoGenerado;
+            }
+
+            // Guardar detalles
+            if (pedidoLogica.GuardarDetalles(detallesTemporales))
+            {
+                MessageBox.Show("Pedido guardado correctamente.");
+                CargarTodosLosProductosActivosConStock();
+                //limpiar dataGridViewDetallePedido
+                dataGridViewDetallePedido.Rows.Clear();
+                //resetear a fecha actual dateTimePicker1
+                dateTimePicker1.Value = DateTime.Now;
+            }
+            else
+            {
+                string errores = string.Join("\n", pedidoLogica.ErroresValidacion);
+                MessageBox.Show("Error al guardar los detalles:\n" + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private bool ValidarDatosPedido()
+        {
+            // Validar fecha
+            if (dateTimePicker1.Value.Date <= DateTime.Today)
+            {
+                MessageBox.Show("La fecha de entrega debe ser posterior a la actual.");
+                return false;
+            }
+            // Validar cliente seleccionado
+            if (dgvResultados.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un cliente.");
+                return false;
+            }
+            // Validar que haya productos en el pedido
+            if (dataGridViewDetallePedido.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe agregar al menos un producto al pedido.");
+                return false;
+            }
+            // Validar cantidades en cada fila
+            foreach (DataGridViewRow fila in dataGridViewDetallePedido.Rows)
+            {
+                if (fila.IsNewRow) continue;
+                int cantidadUnidad = 0;
+                int cantidadBultos = 0;
+
+                if (fila.Cells["cantidad_unidad"].Value != null)
+                    int.TryParse(fila.Cells["cantidad_unidad"].Value.ToString(), out cantidadUnidad);
+                if (fila.Cells["cantidad_bultos"].Value != null)
+                    int.TryParse(fila.Cells["cantidad_bultos"].Value.ToString(), out cantidadBultos);
+                if (cantidadUnidad <= 0 && cantidadBultos <= 0)
+                {
+                    MessageBox.Show("Cada producto debe tener al menos una cantidad en unidades o bultos.", "Validación de cantidades", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        private decimal CalcularTotalPedido()
+        {
+            decimal sumaTotal = 0;
+            foreach (DataGridViewRow fila in dataGridViewDetallePedido.Rows)
+            {
+                if (fila.Cells["total"].Value != null)
+                {
+                    decimal valor;
+                    if (decimal.TryParse(fila.Cells["total"].Value.ToString(), out valor))
+                    {
+                        sumaTotal += valor;
+                    }
+                }
+            }
+            return sumaTotal;
+        }
+
+        private List<DETALLE_PEDIDO> CrearDetallesDesdeGrid(int idPedido)
+        {
+         var detalles = new List<DETALLE_PEDIDO>();
+
+        foreach (DataGridViewRow fila in dataGridViewDetallePedido.Rows)
+        {
+        if (fila.IsNewRow) continue;
+
+            int id_producto = Convert.ToInt32(fila.Cells["id_producto"].Value);
+            int id_presentacion = Convert.ToInt32(fila.Cells["ID_presentacion"].Value);
+            int cantidadUnidades = Convert.ToInt32(fila.Cells["cantidad_unidad"].Value);
+            int cantidadBultos = Convert.ToInt32(fila.Cells["cantidad_bultos"].Value);
+
+            var producto = productoLogica.ObtenerProductoPorId(id_producto);
+            var presentacion = productoLogica.ObtenerPresentacionPorId(id_presentacion);
+            var producto_Presentacion = productoLogica.ObtenerProductoPresentacionPorProductoYPresentacion(id_producto, id_presentacion);
+            var stock = productoLogica.ObtenerStockPorProductoYPresentacion(id_producto, id_presentacion);
+
+        if (stock == null || (cantidadUnidades + cantidadBultos * producto_Presentacion.unidades_bulto > stock.stock_actual))
+        {
+            return null; // Stock insuficiente o inexistente
+        }
+
+        var detalle = new DETALLE_PEDIDO
+        {
+            id_pedido = idPedido,
+            id_producto = id_producto,
+            ID_presentacion = id_presentacion,
+            ID_detalle_pedido = Convert.ToInt32(fila.Cells["ID_detalle_pedido"].Value),
+            cantidad = cantidadUnidades,
+            precio_unitario = Convert.ToDecimal(fila.Cells["precio_unitario"].Value),
+            descuento = Convert.ToDecimal(fila.Cells["descuento"].Value),
+            cantidad_bultos = cantidadBultos
+        };
+
+        detalles.Add(detalle);
+        }
+
+             return detalles.Count > 0 ? detalles : null;
+        }
+       
 
         private void textBoxDNI_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -418,7 +578,7 @@ namespace ArimaERP.EmpleadoClientes
             Empleado empleado = new ClassEmpleadoLogica().ObtenerEmpleadoPorNombreUsuario(usuarioActual);
             if (empleado != null)
             {
-                lblVendedor.Text = $"{empleado.nombre} {empleado.apellido}";
+                lblVendedor.Text = $"Vendedor: {empleado.nombre} {empleado.apellido}";
             }
             else
             {
@@ -432,16 +592,11 @@ namespace ArimaERP.EmpleadoClientes
             lblDireccion.Text = $"Dirección: {fila.Cells["Calle"].Value} {fila.Cells["Numero"].Value}, {fila.Cells["Ciudad"].Value}, {fila.Cells["Provincia"].Value}, CP: {fila.Cells["codPostal"].Value}";
             int siguienteIdPedido = pedidoLogica.ObtenerSiguienteIdPedido();
             lblNumeroPedido.Text = $"Pedido N°: {siguienteIdPedido}";
-
         }
-
-
         private string ObtenerUsuarioActual()
         {
             // Aquí debes implementar la lógica para obtener el nombre del usuario actual
             return UsuarioSesion.Nombre; // Ejemplo: retorna el nombre del usuario desde una clase estática de sesión
-
-
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -469,6 +624,8 @@ namespace ArimaERP.EmpleadoClientes
 
         private void textBoxCodigo_KeyDown(object sender, KeyEventArgs e)
         {
+            //limpiar dataGridViewProductos
+            dataGridViewProductos.Rows.Clear();
             //si presiona enter buscar producto por codigo y cargar datos en el dataGridViewProductos a partir de PRESENTACION, PRODUCTO Y producto_presentacion
             if (e.KeyCode == Keys.Enter)
             {
@@ -541,20 +698,26 @@ namespace ArimaERP.EmpleadoClientes
                         return;
                     }
                 }
-                // Agregar el producto al detalle del pedido con cantidad inicial de 1 unidad y 1 bulto
+                //obtener unidades por bulto de la tabla producto_presentacion
+                int id_producto = Convert.ToInt32(fila.Cells["id_producto"].Value);
+                int ID_presentacion = Convert.ToInt32(fila.Cells["ID_presentacion"].Value);
+                var productoPresentacion = productoLogica.ObtenerProductoPresentacionPorProductoYPresentacion(id_producto, ID_presentacion);
+                if (productoPresentacion == null)
+                {
+                    MessageBox.Show("No se encontró el producto con la presentación seleccionada.");
+                    return;
+                }
+                //obtener unidades por bulto
+                int unidadesPorBulto = productoPresentacion.unidades_bulto;
+                // Agregar el producto al detalle del pedido con cantidad inicial de 0 unidad y 0 bulto
                 decimal precioUnitario = Convert.ToDecimal(fila.Cells["precioLista"].Value);
-                int cantidadUnidades = 1;
-                int cantidadBultos = 1;
-                decimal subtotal = precioUnitario * cantidadUnidades;
+                int cantidadUnidades = 0;
+                int cantidadBultos = 0;
+                decimal subtotal = precioUnitario * cantidadUnidades + cantidadBultos * unidadesPorBulto * precioUnitario;
                 decimal descuento = 0; // Inicialmente sin descuento
-                decimal total = subtotal - descuento;
-                //agregar en dataGridViewDetallePedido en un valor id_pedido el siguiente id de pedido a partir de pedidoLogica.ObtenerSiguienteIdPedido()
-                int siguienteIdPedido = pedidoLogica.ObtenerSiguienteIdPedido();
-
-
+                decimal total = subtotal - (subtotal * descuento / 100);
                 dataGridViewDetallePedido.Rows.Add(
-                    siguienteIdPedido,
-                    dataGridViewDetallePedido.Rows.Count + 1, // ID_detalle_pedido secuencial
+                    dataGridViewDetallePedido.Rows.Count + 1,
                     fila.Cells["id_producto"].Value,
                     fila.Cells["ID_presentacion"].Value,
                     fila.Cells["nombre"].Value,
@@ -568,16 +731,307 @@ namespace ArimaERP.EmpleadoClientes
                 );
             }
         }
-                
-        
+
+        private void ReasignarIdsDetallePedido()
+        {
+            int contador = 1;
+
+            foreach (DataGridViewRow fila in dataGridViewDetallePedido.Rows)
+            {
+                if (fila.IsNewRow) continue;
+
+                fila.Cells["ID_detalle_pedido"].Value = contador;
+                contador++;
+            }
+        }
+
         private void dataGridViewDetallePedido_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //si se presiona el boton eliminar eliminar fila
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewDetallePedido.Columns["btnEliminar"].Index)
             {
                 dataGridViewDetallePedido.Rows.RemoveAt(e.RowIndex);
+                ReasignarIdsDetallePedido();
+
             }
         }
+
+        private void dataGridViewDetallePedido_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var fila = dataGridViewDetallePedido.Rows[e.RowIndex];
+
+            if (fila.Cells["cantidad_unidad"].Value == null ||
+                fila.Cells["cantidad_bultos"].Value == null ||
+                fila.Cells["descuento"].Value == null) return;
+            // Validar que los valores sean numéricos mayores o iguales a cero
+            int cantidadUnidades;
+            int cantidadBultos;
+            decimal descuento;
+            if (!int.TryParse(fila.Cells["cantidad_unidad"].Value.ToString(), out cantidadUnidades) || cantidadUnidades < 0)
+            {
+                //
+                MessageBox.Show("La cantidad de unidades debe ser un número entero positivo.");
+                fila.Cells["cantidad_unidad"].Value = 0;
+
+                return;
+            }
+
+            if(!int.TryParse(fila.Cells["cantidad_bultos"].Value.ToString(), out cantidadBultos) || cantidadBultos < 0)
+            {
+                MessageBox.Show("La cantidad de bultos debe ser un número entero positivo.");
+                fila.Cells["cantidad_bultos"].Value = 0;
+                return;
+            }
+            descuento = Convert.ToDecimal(fila.Cells["descuento"].Value);
+            decimal precioUnitario = Convert.ToDecimal(fila.Cells["precio_unitario"].Value);
+            int id_producto = Convert.ToInt32(fila.Cells["id_producto"].Value);
+            int ID_presentacion = Convert.ToInt32(fila.Cells["ID_presentacion"].Value);
+            var productoPresentacion = productoLogica.ObtenerProductoPresentacionPorProductoYPresentacion(id_producto, ID_presentacion);
+            if (productoPresentacion == null) return;
+
+            int unidadesPorBulto = productoPresentacion.unidades_bulto;
+            decimal subtotal = precioUnitario * cantidadUnidades + cantidadBultos * unidadesPorBulto * precioUnitario;
+            decimal total = subtotal - (subtotal * descuento / 100);
+
+            fila.Cells["subtotal"].Value = subtotal;
+            fila.Cells["total"].Value = total;
+
+            lblTotalPedido.Text = $"Total Pedido: $ {dataGridViewDetallePedido.Rows.Cast<DataGridViewRow>().Sum(r => Convert.ToDecimal(r.Cells["total"].Value))}";
+        }
+
+        private void dataGridViewDetallePedido_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewDetallePedido.IsCurrentCellDirty)
+            {
+                dataGridViewDetallePedido.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }      
+
+        private void dataGridViewDetallePedido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números y control en las columnas de cantidad y descuento
+            if (dataGridViewDetallePedido.CurrentCell != null &&
+                (dataGridViewDetallePedido.CurrentCell.OwningColumn.Name == "cantidad_unidad" ||
+                 dataGridViewDetallePedido.CurrentCell.OwningColumn.Name == "cantidad_bultos" ||
+                 dataGridViewDetallePedido.CurrentCell.OwningColumn.Name == "descuento"))
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(dataGridViewDetallePedido, "Solo se permiten números.");
+                }
+                else
+                {
+                    errorProvider1.SetError(dataGridViewDetallePedido, "");
+                }
+            }
+        }
+        private void comboBoxFamilia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            //buscar productos y producto_presentacion por familia seleccionada en combobox
+            if (comboBoxFamilia.SelectedIndex == -1) return;
+
+            if (comboBoxFamilia.SelectedValue is int idFamiliaSeleccionada && idFamiliaSeleccionada > 0)
+            {
+                
+                var productos = productoLogica.ObtenerProductosPorFamilia(idFamiliaSeleccionada);
+                // Obtener presentaciones activas con stock
+                var productosPresentacion = productoLogica.ListarProductoPresentacionActivosConStock()
+                                            .Where(pp => productos.Any(p => p.id_producto == pp.id_producto))
+                                            .ToList();
+                var presentaciones = productoLogica.ObtenerListaPresentaciones();
+                var marcasLista = marcaLogica.ObtenerTodasLasMarcas();
+
+                // Limpiar el DataGridView antes de cargar nuevos datos
+                dataGridViewProductos.Rows.Clear();
+                comboBoxFamilia.SelectedIndex = -1;
+                foreach (var pp in productosPresentacion)
+                {
+                    var producto = productos.FirstOrDefault(p => p.id_producto == pp.id_producto);
+                    var presentacion = presentaciones.FirstOrDefault(pr => pr.ID_presentacion == pp.ID_presentacion);
+                    var marca = marcasLista.FirstOrDefault(m => m.id_marca == producto.id_marca);
+                    var stockProducto = new ClassProductoLogica().ObtenerStockPorProductoYPresentacion(pp.id_producto, pp.ID_presentacion);
+
+                    if (producto != null && presentacion != null)
+                    {
+                        dataGridViewProductos.Rows.Add(
+                            producto.nombre,
+                            presentacion.descripcion,
+                            pp.cod_producto,
+                            pp.precioLista,
+                            stockProducto.stock_actual,
+                            marca != null ? marca.nombre : "Marca desconocida",
+                            pp.ID_presentacion,
+                            pp.id_producto
+                        );
+                    }
+                }
+            }
+        }
+
+        private void comboBoxMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //buscar productos y producto_presentacion por marca seleccionada en combobox
+            if (comboBoxMarca.SelectedIndex == -1) return;
+
+            if (comboBoxMarca.SelectedValue is int idMarcaSeleccionada && idMarcaSeleccionada > 0)
+            {
+
+                var productos = productoLogica.ObtenerProductoPorMarca(idMarcaSeleccionada);
+                // Obtener presentaciones activas con stock
+                var productosPresentacion = productoLogica.ListarProductoPresentacionActivosConStock()
+                                            .Where(pp => productos.Any(p => p.id_producto == pp.id_producto))
+                                            .ToList();
+                var presentaciones = productoLogica.ObtenerListaPresentaciones();
+                var familiaLista = familiaLogica.ObtenerTodasLasFamilias();
+                var marca = marcaLogica.ObtenerMarcaPorId(idMarcaSeleccionada);
+
+                // Limpiar el DataGridView antes de cargar nuevos datos
+                dataGridViewProductos.Rows.Clear();
+                comboBoxMarca.SelectedIndex= -1;
+
+
+                foreach (var pp in productosPresentacion)
+                {
+                    var producto = productos.FirstOrDefault(p => p.id_producto == pp.id_producto);
+                    var presentacion = presentaciones.FirstOrDefault(pr => pr.ID_presentacion == pp.ID_presentacion);
+                    var stockProducto = productoLogica.ObtenerStockPorProductoYPresentacion(pp.id_producto, pp.ID_presentacion);
+
+                    if (producto != null && presentacion != null)
+                    {
+                        dataGridViewProductos.Rows.Add(
+                            producto.nombre,
+                            presentacion.descripcion,
+                            pp.cod_producto,
+                            pp.precioLista,
+                            stockProducto.stock_actual,
+                            marca.nombre,
+                            pp.ID_presentacion,
+                            pp.id_producto
+                        );
+                    }
+                }
+            }
+        }     
+
+        private void comboBoxClienteZona_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ////filtrar clientes por zona seleccionada
+            if (comboBoxClienteZona.SelectedIndex == -1)
+                return;
+            if (comboBoxClienteZona.SelectedValue is int zonaSeleccionada && zonaSeleccionada>0)
+            {
+                comboBoxClienteZona.SelectedIndex = -1;
+                int idZona = zonaSeleccionada;
+                List<CLIENTE> clientes = clienteLogica.ClientesPorZona(idZona);
+                dgvResultados.Rows.Clear();
+                var zonas = clienteLogica.ObtenerZonas();
+                var tamanos = clienteLogica.ObtenerTamanos();
+                foreach (var cliente in clientes)
+                {
+                    string estadoTexto = cliente.estado ? "Activo" : "Inactivo";
+                    string confiableTexto = cliente.confiable ? "Si" : "No";
+                    string nombreZona = zonas.FirstOrDefault(z => z.id_zona == cliente.id_zona)?.nombre ?? "Zona desconocida";
+                    string nombreTamano = tamanos.FirstOrDefault(t => t.id_tamano == cliente.id_tamano)?.descripcion ?? "Tamaño desconocido";
+                    dgvResultados.Rows.Add(
+                        cliente.id_cliente,
+                        cliente.dni,
+                        cliente.nombre,
+                        cliente.apellido,
+                        cliente.telefono,
+                        cliente.email,
+                        cliente.razon_social,
+                        cliente.cuil_cuit,
+                        cliente.fecha_alta,
+                        estadoTexto,
+                        confiableTexto,
+                        cliente.condicion_frenteIVA,
+                        cliente.calle,
+                        cliente.numero,
+                        cliente.ciudad,
+                        cliente.provincia,
+                        cliente.cod_postal,
+                        nombreTamano,
+                        nombreZona,
+                        cliente.id_tamano,
+                        cliente.id_zona
+                    );
+                }
+                
+            }
+        }
+        
+
+        private void dataGridViewProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //si se presiona el btnAgregarD eliminar fila
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewProductos.Columns["btnAgregarProducto"].Index)
+            {
+                DataGridViewRow fila = dataGridViewProductos.Rows[e.RowIndex];
+                // Verificar si el producto ya está en el detalle del pedido
+                foreach (DataGridViewRow detalleFila in dataGridViewDetallePedido.Rows)
+                {
+                    if (detalleFila.Cells["id_producto"].Value.ToString() == fila.Cells["id_producto"].Value.ToString() &&
+                        detalleFila.Cells["ID_presentacion"].Value.ToString() == fila.Cells["ID_presentacion"].Value.ToString())
+                    {
+                        MessageBox.Show("El producto ya está en el detalle del pedido.");
+                        return;
+                    }
+                }
+                //obtener unidades por bulto de la tabla producto_presentacion
+                int id_producto = Convert.ToInt32(fila.Cells["id_producto"].Value);
+                int ID_presentacion = Convert.ToInt32(fila.Cells["ID_presentacion"].Value);
+                var productoPresentacion = productoLogica.ObtenerProductoPresentacionPorProductoYPresentacion(id_producto, ID_presentacion);
+                if (productoPresentacion == null)
+                {
+                    MessageBox.Show("No se encontró el producto con la presentación seleccionada.");
+                    return;
+                }
+                //obtener unidades por bulto
+                int unidadesPorBulto = productoPresentacion.unidades_bulto;
+                // Agregar el producto al detalle del pedido con cantidad inicial de 0 unidad y 0 bulto
+                decimal precioUnitario = Convert.ToDecimal(fila.Cells["precioLista"].Value);
+                int cantidadUnidades = 0;
+                int cantidadBultos = 0;
+                decimal subtotal = precioUnitario * cantidadUnidades + cantidadBultos * unidadesPorBulto * precioUnitario;
+                decimal descuento = 0; // Inicialmente sin descuento
+                decimal total = subtotal - (subtotal * descuento / 100);
+                dataGridViewDetallePedido.Rows.Add(
+                    dataGridViewDetallePedido.Rows.Count + 1,
+                    fila.Cells["id_producto"].Value,
+                    fila.Cells["ID_presentacion"].Value,
+                    fila.Cells["nombre"].Value,
+                    fila.Cells["presentacion"].Value,
+                    cantidadUnidades,
+                    cantidadBultos,
+                    precioUnitario,
+                    subtotal,
+                    descuento,
+                    total
+                );
+            }      
+    
+        }
+
+        private void btnVerTodosClientes_Click(object sender, EventArgs e)
+        {
+            CargarTodosLosClientesActivos();
+        }
+
+        private void btnVerTodos_Click(object sender, EventArgs e)
+        {
+            //limpiar dataGridViewProductos            
+            CargarTodosLosProductosActivosConStock();
+        }
+
+        
     }
 }
+
+       
+    
+
 
