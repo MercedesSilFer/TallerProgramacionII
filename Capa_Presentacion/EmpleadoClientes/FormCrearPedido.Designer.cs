@@ -39,7 +39,6 @@
             this.btnRegistrarNuevo = new System.Windows.Forms.Button();
             this.textBoxDNI = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBoxClienteZona = new System.Windows.Forms.ComboBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblDireccion = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@
             this.lblFamilia = new System.Windows.Forms.Label();
             this.btnVerTodos = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.comboBoxClienteZona = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,7 +86,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.27739F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 328F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 329F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnVerTodosClientes, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -102,7 +102,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(530, 7);
+            this.label1.Location = new System.Drawing.Point(529, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 31);
             this.label1.TabIndex = 0;
@@ -113,7 +113,7 @@
             // 
             this.btnVerTodosClientes.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVerTodosClientes.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerTodosClientes.Location = new System.Drawing.Point(1070, 7);
+            this.btnVerTodosClientes.Location = new System.Drawing.Point(1069, 7);
             this.btnVerTodosClientes.Name = "btnVerTodosClientes";
             this.btnVerTodosClientes.Size = new System.Drawing.Size(191, 32);
             this.btnVerTodosClientes.TabIndex = 17;
@@ -131,7 +131,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 221F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
             this.tableLayoutPanel2.Controls.Add(this.lblZonaCliente, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnBuscarCliente, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtBuscarCliente, 1, 0);
@@ -152,7 +152,7 @@
             this.lblZonaCliente.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblZonaCliente.AutoSize = true;
             this.lblZonaCliente.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZonaCliente.Location = new System.Drawing.Point(839, 7);
+            this.lblZonaCliente.Location = new System.Drawing.Point(838, 7);
             this.lblZonaCliente.Name = "lblZonaCliente";
             this.lblZonaCliente.Size = new System.Drawing.Size(52, 25);
             this.lblZonaCliente.TabIndex = 13;
@@ -181,7 +181,7 @@
             // btnRegistrarNuevo
             // 
             this.btnRegistrarNuevo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarNuevo.Location = new System.Drawing.Point(1110, 3);
+            this.btnRegistrarNuevo.Location = new System.Drawing.Point(1109, 3);
             this.btnRegistrarNuevo.Name = "btnRegistrarNuevo";
             this.btnRegistrarNuevo.Size = new System.Drawing.Size(180, 33);
             this.btnRegistrarNuevo.TabIndex = 6;
@@ -192,7 +192,7 @@
             // textBoxDNI
             // 
             this.textBoxDNI.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDNI.Location = new System.Drawing.Point(619, 3);
+            this.textBoxDNI.Location = new System.Drawing.Point(618, 3);
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(178, 30);
             this.textBoxDNI.TabIndex = 11;
@@ -209,17 +209,6 @@
             this.label11.Size = new System.Drawing.Size(161, 25);
             this.label11.TabIndex = 12;
             this.label11.Text = "Ingrese DNI cliente";
-            // 
-            // comboBoxClienteZona
-            // 
-            this.comboBoxClienteZona.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxClienteZona.FormattingEnabled = true;
-            this.comboBoxClienteZona.Location = new System.Drawing.Point(930, 3);
-            this.comboBoxClienteZona.Name = "comboBoxClienteZona";
-            this.comboBoxClienteZona.Size = new System.Drawing.Size(174, 31);
-            this.comboBoxClienteZona.TabIndex = 10;
-            this.comboBoxClienteZona.Text = "Seleccione Zona";
-            this.comboBoxClienteZona.SelectedIndexChanged += new System.EventHandler(this.comboBoxClienteZona_SelectedIndexChanged);
             // 
             // lblNombre
             // 
@@ -313,7 +302,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 252F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.74528F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.25472F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 444F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 445F));
             this.tableLayoutPanel5.Controls.Add(this.lblFechaHora, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.lblFechaEntrega, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.dateTimePicker1, 2, 0);
@@ -591,6 +580,17 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // comboBoxClienteZona
+            // 
+            this.comboBoxClienteZona.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxClienteZona.FormattingEnabled = true;
+            this.comboBoxClienteZona.Location = new System.Drawing.Point(929, 3);
+            this.comboBoxClienteZona.Name = "comboBoxClienteZona";
+            this.comboBoxClienteZona.Size = new System.Drawing.Size(174, 31);
+            this.comboBoxClienteZona.TabIndex = 10;
+            this.comboBoxClienteZona.Text = "Seleccione Zona";
+            this.comboBoxClienteZona.SelectedIndexChanged += new System.EventHandler(this.comboBoxClienteZona_SelectedIndexChanged);
+            // 
             // FormCrearPedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -643,7 +643,6 @@
         private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.Button btnRegistrarNuevo;
         private System.Windows.Forms.TextBox txtBuscarCliente;
-        private System.Windows.Forms.ComboBox comboBoxClienteZona;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.ComboBox comboBoxFamilia;
@@ -665,5 +664,6 @@
         private System.Windows.Forms.Label lblZonaCliente;
         private System.Windows.Forms.Button btnVerTodos;
         private System.Windows.Forms.Button btnVerTodosClientes;
+        private System.Windows.Forms.ComboBox comboBoxClienteZona;
     }
 }

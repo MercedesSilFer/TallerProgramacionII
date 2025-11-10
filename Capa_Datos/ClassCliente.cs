@@ -156,7 +156,7 @@ namespace Capa_Datos
         {
             using (var context = new ArimaERPEntities())
             {
-                return context.CLIENTE.Where(c => c.id_zona == id_zona).ToList();
+                return context.CLIENTE.Where(c => c.id_zona == id_zona && c.estado == true).ToList();
             }
         }
         //existe mail de otro cliente

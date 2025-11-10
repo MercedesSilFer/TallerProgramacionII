@@ -298,5 +298,29 @@ namespace Capa_Logica
                 return false;
             }
         }
+        public List<PEDIDO> ObtenerPedidosConSaldoPendientePorVendedor(string nombreUsuario)
+        {
+            return pedido.ObtenerPedidosConSaldoPendientePorVendedor(nombreUsuario);
+        }
+        public List<PEDIDO> ObtenerPedidosSaldadosPorVendedor(string nombreUsuario)
+        {
+            return pedido.ObtenerPedidosSaldadosPorVendedor(nombreUsuario);
+        }
+        public List<PEDIDO> ObtenerPedidosSaldadosUltimoMesPorVendedor(string nombreUsuario)
+        {
+            return pedido.ObtenerPedidosSaldadosUltimoMesPorVendedor(nombreUsuario);
+        }
+        public List<ProductoPresentacionVenta> ObtenerProductoPresentacionMasVendidosConCantidadPorPreventista(string vendedor)
+        {
+            return pedido.ObtenerProductoPresentacionMasVendidosConCantidadPorPreventista(vendedor);
+        }
+        public int? ObtenerIdClientePorTextoYZona(string texto, int idZona)
+        {
+            return pedido.ObtenerIdClientePorTextoYZona(texto, idZona);
+        }
+        public List<PEDIDO> ObtenerPedidosPorEstadoYVendedor(int idEstado, string vendedor)
+        {
+            return pedido.ObtenerPedidosPorEstadoYVendedor(idEstado, vendedor);
+        }
     }
 }

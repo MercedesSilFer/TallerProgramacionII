@@ -64,5 +64,7 @@ namespace ArimaERP
             TContrasena.Text = string.Empty;
             TCorreo.Focus();
         }
+
+        
     }
 }

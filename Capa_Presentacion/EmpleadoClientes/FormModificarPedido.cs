@@ -371,7 +371,7 @@ namespace ArimaERP.EmpleadoClientes
                 var producto = productoLogica.ObtenerProductoPorId(detalle.id_producto);
                 var presentacion = productoLogica.ObtenerPresentacionPorId(detalle.ID_presentacion);
                 var productoPresentacion = productoLogica.ObtenerProductoPresentacionPorProductoYPresentacion(producto.id_producto, presentacion.ID_presentacion);
-                decimal subtotal = (detalle.cantidad ?? 0 + (detalle.cantidad_bultos ?? 0)) * detalle.precio_unitario;
+                decimal subtotal = ((detalle.cantidad ?? 0 ) * detalle.precio_unitario) + ((detalle.cantidad_bultos ?? 0) * productoPresentacion.unidades_bulto * detalle.precio_unitario);
                 decimal totalProducto = subtotal - detalle.descuento;
                 Font fontDetalle = FontFactory.GetFont(FontFactory.HELVETICA, 9); // mismo tamaño que fontHeader
                 tabla.AddCell(new Phrase(producto.nombre.ToString(), fontDetalle));

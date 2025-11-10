@@ -18,6 +18,8 @@ namespace ArimaERP.EmpleadoClientes
         ClassPedidoLogica pedidoLogica = new ClassPedidoLogica();
         ClassZonaLogica zonaLogica = new ClassZonaLogica();
         ClassClienteLogica clienteLogica = new ClassClienteLogica();
+        ClassPagoLogica pagoLogica = new ClassPagoLogica();
+        ClassProductoLogica productoLogica = new ClassProductoLogica();
         private string nombreUsuarioSeleccionado;
 
 
@@ -222,17 +224,7 @@ namespace ArimaERP.EmpleadoClientes
             //MessageBox.Show($"Se listaron {pedidos.Count} pedido(s) del preventista.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //cargar columnas del DataGridView
-            dataGridViewHistorial.Columns.Clear();
-            dataGridViewHistorial.Columns.Add("ID Venta", "ID Venta");
-            dataGridViewHistorial.Columns.Add("Detalle", "Detalle");
-            dataGridViewHistorial.Columns.Add("Fecha", "Fecha");
-            dataGridViewHistorial.Columns.Add("Monto", "Monto");
-            dataGridViewHistorial.Columns.Add("Cliente", "Cliente");
 
-        }
 
         private void productosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -240,25 +232,56 @@ namespace ArimaERP.EmpleadoClientes
             dataGridViewHistorial.Columns.Clear();
             dataGridViewHistorial.Columns.Add("ID Producto", "ID Producto");
             dataGridViewHistorial.Columns.Add("Nombre", "Nombre");
-            dataGridViewHistorial.Columns.Add("Descripcion", "Descripcion");
+            dataGridViewHistorial.Columns.Add("ID_presentacion", "ID_presentacion");
+            dataGridViewHistorial.Columns.Add("presentacion", "Presentación");
             dataGridViewHistorial.Columns.Add("Precio", "Precio");
-            dataGridViewHistorial.Columns.Add("Stock", "Stock");
-            dataGridViewHistorial.Columns.Add("Categoria", "Categoria");
-            dataGridViewHistorial.Columns.Add("Proveedor", "Proveedor");
-            dataGridViewHistorial.Columns.Add("apresentacion", "Presentacion");
+            dataGridViewHistorial.Columns.Add("Cantidad Vendida", "Cantidad Vendida");
+            // Validar preventista
+            string nombreUsuario = nombreUsuarioSeleccionado;
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                MessageBox.Show("Debe seleccionar un preventista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Obtener productos más vendidos con cantidad
+            var productosVendidos = pedidoLogica.ObtenerProductoPresentacionMasVendidosConCantidadPorPreventista(nombreUsuario);
+            if (productosVendidos == null || productosVendidos.Count == 0)
+            {
+                MessageBox.Show("No se encontraron productos vendidos para este preventista.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Cargar cada producto en el DataGridView
+            foreach (var item in productosVendidos)
+            {
+                var pp = item.ProductoPresentacion;
+
+                // Obtener datos relacionados
+                var producto = productoLogica.ObtenerProductoPorId(pp.id_producto);
+                var presentacion = productoLogica.ObtenerPresentacionPorId(pp.ID_presentacion);
+                
+                // Preparar valores
+                string nombreProducto = producto?.nombre ?? "Sin nombre";
+                string descripcionPresentacion = presentacion?.descripcion ?? "Sin presentación";
+                string precio = pp.precioLista.ToString("C");
+                int cantidadVendida = item.CantidadVendida;
+                
+
+                // Agregar fila
+                dataGridViewHistorial.Rows.Add(
+                    pp.id_producto,
+                    nombreProducto,
+                    pp.ID_presentacion,
+                    descripcionPresentacion,
+                    precio,
+                    cantidadVendida
+                );
+
+            }
         }
 
-        private void pagosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //cargar columnas del DataGridView
-            dataGridViewHistorial.Columns.Clear();
-            dataGridViewHistorial.Columns.Add("ID Pago", "ID Pago");
-            dataGridViewHistorial.Columns.Add("Monto", "Monto");
-            dataGridViewHistorial.Columns.Add("Fecha", "Fecha");
-            dataGridViewHistorial.Columns.Add("Metodo de Pago", "Metodo de Pago");
-            dataGridViewHistorial.Columns.Add("Cliente", "Cliente");
 
-        }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -614,5 +637,190 @@ namespace ArimaERP.EmpleadoClientes
                 );
             }
         }
+
+        private void conSaldosPendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Aqui debo implementar la funcionalidad para listar pedidos con saldos pendientes, que son aquellos que no poseen un registro en la tabla pedido_pago o el ultimo registro pedido_pago tiene un saldo mayor a 0.
+            // Limpiar y configurar columnas del DataGridView
+            dataGridViewHistorial.Columns.Clear();
+            dataGridViewHistorial.Rows.Clear();
+            dataGridViewHistorial.Columns.Add("ID Pedido", "ID Pedido");
+            dataGridViewHistorial.Columns.Add("Detalle", "Detalle");
+            dataGridViewHistorial.Columns.Add("Fecha", "Fecha");
+            dataGridViewHistorial.Columns.Add("Monto", "Monto");
+            dataGridViewHistorial.Columns.Add("Saldo Pendiente", "Saldo Pendiente");
+            dataGridViewHistorial.Columns.Add("Estado", "Estado");
+            dataGridViewHistorial.Columns.Add("Cliente", "Cliente");            
+
+            // Validar que haya un preventista definido
+            string nombreUsuario = nombreUsuarioSeleccionado;
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                MessageBox.Show("No se ha definido un preventista para listar pedidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Obtener pedidos del preventista con saldo pendiente
+            var pedidosConSaldo = pedidoLogica.ObtenerPedidosConSaldoPendientePorVendedor(nombreUsuario);
+            if (pedidosConSaldo == null || pedidosConSaldo.Count == 0)
+            {
+                MessageBox.Show("No se encontraron pedidos con saldo pendiente para este preventista.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Cargar pedidos en el DataGridView
+            foreach (var pedido in pedidosConSaldo)
+            {
+                var cliente = clienteLogica.ObtenerClientePorId(pedido.id_cliente);
+                var estado = pedidoLogica.ObtenerEstadoPorId(pedido.id_estado);
+                var ultimo_pedido_pago = pagoLogica.ObtenerUltimoPedidoPagoPorIdPedido(pedido.id_pedido);
+                decimal saldo;
+                if(ultimo_pedido_pago!= null)
+                {
+                    saldo = ultimo_pedido_pago.saldo;
+                }
+                else
+                {
+                    saldo = pedido.total;
+                }
+                    string detalle = $"Factura Nº {pedido.numero_factura}";
+                string fecha = pedido.fecha_entrega.ToString("dd/MM/yyyy");
+                string clienteNombre = cliente != null ? $"{cliente.nombre} {cliente.apellido}" : "Desconocido";
+                string estadoNombre = estado != null ? estado.descripcion : "Sin estado";
+
+                dataGridViewHistorial.Rows.Add(
+                    pedido.id_pedido,
+                    detalle,
+                    fecha,
+                    pedido.total.ToString("C"),
+                    saldo,
+                    estadoNombre,
+                    clienteNombre
+                );
+            }
+        }
+
+        private void saldadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Aqui debo implementar la funcionalidad para listar pedidos con saldos pendientes, que son aquellos que no poseen un registro en la tabla pedido_pago o el ultimo registro pedido_pago tiene un saldo mayor a 0.
+            // Limpiar y configurar columnas del DataGridView
+            dataGridViewHistorial.Columns.Clear();
+            dataGridViewHistorial.Rows.Clear();
+            dataGridViewHistorial.Columns.Add("ID Pedido", "ID Pedido");
+            dataGridViewHistorial.Columns.Add("Detalle", "Detalle");
+            dataGridViewHistorial.Columns.Add("Fecha", "Fecha");
+            dataGridViewHistorial.Columns.Add("Monto", "Monto");
+            dataGridViewHistorial.Columns.Add("Saldo Pendiente", "Saldo");
+            dataGridViewHistorial.Columns.Add("Estado", "Estado");
+            dataGridViewHistorial.Columns.Add("Cliente", "Cliente");            
+
+            // Validar que haya un preventista definido
+            string nombreUsuario = nombreUsuarioSeleccionado;
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                MessageBox.Show("No se ha definido un preventista para listar pedidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Obtener pedidos del preventista con saldo pendiente
+            var pedidosConSaldo = pedidoLogica.ObtenerPedidosSaldadosPorVendedor(nombreUsuario);
+            if (pedidosConSaldo == null || pedidosConSaldo.Count == 0)
+            {
+                MessageBox.Show("No se encontraron pedidos con saldo pendiente para este preventista.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Cargar pedidos en el DataGridView
+            foreach (var pedido in pedidosConSaldo)
+            {
+                var cliente = clienteLogica.ObtenerClientePorId(pedido.id_cliente);
+                var estado = pedidoLogica.ObtenerEstadoPorId(pedido.id_estado);
+                var ultimo_pedido_pago = pagoLogica.ObtenerUltimoPedidoPagoPorIdPedido(pedido.id_pedido);
+                decimal saldo;
+                if(ultimo_pedido_pago!= null)
+                {
+                    saldo = ultimo_pedido_pago.saldo;
+                }
+                else
+                {
+                    saldo = pedido.total;
+                }
+                    string detalle = $"Factura Nº {pedido.numero_factura}";
+                string fecha = pedido.fecha_entrega.ToString("dd/MM/yyyy");
+                string clienteNombre = cliente != null ? $"{cliente.nombre} {cliente.apellido}" : "Desconocido";
+                string estadoNombre = estado != null ? estado.descripcion : "Sin estado";
+
+                dataGridViewHistorial.Rows.Add(
+                    pedido.id_pedido,
+                    detalle,
+                    fecha,
+                    pedido.total.ToString("C"),
+                    saldo,
+                    estadoNombre,
+                    clienteNombre
+                );
+            }
+        }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Desarrollar aquí la lógica para obtener los pedidos del ultimo mes saldados del preventista 
+            dataGridViewHistorial.Columns.Clear();
+            dataGridViewHistorial.Rows.Clear();
+            dataGridViewHistorial.Columns.Add("ID Pedido", "ID Pedido");
+            dataGridViewHistorial.Columns.Add("Detalle", "Detalle");
+            dataGridViewHistorial.Columns.Add("Fecha", "Fecha");
+            dataGridViewHistorial.Columns.Add("Monto", "Monto");
+            dataGridViewHistorial.Columns.Add("Saldo Pendiente", "Saldo");
+            dataGridViewHistorial.Columns.Add("Estado", "Estado");
+            dataGridViewHistorial.Columns.Add("Cliente", "Cliente");
+
+            // Validar que haya un preventista definido
+            string nombreUsuario = nombreUsuarioSeleccionado;
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                MessageBox.Show("No se ha definido un preventista para listar pedidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Obtener pedidos del preventista con saldo pendiente
+            var pedidosConSaldo = pedidoLogica.ObtenerPedidosSaldadosUltimoMesPorVendedor(nombreUsuario);
+            if (pedidosConSaldo == null || pedidosConSaldo.Count == 0)
+            {
+                MessageBox.Show("No se encontraron pedidos con saldo pendiente para este preventista.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Cargar pedidos en el DataGridView
+            foreach (var pedido in pedidosConSaldo)
+            {
+                var cliente = clienteLogica.ObtenerClientePorId(pedido.id_cliente);
+                var estado = pedidoLogica.ObtenerEstadoPorId(pedido.id_estado);
+                var ultimo_pedido_pago = pagoLogica.ObtenerUltimoPedidoPagoPorIdPedido(pedido.id_pedido);
+                decimal saldo;
+                if (ultimo_pedido_pago != null)
+                {
+                    saldo = ultimo_pedido_pago.saldo;
+                }
+                else
+                {
+                    saldo = pedido.total;
+                }
+                string detalle = $"Factura Nº {pedido.numero_factura}";
+                string fecha = pedido.fecha_entrega.ToString("dd/MM/yyyy");
+                string clienteNombre = cliente != null ? $"{cliente.nombre} {cliente.apellido}" : "Desconocido";
+                string estadoNombre = estado != null ? estado.descripcion : "Sin estado";
+
+                dataGridViewHistorial.Rows.Add(
+                    pedido.id_pedido,
+                    detalle,
+                    fecha,
+                    pedido.total.ToString("C"),
+                    saldo,
+                    estadoNombre,
+                    clienteNombre
+                );
+            }
+
+        }
+
+      
     }
 }

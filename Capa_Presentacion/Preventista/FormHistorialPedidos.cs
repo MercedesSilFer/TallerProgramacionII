@@ -29,7 +29,7 @@ namespace ArimaERP.Preventista
         private void button2_Click(object sender, EventArgs e)
         {
             // Crear instancia del formulario hijo que querés abrir
-            FormCrearPedido formCargar = new FormCrearPedido();
+            FormCrearPedidoPreventista formCargar = new FormCrearPedidoPreventista();
 
             // Acceder al formulario padre MDI y llamar a AbrirFormEnPanel
             MDIPreventista mdi = this.MdiParent as MDIPreventista;

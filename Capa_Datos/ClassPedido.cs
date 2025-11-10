@@ -521,14 +521,14 @@ namespace Capa_Datos
         }
 
         public bool EliminarPedido(int id_pedido)
-        {            
+        {
             try
             {
                 using (var context = new ArimaERPEntities())
                 {
                     var pedido = context.PEDIDO.FirstOrDefault(p => p.id_pedido == id_pedido);
                     if (pedido != null)
-                    {                      
+                    {
                         // Eliminar el pedido
                         context.PEDIDO.Remove(pedido);
                         context.SaveChanges();
@@ -573,7 +573,7 @@ namespace Capa_Datos
             }
         }
 
-        
+
         public bool ActualizarStock(int id_producto, int ID_presentacion, int cantidad)
         {
             try
@@ -609,7 +609,7 @@ namespace Capa_Datos
 
         //Obtener ESTADO_PEDIDO  por id_estado
         public ESTADO_PEDIDO ObtenerEstadoPorId(int id_estado)
-        {            
+        {
             try
             {
                 using (var context = new ArimaERPEntities())
@@ -622,9 +622,9 @@ namespace Capa_Datos
                 ErroresValidacion.Clear();
                 ErroresValidacion.Add(ex.Message);
                 return null;
-            }            
+            }
         }
-        
+
 
         public List<PEDIDO> ObtenerPedidosPorZonaYEstado(int id_zona, int id_estado)
         {
@@ -638,7 +638,182 @@ namespace Capa_Datos
                 return pedidos.ToList();
             }
         }
+        public List<PEDIDO> ObtenerPedidosConSaldoPendientePorVendedor(string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                var pedidos = context.PEDIDO
+                    .Where(p => p.vendedor == vendedor)
+                    .ToList();
 
+                var resultado = new List<PEDIDO>();
+
+                foreach (var pedido in pedidos)
+                {
+                    var ultimoPago = context.pedido_pago
+                        .Where(pp => pp.id_pedido == pedido.id_pedido)
+                        .OrderByDescending(pp => pp.id_pago)
+                        .FirstOrDefault();
+
+                    if (ultimoPago == null || ultimoPago.saldo > 0)
+                    {
+                        resultado.Add(pedido);
+                    }
+                }
+
+                return resultado;
+
+            }
+        }
+        public List<PEDIDO> ObtenerPedidosSaldadosPorVendedor(string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                var pedidos = context.PEDIDO
+                    .Where(p => p.vendedor == vendedor)
+                    .ToList();
+
+                var resultado = new List<PEDIDO>();
+
+                foreach (var pedido in pedidos)
+                {
+                    var ultimoPago = context.pedido_pago
+                        .Where(pp => pp.id_pedido == pedido.id_pedido)
+                        .OrderByDescending(pp => pp.id_pago)
+                        .FirstOrDefault();
+
+                    if (ultimoPago.saldo == 0)
+                    {
+                        resultado.Add(pedido);
+                    }
+                }
+
+                return resultado;
+
+            }
+        }
+        public List<PEDIDO> ObtenerPedidosSaldadosUltimoMesPorVendedor(string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                // Obtener primer y último día del mes actual
+                DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
+
+                var pedidos = context.PEDIDO
+                    .Where(p => p.vendedor == vendedor &&
+                                p.fecha_entrega >= inicioMes &&
+                                p.fecha_entrega <= finMes)
+                    .ToList();
+
+                var resultado = new List<PEDIDO>();
+
+                foreach (var pedido in pedidos)
+                {
+                    var ultimoPago = context.pedido_pago
+                        .Where(pp => pp.id_pedido == pedido.id_pedido)
+                        .OrderByDescending(pp => pp.id_pago)
+                        .FirstOrDefault();
+
+                    if (ultimoPago != null && ultimoPago.saldo == 0)
+                    {
+                        resultado.Add(pedido);
+                    }
+                }
+
+                return resultado;
+            }
+        }
+        public List<ProductoPresentacionVenta> ObtenerProductoPresentacionMasVendidosConCantidadPorPreventista(string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                var pedidosSaldados = context.PEDIDO
+                    .Where(p => p.vendedor == vendedor)
+                    .ToList()
+                    .Where(p =>
+                    {
+                        var ultimoPago = context.pedido_pago
+                            .Where(pp => pp.id_pedido == p.id_pedido)
+                            .OrderByDescending(pp => pp.id_pago)
+                            .FirstOrDefault();
+
+                        return ultimoPago != null && ultimoPago.saldo == 0;
+                    })
+                    .Select(p => p.id_pedido)
+                    .ToList();
+
+                var detalles = context.DETALLE_PEDIDO
+                    .Where(dp => pedidosSaldados.Contains(dp.id_pedido))
+                    .ToList();
+
+                var agrupados = detalles
+                    .GroupBy(dp => new { dp.id_producto, dp.ID_presentacion })
+                    .Select(g =>
+                    {
+                        var unidadesBulto = context.producto_presentacion
+                            .Where(pp => pp.id_producto == g.Key.id_producto && pp.ID_presentacion == g.Key.ID_presentacion)
+                            .Select(pp => pp.unidades_bulto)
+                            .FirstOrDefault();
+
+                        var cantidadTotal = g.Sum(dp =>
+                            (dp.cantidad ?? 0) + ((dp.cantidad_bultos ?? 0) * unidadesBulto)
+                        );
+
+                        return new
+                        {
+                            g.Key.id_producto,
+                            g.Key.ID_presentacion,
+                            cantidadTotal
+                        };
+                    })
+                    .OrderByDescending(x => x.cantidadTotal)
+                    .ToList();
+
+                var resultado = new List<ProductoPresentacionVenta>();
+                foreach (var item in agrupados)
+                {
+                    var pp = context.producto_presentacion
+                        .FirstOrDefault(x => x.id_producto == item.id_producto && x.ID_presentacion == item.ID_presentacion);
+
+                    if (pp != null)
+                    {
+                        resultado.Add(new ProductoPresentacionVenta
+                        {
+                            ProductoPresentacion = pp,
+                            CantidadVendida = item.cantidadTotal
+                        });
+                    }
+                }
+
+                return resultado;
+            }
+        }
+        public int? ObtenerIdClientePorTextoYZona(string texto, int idZona)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                int dniBuscado;
+                bool esDni = int.TryParse(texto, out dniBuscado);
+
+                var cliente = context.CLIENTE
+                    .Where(c => c.id_zona == idZona && c.estado == true &&
+                                (esDni ? c.dni == dniBuscado : c.email == texto))
+                    .Select(c => (int?)c.id_cliente)
+                    .FirstOrDefault();
+
+                return cliente;
+            }
+        }
+        public List<PEDIDO> ObtenerPedidosPorEstadoYVendedor(int idEstado, string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.PEDIDO
+                    .Where(p => p.id_estado == idEstado && p.vendedor == vendedor)
+                    .ToList();
+            }
+        }
     }
 }
 

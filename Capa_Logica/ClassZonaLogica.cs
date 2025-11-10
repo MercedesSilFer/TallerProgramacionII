@@ -18,5 +18,9 @@ namespace Capa_Logica
         {   //devolver id_zona
             return zona.BuscarZonaPorPreventista(nombre_usuario);
         }
+        public ZONA ObtenerZonaPorId(int id_zona)
+        {
+            return ClassZona.ObtenerZonaPorId(id_zona);
+        }
     }
 }

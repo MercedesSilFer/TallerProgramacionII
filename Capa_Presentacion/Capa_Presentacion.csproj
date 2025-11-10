@@ -287,11 +287,11 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preventista\FormAltaBajaCliente.cs">
+    <Compile Include="Preventista\FormAltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Preventista\FormAltaBajaCliente.Designer.cs">
-      <DependentUpon>FormAltaBajaCliente.cs</DependentUpon>
+    <Compile Include="Preventista\FormAltaCliente.Designer.cs">
+      <DependentUpon>FormAltaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Preventista\FormCrearPedido.cs">
       <SubType>Form</SubType>
@@ -299,11 +299,23 @@
     <Compile Include="Preventista\FormCrearPedido.Designer.cs">
       <DependentUpon>FormCrearPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preventista\FormCrearPedidoPreventista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preventista\FormCrearPedidoPreventista.Designer.cs">
+      <DependentUpon>FormCrearPedidoPreventista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preventista\FormHistorialPedidos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Preventista\FormHistorialPedidos.Designer.cs">
       <DependentUpon>FormHistorialPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preventista\FormModificarPedidoPreventista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preventista\FormModificarPedidoPreventista.Designer.cs">
+      <DependentUpon>FormModificarPedidoPreventista.cs</DependentUpon>
     </Compile>
     <Compile Include="Preventista\FormRutas.cs">
       <SubType>Form</SubType>
@@ -421,14 +433,20 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preventista\FormAltaBajaCliente.resx">
-      <DependentUpon>FormAltaBajaCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Preventista\FormAltaCliente.resx">
+      <DependentUpon>FormAltaCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preventista\FormCrearPedido.resx">
       <DependentUpon>FormCrearPedido.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Preventista\FormCrearPedidoPreventista.resx">
+      <DependentUpon>FormCrearPedidoPreventista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preventista\FormHistorialPedidos.resx">
       <DependentUpon>FormHistorialPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preventista\FormModificarPedidoPreventista.resx">
+      <DependentUpon>FormModificarPedidoPreventista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preventista\FormRutas.resx">
       <DependentUpon>FormRutas.cs</DependentUpon>

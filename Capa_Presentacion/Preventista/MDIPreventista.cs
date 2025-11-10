@@ -16,6 +16,7 @@ namespace ArimaERP.Preventista
     public partial class MDIPreventista : Form
     {
         ClassEmpleadoLogica classEmpleadoLogica = new ClassEmpleadoLogica();
+        ClassZonaLogica zonaLogica = new ClassZonaLogica();
         public MDIPreventista()
         {
             InitializeComponent();
@@ -29,6 +30,9 @@ namespace ArimaERP.Preventista
             lblRol.Text = "Preventista";
             //Obtener usuario actual
             string usuarioActual = ObtenerUsuarioActual();
+            int id_zona = zonaLogica.BuscarZonaPorPreventista(usuarioActual);
+            var zona = zonaLogica.ObtenerZonaPorId(id_zona);
+            lblZona.Text = $"Zona: {zona.nombre}";
             //obtener nombre de empleado de tabla Empleado partir de nombre_usuario que corresponde al usuario actual
             Empleado empleado = new ClassEmpleadoLogica().ObtenerEmpleadoPorNombreUsuario(usuarioActual);
             if (empleado != null)
@@ -39,8 +43,8 @@ namespace ArimaERP.Preventista
         
          private string ObtenerUsuarioActual()
         {
-            // Aquí debes implementar la lógica para obtener el nombre del usuario actual
-            return UsuarioSesion.Nombre; // Ejemplo: retorna el nombre del usuario desde una clase estática de sesión
+            
+            return UsuarioSesion.Nombre; 
         }
 
         public void AbrirFormEnPanel(Form formHijo)
@@ -89,7 +93,7 @@ namespace ArimaERP.Preventista
 
         private void btnFMP_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FormAltaBajaCliente());
+            AbrirFormEnPanel(new FormAltaCliente());
         }
 
         private void btnStock_Click(object sender, EventArgs e)
@@ -104,6 +108,6 @@ namespace ArimaERP.Preventista
             this.Close();
           
         }
-                
+
     }
 }
