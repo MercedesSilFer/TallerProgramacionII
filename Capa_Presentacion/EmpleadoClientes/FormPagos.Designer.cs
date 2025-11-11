@@ -228,7 +228,7 @@
             this.tableLayoutPanelRegistrarPago.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.93596F));
             this.tableLayoutPanelRegistrarPago.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanelRegistrarPago.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 306F));
-            this.tableLayoutPanelRegistrarPago.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
+            this.tableLayoutPanelRegistrarPago.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 185F));
             this.tableLayoutPanelRegistrarPago.Controls.Add(this.lblIdCliente, 1, 1);
             this.tableLayoutPanelRegistrarPago.Controls.Add(this.txtMonto, 4, 0);
             this.tableLayoutPanelRegistrarPago.Controls.Add(this.lblCliente, 1, 0);
@@ -263,7 +263,7 @@
             // 
             this.txtMonto.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtMonto.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMonto.Location = new System.Drawing.Point(841, 9);
+            this.txtMonto.Location = new System.Drawing.Point(840, 9);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(243, 31);
             this.txtMonto.TabIndex = 8;
@@ -285,7 +285,7 @@
             this.lblMonto.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblMonto.AutoSize = true;
             this.lblMonto.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonto.Location = new System.Drawing.Point(769, 12);
+            this.lblMonto.Location = new System.Drawing.Point(768, 12);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(66, 25);
             this.lblMonto.TabIndex = 2;
@@ -296,7 +296,7 @@
             this.lblMetodoPago.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblMetodoPago.AutoSize = true;
             this.lblMetodoPago.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMetodoPago.Location = new System.Drawing.Point(714, 62);
+            this.lblMetodoPago.Location = new System.Drawing.Point(713, 62);
             this.lblMetodoPago.Name = "lblMetodoPago";
             this.lblMetodoPago.Size = new System.Drawing.Size(121, 25);
             this.lblMetodoPago.TabIndex = 3;
@@ -328,7 +328,7 @@
             this.comboBoxMetodoPago.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBoxMetodoPago.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxMetodoPago.FormattingEnabled = true;
-            this.comboBoxMetodoPago.Location = new System.Drawing.Point(841, 58);
+            this.comboBoxMetodoPago.Location = new System.Drawing.Point(840, 58);
             this.comboBoxMetodoPago.Name = "comboBoxMetodoPago";
             this.comboBoxMetodoPago.Size = new System.Drawing.Size(241, 33);
             this.comboBoxMetodoPago.TabIndex = 9;

@@ -1016,26 +1016,10 @@ namespace ArimaERP.Preventista
                 MessageBox.Show("Operación cancelada por el usuario.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            int estadoPedido;
-
-            //Preguntar si es venta en el local
-            DialogResult esVentaEnElLocal = MessageBox.Show(
-               "Es Venta en el Local?",
-               "Confirmar Entrega Inmediata",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question
-           );
-            if (esVentaEnElLocal == DialogResult.Yes)
-            {
-                estadoPedido = 3;
-            }
-            else
-            {
-                estadoPedido = 1;
-            }
+                        
 
             // Crear pedido
-            int idPedidoGenerado = pedidoLogica.CrearPedido(fechaActual, dateTimePicker1.Value, idCliente, estadoPedido, total, vendedor);
+            int idPedidoGenerado = pedidoLogica.CrearPedido(fechaActual, dateTimePicker1.Value, idCliente, 1, total, vendedor);
             if (idPedidoGenerado == -1)
             {
                 string errores = string.Join("\n", pedidoLogica.ErroresValidacion);

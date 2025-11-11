@@ -66,6 +66,7 @@
             this.lblEstadoPedido = new System.Windows.Forms.Label();
             this.dataGridViewDetallePedido = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblNombre = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -81,9 +82,10 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.36964F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.28783F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.02671F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.6559F));
+            this.tableLayoutPanel1.Controls.Add(this.lblNombre, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnTodosLosPedidos, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -99,7 +101,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(648, 6);
+            this.label1.Location = new System.Drawing.Point(862, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(325, 31);
             this.label1.TabIndex = 0;
@@ -327,6 +329,7 @@
             this.dataGridViewModificarPedidos.TabIndex = 5;
             this.dataGridViewModificarPedidos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewModificarPedidos_CellContentClick);
             this.dataGridViewModificarPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewModificarPedidos_CellFormatting);
+            this.dataGridViewModificarPedidos.SelectionChanged += new System.EventHandler(this.dataGridViewModificarPedidos_SelectionChanged);
             // 
             // tableLayoutPanel3
             // 
@@ -464,7 +467,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.22917F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.78274F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.17857F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
             this.tableLayoutPanel6.Controls.Add(this.btnModificarPedido, 5, 0);
             this.tableLayoutPanel6.Controls.Add(this.btnCancelarModificacion, 6, 0);
             this.tableLayoutPanel6.Controls.Add(this.dateTimePicker2, 1, 0);
@@ -486,7 +489,7 @@
             this.btnModificarPedido.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModificarPedido.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificarPedido.Location = new System.Drawing.Point(1310, 3);
+            this.btnModificarPedido.Location = new System.Drawing.Point(1304, 3);
             this.btnModificarPedido.Name = "btnModificarPedido";
             this.btnModificarPedido.Size = new System.Drawing.Size(180, 39);
             this.btnModificarPedido.TabIndex = 14;
@@ -498,7 +501,7 @@
             // 
             this.btnCancelarModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelarModificacion.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarModificacion.Location = new System.Drawing.Point(1496, 3);
+            this.btnCancelarModificacion.Location = new System.Drawing.Point(1490, 3);
             this.btnCancelarModificacion.Name = "btnCancelarModificacion";
             this.btnCancelarModificacion.Size = new System.Drawing.Size(184, 39);
             this.btnCancelarModificacion.TabIndex = 8;
@@ -528,7 +531,7 @@
             "Entregado",
             "Cancelado",
             "Retrasado"});
-            this.comboBoxEstados.Location = new System.Drawing.Point(488, 7);
+            this.comboBoxEstados.Location = new System.Drawing.Point(486, 7);
             this.comboBoxEstados.Name = "comboBoxEstados";
             this.comboBoxEstados.Size = new System.Drawing.Size(178, 31);
             this.comboBoxEstados.TabIndex = 13;
@@ -538,7 +541,7 @@
             // 
             this.lblDetalles.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetalles.AutoSize = true;
-            this.lblDetalles.Location = new System.Drawing.Point(896, 7);
+            this.lblDetalles.Location = new System.Drawing.Point(892, 7);
             this.lblDetalles.Name = "lblDetalles";
             this.lblDetalles.Size = new System.Drawing.Size(195, 31);
             this.lblDetalles.TabIndex = 0;
@@ -562,7 +565,7 @@
             this.lblEstadoPedido.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblEstadoPedido.AutoSize = true;
             this.lblEstadoPedido.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstadoPedido.Location = new System.Drawing.Point(332, 11);
+            this.lblEstadoPedido.Location = new System.Drawing.Point(330, 11);
             this.lblEstadoPedido.Name = "lblEstadoPedido";
             this.lblEstadoPedido.Size = new System.Drawing.Size(118, 23);
             this.lblEstadoPedido.TabIndex = 12;
@@ -590,6 +593,17 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(4, 0);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(107, 32);
+            this.lblNombre.TabIndex = 18;
+            this.lblNombre.Text = "Nombre:";
             // 
             // FormModificarPedidoPreventista
             // 
@@ -664,5 +678,6 @@
         private System.Windows.Forms.Label lblDetalles;
         private System.Windows.Forms.DataGridView dataGridViewDetallePedido;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblNombre;
     }
 }

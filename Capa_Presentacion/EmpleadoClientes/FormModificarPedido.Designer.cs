@@ -37,8 +37,10 @@
             this.txtBuscarCliente = new System.Windows.Forms.TextBox();
             this.lblNumeroFactura = new System.Windows.Forms.Label();
             this.labelClientes = new System.Windows.Forms.Label();
+            this.comboBoxClienteZona = new System.Windows.Forms.ComboBox();
             this.btnFechaEntrega = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblZona = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblEstado = new System.Windows.Forms.Label();
@@ -68,8 +70,6 @@
             this.lblFamilia = new System.Windows.Forms.Label();
             this.btnVerTodos = new System.Windows.Forms.Button();
             this.dataGridViewProductos = new System.Windows.Forms.DataGridView();
-            this.lblZona = new System.Windows.Forms.Label();
-            this.comboBoxClienteZona = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -197,6 +197,17 @@
             this.labelClientes.Text = "Ingrese DNI/Email Cliente";
             this.labelClientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // comboBoxClienteZona
+            // 
+            this.comboBoxClienteZona.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxClienteZona.FormattingEnabled = true;
+            this.comboBoxClienteZona.Location = new System.Drawing.Point(803, 3);
+            this.comboBoxClienteZona.Name = "comboBoxClienteZona";
+            this.comboBoxClienteZona.Size = new System.Drawing.Size(154, 31);
+            this.comboBoxClienteZona.TabIndex = 10;
+            this.comboBoxClienteZona.Text = "Seleccione Zona";
+            this.comboBoxClienteZona.SelectedIndexChanged += new System.EventHandler(this.comboBoxClienteZona_SelectedIndexChanged);
+            // 
             // btnFechaEntrega
             // 
             this.btnFechaEntrega.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -218,6 +229,16 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(154, 30);
             this.dateTimePicker1.TabIndex = 43;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // lblZona
+            // 
+            this.lblZona.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblZona.AutoSize = true;
+            this.lblZona.Location = new System.Drawing.Point(701, 11);
+            this.lblZona.Name = "lblZona";
+            this.lblZona.Size = new System.Drawing.Size(38, 16);
+            this.lblZona.TabIndex = 45;
+            this.lblZona.Text = "Zona";
             // 
             // errorProvider1
             // 
@@ -378,7 +399,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.89788F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.20777F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.88215F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
             this.tableLayoutPanel6.Controls.Add(this.btnModificarPedido, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboBoxEstados, 4, 0);
             this.tableLayoutPanel6.Controls.Add(this.lblEstadoPedido, 3, 0);
@@ -420,7 +441,7 @@
             "Retrasado"});
             this.comboBoxEstados.Location = new System.Drawing.Point(661, 7);
             this.comboBoxEstados.Name = "comboBoxEstados";
-            this.comboBoxEstados.Size = new System.Drawing.Size(169, 31);
+            this.comboBoxEstados.Size = new System.Drawing.Size(168, 31);
             this.comboBoxEstados.TabIndex = 13;
             this.comboBoxEstados.Text = "Seleccione Estado";
             // 
@@ -441,7 +462,7 @@
             // 
             this.btnCancelarModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelarModificacion.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarModificacion.Location = new System.Drawing.Point(1060, 3);
+            this.btnCancelarModificacion.Location = new System.Drawing.Point(1058, 3);
             this.btnCancelarModificacion.Name = "btnCancelarModificacion";
             this.btnCancelarModificacion.Size = new System.Drawing.Size(151, 39);
             this.btnCancelarModificacion.TabIndex = 8;
@@ -476,7 +497,7 @@
             // 
             this.lblDetalles.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetalles.AutoSize = true;
-            this.lblDetalles.Location = new System.Drawing.Point(847, 7);
+            this.lblDetalles.Location = new System.Drawing.Point(846, 7);
             this.lblDetalles.Name = "lblDetalles";
             this.lblDetalles.Size = new System.Drawing.Size(195, 31);
             this.lblDetalles.TabIndex = 0;
@@ -627,27 +648,6 @@
             this.dataGridViewProductos.Size = new System.Drawing.Size(1285, 142);
             this.dataGridViewProductos.TabIndex = 10;
             this.dataGridViewProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductos_CellContentClick);
-            // 
-            // lblZona
-            // 
-            this.lblZona.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblZona.AutoSize = true;
-            this.lblZona.Location = new System.Drawing.Point(701, 11);
-            this.lblZona.Name = "lblZona";
-            this.lblZona.Size = new System.Drawing.Size(38, 16);
-            this.lblZona.TabIndex = 45;
-            this.lblZona.Text = "Zona";
-            // 
-            // comboBoxClienteZona
-            // 
-            this.comboBoxClienteZona.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxClienteZona.FormattingEnabled = true;
-            this.comboBoxClienteZona.Location = new System.Drawing.Point(803, 3);
-            this.comboBoxClienteZona.Name = "comboBoxClienteZona";
-            this.comboBoxClienteZona.Size = new System.Drawing.Size(154, 31);
-            this.comboBoxClienteZona.TabIndex = 10;
-            this.comboBoxClienteZona.Text = "Seleccione Zona";
-            this.comboBoxClienteZona.SelectedIndexChanged += new System.EventHandler(this.comboBoxClienteZona_SelectedIndexChanged);
             // 
             // FormModificarPedido
             // 

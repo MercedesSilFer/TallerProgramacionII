@@ -339,6 +339,9 @@ namespace Capa_Logica
         {
             return pedido.ObtenerPedidosPorFechaCreacionYPreventista(fechaCreacion, preventista);
         }
-
+        public List<PEDIDO> ObtenerPedidosSaldadosPorVendedorYFechas(string vendedor, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return pedido.ObtenerPedidosSaldadosPorVendedorYFechas(vendedor, fechaDesde, fechaHasta);
+        }
     }
 }

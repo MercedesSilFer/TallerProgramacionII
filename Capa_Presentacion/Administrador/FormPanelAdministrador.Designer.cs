@@ -34,8 +34,6 @@
             this.Accion3 = new System.Windows.Forms.Button();
             this.Accion2 = new System.Windows.Forms.Button();
             this.Accion1 = new System.Windows.Forms.Button();
-            this.gbxMDIPreventista = new System.Windows.Forms.GroupBox();
-            this.btnPreventista = new System.Windows.Forms.Button();
             this.gbxMDIProductos = new System.Windows.Forms.GroupBox();
             this.btnProductos = new System.Windows.Forms.Button();
             this.gbxMDIiClientes = new System.Windows.Forms.GroupBox();
@@ -51,7 +49,6 @@
             this.lblSoporte = new System.Windows.Forms.Label();
             this.TLPMAIN.SuspendLayout();
             this.gbxAdmin.SuspendLayout();
-            this.gbxMDIPreventista.SuspendLayout();
             this.gbxMDIProductos.SuspendLayout();
             this.gbxMDIiClientes.SuspendLayout();
             this.TLPHeader.SuspendLayout();
@@ -65,17 +62,15 @@
             this.TLPMAIN.ColumnCount = 2;
             this.TLPMAIN.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.TLPMAIN.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPMAIN.Controls.Add(this.gbxAdmin, 1, 1);
-            this.TLPMAIN.Controls.Add(this.gbxMDIPreventista, 0, 1);
             this.TLPMAIN.Controls.Add(this.gbxMDIProductos, 1, 0);
             this.TLPMAIN.Controls.Add(this.gbxMDIiClientes, 0, 0);
             this.TLPMAIN.Location = new System.Drawing.Point(13, 171);
             this.TLPMAIN.Margin = new System.Windows.Forms.Padding(0);
             this.TLPMAIN.Name = "TLPMAIN";
-            this.TLPMAIN.RowCount = 2;
-            this.TLPMAIN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPMAIN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPMAIN.Size = new System.Drawing.Size(1333, 558);
+            this.TLPMAIN.RowCount = 1;
+            this.TLPMAIN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPMAIN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TLPMAIN.Size = new System.Drawing.Size(1333, 312);
             this.TLPMAIN.TabIndex = 0;
             // 
             // gbxAdmin
@@ -89,7 +84,7 @@
             this.gbxAdmin.Controls.Add(this.Accion1);
             this.gbxAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxAdmin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxAdmin.Location = new System.Drawing.Point(761, 284);
+            this.gbxAdmin.Location = new System.Drawing.Point(434, 497);
             this.gbxAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.gbxAdmin.Name = "gbxAdmin";
             this.gbxAdmin.Padding = new System.Windows.Forms.Padding(4);
@@ -155,37 +150,6 @@
             this.Accion1.UseVisualStyleBackColor = false;
             this.Accion1.Click += new System.EventHandler(this.Accion1_Click);
             // 
-            // gbxMDIPreventista
-            // 
-            this.gbxMDIPreventista.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gbxMDIPreventista.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.gbxMDIPreventista.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.gbxMDIPreventista.Controls.Add(this.btnPreventista);
-            this.gbxMDIPreventista.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxMDIPreventista.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxMDIPreventista.Location = new System.Drawing.Point(95, 305);
-            this.gbxMDIPreventista.Margin = new System.Windows.Forms.Padding(4);
-            this.gbxMDIPreventista.Name = "gbxMDIPreventista";
-            this.gbxMDIPreventista.Padding = new System.Windows.Forms.Padding(4);
-            this.gbxMDIPreventista.Size = new System.Drawing.Size(476, 226);
-            this.gbxMDIPreventista.TabIndex = 3;
-            this.gbxMDIPreventista.TabStop = false;
-            this.gbxMDIPreventista.Text = "Ir a Sección Preventista";
-            // 
-            // btnPreventista
-            // 
-            this.btnPreventista.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(160)))));
-            this.btnPreventista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPreventista.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPreventista.Location = new System.Drawing.Point(136, 76);
-            this.btnPreventista.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPreventista.Name = "btnPreventista";
-            this.btnPreventista.Size = new System.Drawing.Size(203, 75);
-            this.btnPreventista.TabIndex = 1;
-            this.btnPreventista.Text = "Acceder";
-            this.btnPreventista.UseVisualStyleBackColor = false;
-            this.btnPreventista.Click += new System.EventHandler(this.btnPreventista_Click);
-            // 
             // gbxMDIProductos
             // 
             this.gbxMDIProductos.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -194,7 +158,7 @@
             this.gbxMDIProductos.Controls.Add(this.btnProductos);
             this.gbxMDIProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxMDIProductos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxMDIProductos.Location = new System.Drawing.Point(761, 26);
+            this.gbxMDIProductos.Location = new System.Drawing.Point(761, 43);
             this.gbxMDIProductos.Margin = new System.Windows.Forms.Padding(4);
             this.gbxMDIProductos.Name = "gbxMDIProductos";
             this.gbxMDIProductos.Padding = new System.Windows.Forms.Padding(4);
@@ -225,7 +189,7 @@
             this.gbxMDIiClientes.Controls.Add(this.btnClientes);
             this.gbxMDIiClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxMDIiClientes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxMDIiClientes.Location = new System.Drawing.Point(95, 26);
+            this.gbxMDIiClientes.Location = new System.Drawing.Point(95, 43);
             this.gbxMDIiClientes.Margin = new System.Windows.Forms.Padding(4);
             this.gbxMDIiClientes.Name = "gbxMDIiClientes";
             this.gbxMDIiClientes.Padding = new System.Windows.Forms.Padding(4);
@@ -253,12 +217,12 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(419, 104);
+            this.label1.Location = new System.Drawing.Point(453, 104);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(506, 54);
+            this.label1.Size = new System.Drawing.Size(342, 54);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Administración Central.";
+            this.label1.Text = "Administración ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -387,6 +351,7 @@
             this.ClientSize = new System.Drawing.Size(1361, 838);
             this.Controls.Add(this.TLPFooter);
             this.Controls.Add(this.TLPHeader);
+            this.Controls.Add(this.gbxAdmin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TLPMAIN);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -397,7 +362,6 @@
             this.Load += new System.EventHandler(this.FormPanelAdministrador_Load);
             this.TLPMAIN.ResumeLayout(false);
             this.gbxAdmin.ResumeLayout(false);
-            this.gbxMDIPreventista.ResumeLayout(false);
             this.gbxMDIProductos.ResumeLayout(false);
             this.gbxMDIiClientes.ResumeLayout(false);
             this.TLPHeader.ResumeLayout(false);
@@ -412,7 +376,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel TLPMAIN;
-        private System.Windows.Forms.GroupBox gbxMDIPreventista;
         private System.Windows.Forms.GroupBox gbxMDIProductos;
         private System.Windows.Forms.GroupBox gbxMDIiClientes;
         private System.Windows.Forms.Label label1;
@@ -421,7 +384,6 @@
         private System.Windows.Forms.Button Accion3;
         private System.Windows.Forms.Button Accion2;
         private System.Windows.Forms.Button Accion1;
-        private System.Windows.Forms.Button btnPreventista;
         private System.Windows.Forms.Button btnProductos;
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.TableLayoutPanel TLPHeader;

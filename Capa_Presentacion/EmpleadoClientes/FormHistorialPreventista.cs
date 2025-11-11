@@ -701,7 +701,7 @@ namespace ArimaERP.EmpleadoClientes
 
         private void saldadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Aqui debo implementar la funcionalidad para listar pedidos con saldos pendientes, que son aquellos que no poseen un registro en la tabla pedido_pago o el ultimo registro pedido_pago tiene un saldo mayor a 0.
+            //Aqui debo implementar la funcionalidad para listar pedidos saldados, saldo 0 en ultimo pedido_pago
             // Limpiar y configurar columnas del DataGridView
             dataGridViewHistorial.Columns.Clear();
             dataGridViewHistorial.Rows.Clear();

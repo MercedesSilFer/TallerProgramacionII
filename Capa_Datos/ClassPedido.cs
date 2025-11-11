@@ -693,7 +693,7 @@ namespace Capa_Datos
                         .OrderByDescending(pp => pp.id_pago)
                         .FirstOrDefault();
 
-                    if (ultimoPago.saldo == 0)
+                    if (ultimoPago != null && ultimoPago.saldo == 0)
                     {
                         resultado.Add(pedido);
                     }
@@ -703,6 +703,35 @@ namespace Capa_Datos
 
             }
         }
+        public List<PEDIDO> ObtenerPedidosSaldadosPorVendedorYFechas(string vendedor, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                var pedidos = context.PEDIDO
+                    .Where(p => p.vendedor == vendedor &&
+                                p.fecha_entrega >= fechaDesde &&
+                                p.fecha_entrega <= fechaHasta)
+                    .ToList();
+
+                var resultado = new List<PEDIDO>();
+
+                foreach (var pedido in pedidos)
+                {
+                    var ultimoPago = context.pedido_pago
+                        .Where(pp => pp.id_pedido == pedido.id_pedido)
+                        .OrderByDescending(pp => pp.id_pago)
+                        .FirstOrDefault();
+
+                    if (ultimoPago != null && ultimoPago.saldo == 0)
+                    {
+                        resultado.Add(pedido);
+                    }
+                }
+
+                return resultado;
+            }
+        }
+
         public List<PEDIDO> ObtenerPedidosSaldadosUltimoMesPorVendedor(string vendedor)
         {
             using (var context = new ArimaERPEntities())

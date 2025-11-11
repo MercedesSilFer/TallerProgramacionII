@@ -588,14 +588,22 @@ namespace ArimaERP.Preventista
             comboBoxSeleccionarTamano.ValueMember = "id_tamano";
             comboBoxSeleccionarTamano.SelectedIndex = 0;
 
+            // Cargar zonas
             var zonas = clienteLogica.ObtenerZonas();
             zonas.Insert(0, new ZONA { id_zona = 0, nombre = "Seleccione zona" });
 
-            comboBoxSeleccionarZona.DataSource = null;
             comboBoxSeleccionarZona.DataSource = zonas;
             comboBoxSeleccionarZona.DisplayMember = "nombre";
             comboBoxSeleccionarZona.ValueMember = "id_zona";
-            comboBoxSeleccionarZona.SelectedIndex = 0;
+
+            // Buscar la zona del preventista
+            int id_zona = zonaLogica.BuscarZonaPorPreventista(usuarioActual);
+
+            // Establecer como seleccionada la zona del preventista
+            comboBoxSeleccionarZona.SelectedValue = id_zona;
+
+            // Deshabilitar edición
+            comboBoxSeleccionarZona.Enabled = false;
         }
 
         private void FormCliente_Load(object sender, EventArgs e)
@@ -647,6 +655,9 @@ namespace ArimaERP.Preventista
                 errorProvider1.SetError(txtCodigoPostal, "");
             }
         }
+
+
+       
     }
 }
 

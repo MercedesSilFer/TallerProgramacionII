@@ -76,6 +76,7 @@ namespace ArimaERP.Preventista
                         //Obtener CLIENTE por pedido.id_cliente
                         var cliente = clienteLogica.ObtenerClientePorId(pedido.id_cliente);
                         string nombreCompleto = $"{cliente.nombre} {cliente.apellido}";
+                        var estadoPedido = pedidoLogica.ObtenerEstadoPorId(pedido.id_estado);
 
                         //Obtener VENDEDOR por pedido.vendedor
                         var empleado = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(pedido.vendedor);
@@ -88,6 +89,7 @@ namespace ArimaERP.Preventista
                             pedido.id_cliente,
                             nombreCompleto,
                             pedido.id_estado,
+                            estadoPedido.descripcion,
                             pedido.total.ToString("C"),
                             pedido.numero_factura,
                             pedido.vendedor,
@@ -104,6 +106,13 @@ namespace ArimaERP.Preventista
 
         private void FormModificarPedidoPreventista_Load(object sender, EventArgs e)
         {
+            string usuarioActual = ObtenerUsuarioActual();
+            //obtener nombre de empleado de tabla Empleado partir de nombre_usuario que corresponde al usuario actual
+            Empleado empleado = new ClassEmpleadoLogica().ObtenerEmpleadoPorNombreUsuario(usuarioActual);
+            if (empleado != null)
+            {
+                lblNombre.Text = $"{empleado.nombre} {empleado.apellido}";
+            }
             //crear dataGridviewModificarPedidos con columnas
             dataGridViewModificarPedidos.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 12);
             dataGridViewModificarPedidos.Columns.Add("id_pedido", "ID_Pedido");
@@ -113,8 +122,8 @@ namespace ArimaERP.Preventista
             //ocultar columna id_cliente
             dataGridViewModificarPedidos.Columns["id_cliente"].Visible = false;
             dataGridViewModificarPedidos.Columns.Add("nombre_cliente", "Nombre Cliente");
-            dataGridViewModificarPedidos.Columns.Add("estado", "Estado");
             dataGridViewModificarPedidos.Columns.Add("id_estado", "ID_Estado");
+            dataGridViewModificarPedidos.Columns.Add("estado", "Estado");            
             //ocultar columna id_estado
             dataGridViewModificarPedidos.Columns["id_estado"].Visible = false;
             dataGridViewModificarPedidos.Columns.Add("total", "Total");
@@ -610,16 +619,16 @@ namespace ArimaERP.Preventista
                 string nombreCompleto = $"{cliente.nombre} {cliente.apellido}";
                 //Obtener VENDEDOR por pedido.vendedor
                 var empleado = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(pedido.vendedor);
-                var estadoPedido = pedidoLogica.ObtenerEstadosPedido().FirstOrDefault(e => e.id_estado == pedido.id_estado);
+                var estadoPedido = pedidoLogica.ObtenerEstadoPorId(pedido.id_estado);
                 string nombreVendedor = $"{empleado.nombre} {empleado.apellido}";
                 dataGridViewModificarPedidos.Rows.Add(
                     pedido.id_pedido,
                     pedido.fecha_creacion.ToString("dd/MM/yyyy"),
                     pedido.fecha_entrega.ToString("dd/MM/yyyy"),
                     pedido.id_cliente,
-                    nombreCompleto,
-                    estadoPedido.descripcion,
+                    nombreCompleto,                    
                     pedido.id_estado,
+                    estadoPedido.descripcion,
                     pedido.total.ToString("C"),
                     pedido.numero_factura,
                     pedido.vendedor,
@@ -912,6 +921,23 @@ namespace ArimaERP.Preventista
             //si se presiona el btnAgregarProducto 
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewProductos.Columns["btnAgregarProducto"].Index)
             {
+                // Paso 1: Validaciones previas
+                var filaPedido = dataGridViewModificarPedidos.CurrentRow;
+                if (filaPedido == null)
+                {
+                    MessageBox.Show("Debe seleccionar un pedido para modificar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int idPedidoSeleccionado = Convert.ToInt32(filaPedido.Cells["id_pedido"].Value);
+                var pedido = pedidoLogica.ObtenerPedidoPorId(idPedidoSeleccionado);
+
+                if (pedido.id_estado == 4 || pedido.id_estado == 3)
+                {
+                    MessageBox.Show("No se pueden modificar pedidos en estado 'Entregado' o 'Cancelado'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnCancelarModificacion.PerformClick();
+                    return;
+                }
                 DataGridViewRow fila = dataGridViewProductos.Rows[e.RowIndex];
                 // Verificar si el producto ya está en el detalle del pedido
                 foreach (DataGridViewRow detalleFila in dataGridViewDetallePedido.Rows)
@@ -1041,9 +1067,10 @@ namespace ArimaERP.Preventista
             int idPedidoSeleccionado = Convert.ToInt32(filaPedido.Cells["id_pedido"].Value);
             var pedido = pedidoLogica.ObtenerPedidoPorId(idPedidoSeleccionado);
 
-            if (pedido.id_estado == 4)
+            if (pedido.id_estado == 4 || pedido.id_estado == 3)
             {
-                MessageBox.Show("No se pueden modificar pedidos en estado 'Cancelado'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se pueden modificar pedidos en estado 'Entregado' o 'Cancelado'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnCancelarModificacion.PerformClick();
                 return;
             }
 
@@ -1494,6 +1521,23 @@ namespace ArimaERP.Preventista
             CargarPedidosEnDataGridView(pedidoLogica.ObtenerTodosLosPedidos());
             CargarTodosLosProductosActivosConStock();
             dataGridViewDetallePedido.Rows.Clear();
+        }
+
+        private void dataGridViewModificarPedidos_SelectionChanged(object sender, EventArgs e)
+        {
+            // Limpiar detalles si hay una fila seleccionada
+            if (dataGridViewModificarPedidos.SelectedRows.Count > 0)
+            {
+                dataGridViewDetallePedido.Rows.Clear();
+                comboBoxEstados.SelectedIndex = -1;
+                dateTimePicker2.Value = DateTime.Now;
+
+                //desactivar controles hasta que se presione btnVerDetalles
+                comboBoxEstados.Enabled = false;
+                dateTimePicker2.Enabled = false;
+                btnModificarPedido.Enabled = false;
+                dataGridViewDetallePedido.DefaultCellStyle.BackColor = Color.White;
+            }
         }
     }
     }
