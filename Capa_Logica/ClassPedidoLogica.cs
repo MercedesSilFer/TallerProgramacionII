@@ -322,5 +322,23 @@ namespace Capa_Logica
         {
             return pedido.ObtenerPedidosPorEstadoYVendedor(idEstado, vendedor);
         }
+        public PEDIDO ObtenerPedidoPorNumeroFacturaYVendedor(int numeroFactura, string vendedor)
+        {
+            return pedido.ObtenerPedidoPorNumeroFacturaYVendedor(numeroFactura, vendedor);  
+        }
+        public List<PEDIDO> ObtenerPedidosPorMontoYPreventista(decimal montoMaximo, string nombrePreventista)
+        {
+            return pedido.ObtenerPedidosPorMontoYPreventista(montoMaximo, nombrePreventista);
+        }
+        public List<PEDIDO> ObtenerPedidosPorFechaEntregaYPreventista(DateTime fechaEntrega, string preventista)
+        {
+            return pedido.ObtenerPedidosPorFechaEntregaYPreventista(fechaEntrega, preventista);
+        }
+
+        public List<PEDIDO> ObtenerPedidosPorFechaCreacionYPreventista(DateTime fechaCreacion, string preventista)
+        {
+            return pedido.ObtenerPedidosPorFechaCreacionYPreventista(fechaCreacion, preventista);
+        }
+
     }
 }

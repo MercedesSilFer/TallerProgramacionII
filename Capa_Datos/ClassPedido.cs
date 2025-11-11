@@ -492,6 +492,17 @@ namespace Capa_Datos
                 return context.PEDIDO.Where(p => p.total <= montoMaximo).ToList();
             }
         }
+
+        public List<PEDIDO> ObtenerPedidosPorMontoYPreventista(decimal montoMaximo, string nombrePreventista)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.PEDIDO
+                    .Where(p => p.total <= montoMaximo && p.vendedor == nombrePreventista)
+                    .ToList();
+            }
+        }
+
         public List<PEDIDO> ObtenerPedidosEntregadosPorMontoMaximo(decimal montoMaximo)
         {
             using (var context = new ArimaERPEntities())
@@ -811,6 +822,33 @@ namespace Capa_Datos
             {
                 return context.PEDIDO
                     .Where(p => p.id_estado == idEstado && p.vendedor == vendedor)
+                    .ToList();
+            }
+        }
+        public PEDIDO ObtenerPedidoPorNumeroFacturaYVendedor(int numeroFactura, string vendedor)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.PEDIDO
+                    .FirstOrDefault(p => p.numero_factura == numeroFactura && p.vendedor == vendedor);
+            }
+        }
+        public List<PEDIDO> ObtenerPedidosPorFechaEntregaYPreventista(DateTime fechaEntrega, string preventista)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.PEDIDO
+                    .Where(p => p.fecha_entrega == fechaEntrega && p.vendedor == preventista)
+                    .ToList();
+            }
+        }
+
+        public List<PEDIDO> ObtenerPedidosPorFechaCreacionYPreventista(DateTime fechaCreacion, string preventista)
+        {
+            using (var context = new ArimaERPEntities())
+            {
+                return context.PEDIDO
+                    .Where(p => p.fecha_creacion == fechaCreacion && p.vendedor == preventista)
                     .ToList();
             }
         }

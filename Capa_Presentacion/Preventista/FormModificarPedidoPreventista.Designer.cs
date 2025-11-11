@@ -188,6 +188,7 @@
             this.textBoxNumeroFactura.Name = "textBoxNumeroFactura";
             this.textBoxNumeroFactura.Size = new System.Drawing.Size(185, 30);
             this.textBoxNumeroFactura.TabIndex = 3;
+            this.textBoxNumeroFactura.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNumeroFactura_KeyDown);
             this.textBoxNumeroFactura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNumeroFactura_KeyPress);
             // 
             // labelClientes
@@ -212,6 +213,7 @@
             this.btnFechaEntrega.TabIndex = 42;
             this.btnFechaEntrega.Text = "Fecha Entrega";
             this.btnFechaEntrega.UseVisualStyleBackColor = true;
+            this.btnFechaEntrega.Click += new System.EventHandler(this.btnFechaEntrega_Click);
             // 
             // comboBoxBuscarPorEstado
             // 
@@ -286,6 +288,7 @@
             this.txtMontoMaximo.Name = "txtMontoMaximo";
             this.txtMontoMaximo.Size = new System.Drawing.Size(184, 30);
             this.txtMontoMaximo.TabIndex = 3;
+            this.txtMontoMaximo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMontoMaximo_KeyDown);
             this.txtMontoMaximo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontoMaximo_KeyPress);
             // 
             // btnCreacion
@@ -297,6 +300,7 @@
             this.btnCreacion.TabIndex = 42;
             this.btnCreacion.Text = "Fecha Creación";
             this.btnCreacion.UseVisualStyleBackColor = true;
+            this.btnCreacion.Click += new System.EventHandler(this.btnCreacion_Click);
             // 
             // dateTimePicker4
             // 
@@ -322,6 +326,7 @@
             this.dataGridViewModificarPedidos.Size = new System.Drawing.Size(1685, 202);
             this.dataGridViewModificarPedidos.TabIndex = 5;
             this.dataGridViewModificarPedidos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewModificarPedidos_CellContentClick);
+            this.dataGridViewModificarPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewModificarPedidos_CellFormatting);
             // 
             // tableLayoutPanel3
             // 
@@ -382,6 +387,7 @@
             this.comboBoxFamilia.Size = new System.Drawing.Size(263, 31);
             this.comboBoxFamilia.TabIndex = 8;
             this.comboBoxFamilia.Text = "Familia";
+            this.comboBoxFamilia.SelectedIndexChanged += new System.EventHandler(this.comboBoxFamilia_SelectedIndexChanged);
             // 
             // comboBoxMarca
             // 
@@ -393,6 +399,7 @@
             this.comboBoxMarca.Size = new System.Drawing.Size(201, 31);
             this.comboBoxMarca.TabIndex = 10;
             this.comboBoxMarca.Text = "Marca";
+            this.comboBoxMarca.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarca_SelectedIndexChanged);
             // 
             // textBoxCodigo
             // 
@@ -402,6 +409,8 @@
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(202, 30);
             this.textBoxCodigo.TabIndex = 7;
+            this.textBoxCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCodigo_KeyDown);
+            this.textBoxCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCodigo_KeyPress);
             // 
             // lblFamilia
             // 
@@ -424,6 +433,7 @@
             this.btnVerTodos.TabIndex = 16;
             this.btnVerTodos.Text = "Todos los Productos";
             this.btnVerTodos.UseVisualStyleBackColor = true;
+            this.btnVerTodos.Click += new System.EventHandler(this.btnVerTodos_Click);
             // 
             // dataGridViewProductos
             // 
@@ -442,6 +452,7 @@
             this.dataGridViewProductos.RowTemplate.Height = 24;
             this.dataGridViewProductos.Size = new System.Drawing.Size(1685, 211);
             this.dataGridViewProductos.TabIndex = 11;
+            this.dataGridViewProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductos_CellContentClick);
             // 
             // tableLayoutPanel6
             // 
@@ -481,6 +492,7 @@
             this.btnModificarPedido.TabIndex = 14;
             this.btnModificarPedido.Text = "Actualizar Pedido";
             this.btnModificarPedido.UseVisualStyleBackColor = true;
+            this.btnModificarPedido.Click += new System.EventHandler(this.btnModificarPedido_Click);
             // 
             // btnCancelarModificacion
             // 
@@ -571,6 +583,9 @@
             this.dataGridViewDetallePedido.Size = new System.Drawing.Size(1685, 205);
             this.dataGridViewDetallePedido.TabIndex = 13;
             this.dataGridViewDetallePedido.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDetallePedido_CellContentClick);
+            this.dataGridViewDetallePedido.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDetallePedido_CellValueChanged);
+            this.dataGridViewDetallePedido.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridViewDetallePedido_CurrentCellDirtyStateChanged);
+            this.dataGridViewDetallePedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewDetallePedido_KeyPress);
             // 
             // errorProvider1
             // 
