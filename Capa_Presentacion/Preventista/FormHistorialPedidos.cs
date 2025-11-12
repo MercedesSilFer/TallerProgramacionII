@@ -69,7 +69,7 @@ namespace ArimaERP.Preventista
 
             dgv.Columns.Add("ID Pedido", "Venta(N°Pedido)");
             dgv.Columns.Add("factura", "N° Factura");
-            dgv.Columns.Add("Fecha", "Fecha");
+            dgv.Columns.Add("Fecha", "Fecha Entrega");
             dgv.Columns.Add("Monto", "Monto");
             dgv.Columns.Add("Cliente", "Cliente");
 
@@ -120,6 +120,7 @@ namespace ArimaERP.Preventista
             decimal totalVendido = pedidosSaldados.Sum(p => p.total);
             decimal promedioPorVenta = pedidosSaldados.Count > 0 ? totalVendido / pedidosSaldados.Count : 0;
             decimal comision = totalVendido * 0.03m;
+            //MessageBox.Show($"Total: {totalVendido}, Promedio: {promedioPorVenta}, Comisión: {comision}");
 
             // Mostrar en los labels
             lblTotalVendido.Text = $"Total vendido: $ {totalVendido:N2}";

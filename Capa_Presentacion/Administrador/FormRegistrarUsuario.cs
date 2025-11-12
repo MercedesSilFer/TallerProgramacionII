@@ -573,6 +573,29 @@ namespace ArimaERP.Administrador
             {
                 // Si todos los campos son válidos mostrar mensaje de éxito
                 MessageBox.Show("Empleado guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var empleadoExistente = empleadoLogica.ObtenerEmpleadoPorNombreUsuario(textBoxUsuario.Text);
+                if (empleadoExistente != null)
+                {
+                    string usuarioActual = ObtenerUsuarioActual();
+                    string valorNuevo =
+                        $"Nombre: {empleadoExistente.nombre}, Apellido: {empleadoExistente.apellido}, " +
+                        $"DNI: {empleadoExistente.dni}, Email: {empleadoExistente.email}, " +
+                        $"Teléfono: {empleadoExistente.telefono}, Dirección: {empleadoExistente.direccion ?? "Sin dirección"}";
+
+                    bool registrado = auditoriaLogica.Registrar(
+                        valorAnterior: "-",
+                        valorNuevo: valorNuevo,
+                        nombreAccion: "Alta",
+                        nombreEntidad: "Empleado",
+                        usuario: usuarioActual
+                    );
+
+                    if (!registrado)
+                    {
+                        empleadoLogica.ErroresValidacion.Add("Error al registrar auditoría:\n" +
+                            string.Join("\n", auditoriaLogica.ErroresValidacion));
+                    }
+                }
             }
             else
             {

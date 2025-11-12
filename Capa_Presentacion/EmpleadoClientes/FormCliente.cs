@@ -497,6 +497,30 @@ namespace ArimaERP.EmpleadoClientes
                         if (cuentaCreada)
                         {
                             MessageBox.Show("Cuenta corriente creada para el cliente confiable.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Obtener la cuenta corriente recién creada
+                            var cuentaCorriente = clienteLogica.ObtenerCuentaCorrientePorIdCliente(cliente.id_cliente);
+
+                            if (cuentaCorriente != null)
+                            {
+                                string valorNuevoCuenta =
+                                    $"ClienteID: {cuentaCorriente.id_cliente}, " +
+                                    $"Saldo Actual: {cuentaCorriente.saldo_actual:N2}, Fecha último movimiento: {cuentaCorriente.fecha_ultimo_movimiento}";
+
+                                bool registradoCuenta = auditoria.Registrar(
+                                    valorAnterior: "-",
+                                    valorNuevo: valorNuevoCuenta,
+                                    nombreAccion: "Alta",
+                                    nombreEntidad: "CUENTA_CORRIENTE",
+                                    usuario: usuarioActual
+                                );
+
+                                if (!registradoCuenta)
+                                {
+                                    MessageBox.Show("Cuenta corriente creada, pero no se pudo registrar auditoría:\n" +
+                                        string.Join("\n", auditoria.ErroresValidacion),
+                                        "Auditoría", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
                         }
                         else
                         {
